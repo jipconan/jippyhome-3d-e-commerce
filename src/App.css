@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Alumni+Sans:ital,wght@0,100..900;1,100..900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000&display=swap");
+
+/* You can add additional styles here */
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+/* Snipcart Button Primary */
+.snipcart-button-primary {
+  background-color: #6b7280; /* gray.500 */
+  color: #f9fafb; /* gray.100 */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out;
+}
+
+.snipcart-button-primary:hover {
+  background-color: #4b5563; /* gray.700 */
+  color: #d1d5db; /* gray.300 */
+}
+
+/* Snipcart Button Icon Secondary */
+.snipcart-button-icon.is-secondary {
+  color: black; /* white */
+  border-color: transparent;
+  background-color: #f3f4f6; /* light gray */
+  transition: background-color 0.3s ease-in-out;
+}
+
+.snipcart-button-icon.is-secondary:hover {
+  color: #ffffff; /* white */
+  background-color: #6b7280; /* gray.500 */
+}
+
+/* Snipcart Cart Header Icon */
+.snipcart-cart-header__icon {
+  color: #6b7280; /* gray.500 */
+}
+
+/* Snipcart Button Secondary */
+.snipcart-button-secondary {
+  color: #6b7280; /* gray.500 */
+  border-color: transparent;
+  background-color: #f9fafb; /* gray.100 */
+  transition:
+    background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out;
+}
+
+.snipcart-button-secondary:hover {
+  color: #f9fafb; /* gray.100 */
+  border-color: transparent;
+  background-color: #4b5563; /* gray.700 */
+}
