@@ -3,8 +3,8 @@ import { popoverTheme } from "./popoverTheme";
 
 export const theme = extendTheme({
   fonts: {
-    heading: "DM Sans, sans-serif",
     body: "DM Sans, sans-serif",
+    heading: "DM Sans, sans-serif",
   },
   styles: {
     global: {

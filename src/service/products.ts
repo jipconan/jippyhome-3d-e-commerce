@@ -1,5 +1,5 @@
 import * as productsAPI from "../api/products";
-import { Product, ProductsByCategory } from "../types/dataTypes";
+import { Product } from "../types/dataTypes";
 
 // Fetches all products from the API and handles potential errors
 export async function getAllProducts(): Promise<Product[]> {
@@ -64,11 +64,9 @@ export async function getProductsById(id: string): Promise<Product> {
 }
 
 // Fetches products by category ID and handles potential errors
-export async function getProductsByCategory(
-  id: string
-): Promise<ProductsByCategory> {
+export async function getProductsByCategory(param: string): Promise<Product[]> {
   try {
-    const products = await productsAPI.getProductsByCategory(id);
+    const products = await productsAPI.getProductsByCategory(param);
     return products;
   } catch (error) {
     console.error("Error fetching products by category:", error);

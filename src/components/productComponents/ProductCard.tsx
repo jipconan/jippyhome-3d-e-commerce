@@ -1,5 +1,6 @@
 // ProductCard.tsx
 import { Box, Image, Text } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import { Product } from "../../types/dataTypes";
 
 type ProductCardProps = {
@@ -8,6 +9,12 @@ type ProductCardProps = {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { name, description, price, imageUrl } = product;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    const link = product._id;
+    navigate(`/store/product/${link}`);
+  };
 
   return (
     <Box
@@ -15,29 +22,30 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       borderRadius="lg"
       overflow="hidden"
       boxShadow="md"
-      p="4"
       bg="white"
       display="flex"
       flexDirection="column"
       h="100%"
+      onClick={handleClick}
+      cursor="pointer"
     >
       {/* Image of the product */}
       <Box flex="1">
-        <Image src={imageUrl[0]} alt={name} boxSize="400px" objectFit="cover" />
+        <Image src={imageUrl[0]} alt={name} objectFit="cover" />
       </Box>
 
       {/* Product details */}
-      <Box mt="4" p="2">
+      <Box p="4">
         {/* Product name */}
-        <Text fontWeight="bold" fontSize="lg" mb="2">
+        <Text fontWeight="bold" fontSize="lg" mb="2" height="3vh">
           {name}
         </Text>
         {/* Product description */}
-        <Text color="gray.500" fontSize="sm">
+        <Text color="gray.500" fontSize="sm" height="4vh" overflow="hidden">
           {description}
         </Text>
         {/* Product price */}
-        <Text mt="2" fontSize="lg" fontWeight="semibold" p="5">
+        <Text mt="2" fontSize="lg" fontWeight="semibold" height="4vh">
           ${price}
         </Text>
       </Box>

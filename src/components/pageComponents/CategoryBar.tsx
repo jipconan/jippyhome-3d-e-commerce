@@ -19,8 +19,8 @@ const CategoryBar: React.FC = () => {
   const [openPopover, setOpenPopover] = useState<string | null>(null);
 
   // Handle mouse enter event to show popover
-  const handleMouseEnter = (categoryId: string) => {
-    setOpenPopover(categoryId);
+  const handleMouseEnter = (categoryName: string) => {
+    setOpenPopover(categoryName);
   };
 
   // Handle mouse leave event to hide popover
@@ -60,7 +60,7 @@ const CategoryBar: React.FC = () => {
                   onMouseEnter={() => handleMouseEnter(category._id)}
                 >
                   {/* Link to category page */}
-                  <Link to={`/category/${encodeURIComponent(category._id)}`}>
+                  <Link to={`/store/${category.name}`}>
                     <Button
                       variant="unstyled"
                       w="100%"

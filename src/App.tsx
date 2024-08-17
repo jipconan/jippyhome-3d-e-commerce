@@ -34,7 +34,7 @@ const AppContent: React.FC<{ user: User | null }> = ({ user }) => {
   const isSignInPage = location.pathname === "/signin";
 
   return (
-    <div className="font-josefin">
+    <div>
       {!(isSignInPage || isSignUpPage) && (
         <>
           <header className="header">
@@ -52,7 +52,8 @@ const AppContent: React.FC<{ user: User | null }> = ({ user }) => {
           <Route path="/contact" element={<Pages.ContactPage />} />
           <Route path="/faq" element={<Pages.FaqPage />} />
           <Route path="/store" element={<Pages.StorePage />} />
-          <Route path="/store/:id" element={<Pages.ProductPage />} />
+          <Route path="/store/:category" element={<Pages.StorePage />} />
+          <Route path="/store/product/:id" element={<Pages.ProductPage />} />
           <Route path="/store/merchant" element={<Pages.MerchantPage />} />
           <Route path="*" element={<Navigate to="/" />} />
 
