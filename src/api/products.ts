@@ -1,5 +1,5 @@
 import { getToken, getUserIdFromToken } from "../utils/security";
-import { Product, ProductsByCategory } from "../types/dataTypes";
+import { Product } from "../types/dataTypes";
 
 const BASE_URL = "http://localhost:3000/products";
 
@@ -116,10 +116,8 @@ export async function getProductById(id: string): Promise<Product> {
 }
 
 // Fetches products belonging to a specific category.
-export async function getProductsByCategory(
-  id: string
-): Promise<ProductsByCategory> {
-  const url = `${BASE_URL}/type/${id}`;
+export async function getProductsByCategory(param: string): Promise<Product[]> {
+  const url = `${BASE_URL}/type/${param}`;
   const response = await fetch(url);
 
   if (response.ok) {

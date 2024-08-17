@@ -76,7 +76,6 @@ const SignUpForm: React.FC = () => {
       p={6}
       borderRadius="lg"
       boxShadow="lg"
-      className="font-montserrat"
     >
       <Box
         mx="auto"

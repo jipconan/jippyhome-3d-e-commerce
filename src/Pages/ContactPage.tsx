@@ -10,7 +10,7 @@ const ContactPage: React.FC = () => {
       align="center"
       justify="center"
       maxWidth="100vw"
-      w="80vw"
+      w="75vw"
       minH="100vh" // Ensures the content takes up the full viewport height
       mx="auto" // Centers horizontally
     >

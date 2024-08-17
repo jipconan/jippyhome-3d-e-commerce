@@ -18,13 +18,11 @@ export const MapSubcategories = (
               {subcategory.name}
             </Text>
           )}
-
-          {/* Check if subcategory has further subcategories */}
           {subcategory.subcategories ? (
             subcategory.subcategories.map((subSubcategory) => (
               <Box key={subSubcategory._id}>
                 <Link
-                  href={`/store/furniture/${subSubcategory._id}`}
+                  href={`/store/${subSubcategory.name}`}
                   _hover={{ textDecoration: "underline" }}
                 >
                   <Text fontSize="sm" mb={1}>
@@ -36,7 +34,7 @@ export const MapSubcategories = (
           ) : (
             <Box key={subcategory._id}>
               <Link
-                href={`/store/furniture/${subcategory._id}`}
+                href={`/store/${subcategory.name}`}
                 _hover={{ textDecoration: "underline" }}
               >
                 <Text>{subcategory.name}</Text>

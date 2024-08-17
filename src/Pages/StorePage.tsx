@@ -1,22 +1,41 @@
-// StorePage.tsx
 import React, { useEffect, useState } from "react";
-import { Box, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Stack,
+  Flex,
+  Select,
+  VStack,
+  Divider,
+  Container,
+  Heading,
+} from "@chakra-ui/react";
 import { useLoading } from "../utils/PageUtils";
-import { getProductsBySubCategory } from "../service/finder";
-import { ProductsByCategory } from "../types/dataTypes";
+import { getAllProducts, getProductsByCategory } from "../service/products";
+import { Product } from "../types/dataTypes";
 import * as Comps from "../components";
+import { useParams } from "react-router-dom";
 
 const StorePage: React.FC = () => {
-  const [productsByCategory, setProductsByCategory] =
-    useState<ProductsByCategory>({});
+  const [products, setProducts] = useState<Product[]>([]);
+  const [sortOrder, setSortOrder] = useState<string>("default");
   const { loading, setLoading, LoadingComponent } = useLoading();
+  const { category } = useParams<{
+    category?: string;
+  }>();
 
-  // Fetches products by subcategory and updates state
   async function fetchProducts() {
     setLoading(true);
     try {
-      const data: ProductsByCategory = await getProductsBySubCategory();
-      setProductsByCategory(data);
+      if (category) {
+        console.log(category);
+        // Fetch products by category
+        const data = await getProductsByCategory(category);
+        setProducts(data);
+      } else {
+        // Fetch all products
+        const data = await getAllProducts();
+        setProducts(data);
+      }
     } catch (error) {
       console.error("Error fetching products:", error);
     } finally {
@@ -24,53 +43,66 @@ const StorePage: React.FC = () => {
     }
   }
 
-  // Fetch products when the component mounts
+  function handleSortChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    const value = e.target.value;
+    setSortOrder(value);
+
+    const sortedProducts = [...products].sort((a, b) => {
+      if (value === "price-low-high") {
+        return a.price - b.price;
+      } else if (value === "price-high-low") {
+        return b.price - a.price;
+      } else {
+        return 0;
+      }
+    });
+
+    setProducts(sortedProducts);
+  }
+
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [category]); // Fetch products whenever subCategory changes
 
-  // Display loading component while data is being fetched
   if (loading) {
     return <LoadingComponent />;
   }
 
   return (
-    <Box p={4}>
-      {/* Map through categories and subcategories to display products */}
-      {Object.entries(productsByCategory).map(([category, subCategories]) => (
-        <Box
-          key={category}
-          borderWidth="2px"
-          borderRadius="md"
-          boxShadow="dark-lg"
-          p={8}
-          mb={8}
-        >
-          {/* Category name */}
-          <Heading as="h2" size="lg" mb={4}>
-            {category}
+    <Container maxW="80vw" centerContent>
+      <Stack align="stretch" justify="center" w="100%" p={4} h="12vh">
+        <Heading as="h1" fontFamily="'Baskervville', serif" fontWeight={600}>
+          {category
+            ? category.charAt(0).toUpperCase() + category.slice(1)
+            : null}
+        </Heading>
+      </Stack>
+      <Divider border="1px solid lightgrey" />
+      <Stack direction="row" spacing={0} w="100%" p={4}>
+        <VStack align="stretch" w="17vw">
+          <Heading as="h3" size="lg">
+            Filters
           </Heading>
-          {/* Map through subcategories to display products */}
-          {Object.entries(subCategories).map(([subCategory, products]) => (
-            <Box
-              key={subCategory}
-              borderWidth="2px"
-              borderRadius="md"
-              borderColor="lightgrey"
-              boxShadow="md"
-              p={8}
-              mb={8}
+          {/* Add filter components here */}
+          {/* <Comps.FilterComponent /> */}
+        </VStack>
+        <Box w="100%">
+          <Flex justifyContent="flex-end" mb={4}>
+            <Select
+              width="200px"
+              value={sortOrder}
+              onChange={handleSortChange}
+              placeholder="Sort by"
             >
-              {/* subCategory name */}
-              <Heading as="h3" size="md" mb={3}>
-                {subCategory}
-              </Heading>
-              <Comps.ProductGrid products={products} />
-            </Box>
-          ))}
+              <option value="price-low-high">Price: Low to High</option>
+              <option value="price-high-low">Price: High to Low</option>
+            </Select>
+          </Flex>
+
+          <Comps.ProductGrid products={products} />
         </Box>
-      ))}
-    </Box>
+      </Stack>
+    </Container>
   );
 };
 
