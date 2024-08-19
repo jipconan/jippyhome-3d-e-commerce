@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const BASE_URL = "http://localhost:3000/api/cloudinary";
 
 // Uploads an image file to Cloudinary and returns the URL of the uploaded image.
@@ -8,21 +10,20 @@ export async function uploadImage(file: File, folder: string): Promise<string> {
 
   try {
     console.log("Uploading file to Cloudinary:", file);
-    const response = await fetch(`${BASE_URL}/upload`, {
-      method: "POST",
-      body: formData,
+
+    const response = await axios.post(`${BASE_URL}/upload`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     });
+
     console.log("Cloudinary POST Response:", response);
 
-    if (!response.ok) {
-      throw new Error(
-        "Failed to upload image. Please check the file and try again."
-      );
-    }
-    const data = await response.json();
-    return data.url;
+    return response.data.url;
   } catch (error) {
     console.error("Error uploading image:", error);
-    throw error;
+    throw new Error(
+      "Failed to upload image. Please check the file and try again."
+    );
   }
 }

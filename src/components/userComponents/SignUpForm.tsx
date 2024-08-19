@@ -76,6 +76,7 @@ const SignUpForm: React.FC = () => {
       p={6}
       borderRadius="lg"
       boxShadow="lg"
+      className="font-montserrat"
     >
       <Box
         mx="auto"
@@ -165,7 +166,7 @@ const SignUpForm: React.FC = () => {
             <Checkbox id="agree" name="agree" onChange={handleChange} />
             <Box display="flex" alignItems="center" ml={2}>
               <FormLabel htmlFor="agree" mb={0} fontSize="sm">
-                I have read and acknowledge Group Assembly’s{" "}
+                I have read and acknowledge JippyHome’s{" "}
                 <Text
                   as="span"
                   fontSize="sm"

@@ -11,6 +11,7 @@ export { default as AnnouncementHeader } from "./pageComponents/AnnouncementHead
 export { default as AddToCartButton } from "./productComponents/AddToCartButton";
 export { default as ProductGrid } from "./productComponents/ProductGrid";
 export { default as ProductCard } from "./productComponents/ProductCard";
+export { default as ProductFilters } from "./productComponents/ProductFilters";
 
 // modalComponents
 export { default as MerchantUploadModal } from "./modalComponents/MerchantUploadModal";

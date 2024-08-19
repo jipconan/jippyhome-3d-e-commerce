@@ -55,6 +55,7 @@ export async function deleteProduct(id: string): Promise<void> {
 // Fetches a product by its ID and handles potential errors
 export async function getProductsById(id: string): Promise<Product> {
   try {
+    0;
     const product = await productsAPI.getProductById(id);
     return product;
   } catch (error) {
@@ -71,5 +72,16 @@ export async function getProductsByCategory(param: string): Promise<Product[]> {
   } catch (error) {
     console.error("Error fetching products by category:", error);
     throw error;
+  }
+}
+
+export async function getProductsByFilters(filters: any): Promise<Product[]> {
+  try {
+    // Call the API function with the filters
+    const products = await getProductsByFilters(filters);
+    return products;
+  } catch (error) {
+    console.error("Error fetching products by filters:", error);
+    return [];
   }
 }

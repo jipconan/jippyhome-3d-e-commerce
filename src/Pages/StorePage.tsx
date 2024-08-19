@@ -17,6 +17,7 @@ import { useParams } from "react-router-dom";
 
 const StorePage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [sortOrder, setSortOrder] = useState<string>("default");
   const { loading, setLoading, LoadingComponent } = useLoading();
   const { category } = useParams<{
@@ -28,10 +29,12 @@ const StorePage: React.FC = () => {
     try {
       if (category) {
         console.log(category);
+        setProducts([]);
         // Fetch products by category
         const data = await getProductsByCategory(category);
         setProducts(data);
       } else {
+        setProducts([]);
         // Fetch all products
         const data = await getAllProducts();
         setProducts(data);
@@ -47,7 +50,7 @@ const StorePage: React.FC = () => {
     const value = e.target.value;
     setSortOrder(value);
 
-    const sortedProducts = [...products].sort((a, b) => {
+    const sortedProducts = [...filteredProducts].sort((a, b) => {
       if (value === "price-low-high") {
         return a.price - b.price;
       } else if (value === "price-high-low") {
@@ -57,12 +60,20 @@ const StorePage: React.FC = () => {
       }
     });
 
-    setProducts(sortedProducts);
+    setFilteredProducts(sortedProducts);
+  }
+
+  function handleFilterChange(filteredProducts: Product[]) {
+    setFilteredProducts(filteredProducts);
   }
 
   useEffect(() => {
     fetchProducts();
-  }, [category]); // Fetch products whenever subCategory changes
+  }, [category]); // Fetch products whenever category changes
+
+  useEffect(() => {
+    setFilteredProducts(products); // Initialize filtered products
+  }, [products]);
 
   if (loading) {
     return <LoadingComponent />;
@@ -80,11 +91,11 @@ const StorePage: React.FC = () => {
       <Divider border="1px solid lightgrey" />
       <Stack direction="row" spacing={0} w="100%" p={4}>
         <VStack align="stretch" w="17vw">
-          <Heading as="h3" size="lg">
-            Filters
-          </Heading>
           {/* Add filter components here */}
-          {/* <Comps.FilterComponent /> */}
+          <Comps.ProductFilters
+            products={products}
+            onFilterChange={handleFilterChange}
+          />
         </VStack>
         <Box w="100%">
           <Flex justifyContent="flex-end" mb={4}>
@@ -99,7 +110,7 @@ const StorePage: React.FC = () => {
             </Select>
           </Flex>
 
-          <Comps.ProductGrid products={products} />
+          <Comps.ProductGrid products={filteredProducts} />
         </Box>
       </Stack>
     </Container>

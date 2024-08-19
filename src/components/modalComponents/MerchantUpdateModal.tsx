@@ -248,7 +248,7 @@ const MerchantUpdateModal: React.FC<MerchantUpdateModalProps> = ({
                     <Stack spacing={4}>
                       <FormLabel>Images Preview</FormLabel>
                       <Files.ImageExistingPreview
-                        imageUrls={formState.imageUrl}
+                        imageUrls={formState.imageUrl || []}
                       />
                       <FormLabel>3D Model Preview</FormLabel>
                       <Button
