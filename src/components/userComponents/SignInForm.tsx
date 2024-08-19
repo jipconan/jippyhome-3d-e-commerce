@@ -64,7 +64,7 @@ const SignInForm: React.FC = () => {
       maxW="30vw"
       maxH="60vh"
       w="25vw"
-      h="52vh"
+      h="55vh"
       p={6}
       borderRadius="lg"
       boxShadow="lg"
@@ -121,6 +121,14 @@ const SignInForm: React.FC = () => {
             />
             <FormErrorMessage>{passwordError}</FormErrorMessage>
           </FormControl>
+
+          <Text fontSize="sm">
+            Don't have an account?{" "}
+            <Link to="/signup" style={{ color: "blue" }}>
+              Sign Up
+            </Link>
+            .
+          </Text>
 
           <Button
             type="submit"

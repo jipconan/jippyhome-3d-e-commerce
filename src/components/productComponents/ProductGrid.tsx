@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Stack, SimpleGrid, Flex, Box } from "@chakra-ui/react";
+import { Button, Stack, SimpleGrid, Flex } from "@chakra-ui/react";
 import * as Comps from "../../components";
 import { Product } from "../../types/dataTypes";
 

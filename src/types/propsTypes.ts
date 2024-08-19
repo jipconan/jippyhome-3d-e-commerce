@@ -45,3 +45,8 @@ export type HomeCategoryProps = {
   link: string;
   buttonText: string;
 };
+
+// Define a type for filters
+export type Filters = {
+  [key: string]: string | number | boolean;
+};
