@@ -3,7 +3,9 @@ import {
   User,
   SignInDetails,
   SignInDetailsResponse,
+  UserDetailsProps,
 } from "../types/autheticationTypes";
+import { getUserIdFromToken } from "../utils/security";
 import { TicketFormData } from "../types/dataTypes";
 
 const BASE_URL = "http://localhost:3000/users";
@@ -139,10 +141,22 @@ export async function signoutUser(token: string, user: User): Promise<string> {
 }
 
 // Fetches details of a specific user based on their user ID.
-export async function getUserDetails(userId: string): Promise<User> {
+export async function getUserDetails(): Promise<UserDetailsProps> {
   try {
-    const response = await axios.get<User>(`${BASE_URL}/${userId}`);
-    return response.data;
+    const userId = getUserIdFromToken(); // Function to extract user ID from token
+    // console.log(userId);
+    const response = await axios.get(`${BASE_URL}/${userId}`);
+
+    // Extract user details from the nested structure
+    const user = response.data.user;
+
+    // Return user details in the expected format
+    return {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      address: "",
+    };
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error(

@@ -6,6 +6,9 @@ export type User = {
   salt?: string;
   iterations?: number;
   confirm?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  postalCode?: string;
 };
 
 // Contains details needed for signing in, including name, salt, and iterations
@@ -24,4 +27,13 @@ export type SignInDetailsResponse = {
   success: boolean;
   data?: SignInDetails;
   error?: string;
+};
+
+export type UserDetailsProps = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  postalCode?: string;
 };
