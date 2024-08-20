@@ -77,10 +77,10 @@ const AppContent: React.FC<{ user: User | null }> = ({ user }) => {
 
           {/* Private Route */}
           <Route
-            path="/profile"
+            path="/account"
             element={
-              <ProtectedRoute isUserLoggedIn={!!user} redirectTo="/signin">
-                <Pages.ProfilePage />
+              <ProtectedRoute isUserLoggedIn={!!user} redirectTo="/">
+                <Pages.AccountPage />
               </ProtectedRoute>
             }
           />

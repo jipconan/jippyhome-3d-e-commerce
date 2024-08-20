@@ -4,6 +4,7 @@ import {
   User,
   SignInDetails,
   SignInDetailsResponse,
+  UserDetailsProps,
 } from "../types/autheticationTypes";
 import { TicketFormData } from "../types/dataTypes";
 
@@ -43,6 +44,7 @@ export async function signinUser(user: User): Promise<SignInDetailsResponse> {
 // Retrieves the user from the token payload if available
 export function getUser(): string | null {
   const token = getToken();
+  // console.log(token);
   return token ? JSON.parse(atob(token.split(".")[1])).payload.user : null;
 }
 
@@ -86,8 +88,8 @@ export async function logoutUser(): Promise<void> {
 }
 
 // Retrieves user details for a given user ID
-export async function getUserDetails(userid: string): Promise<User> {
-  const userDetails = await usersAPI.getUserDetails(userid);
+export async function getUserDetails(): Promise<UserDetailsProps> {
+  const userDetails = await usersAPI.getUserDetails();
   // console.log("service/user - getUserDetails - userDetails:", userDetails);
   return userDetails;
 }

@@ -35,7 +35,7 @@ const ProductFilters: React.FC<ProductFiltersProps> = ({
       roomCategory: [],
     };
 
-    // Parse price filter
+    // Parse price filter only if present in the URL
     const price = params.get("price");
     if (price) {
       const [minPrice, maxPrice] = price.split(",").map(Number);
@@ -60,8 +60,14 @@ const ProductFilters: React.FC<ProductFiltersProps> = ({
     const params = new URLSearchParams();
 
     for (const [key, value] of Object.entries(filters)) {
-      if (Array.isArray(value) && key === "price") {
-        if (value.length === 2 && !isNaN(value[0]) && !isNaN(value[1])) {
+      if (key === "price") {
+        // Only add the price filter if it's different from the default
+        const defaultPriceRange = [0, 1000];
+        if (
+          Array.isArray(value) &&
+          (value[0] !== defaultPriceRange[0] ||
+            value[1] !== defaultPriceRange[1])
+        ) {
           params.set(key, `${value[0]},${value[1]}`);
         }
       } else if (value.length > 0) {
@@ -75,6 +81,7 @@ const ProductFilters: React.FC<ProductFiltersProps> = ({
 
     navigate({ search: params.toString() });
   };
+
   const [colors, setColors] = useState<string[]>([]);
   const [materials, setMaterials] = useState<string[]>([]);
   const [furnitureCategories, setFurnitureCategories] = useState<{
