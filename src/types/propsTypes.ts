@@ -50,3 +50,11 @@ export type HomeCategoryProps = {
 export type Filters = {
   [key: string]: string | number | boolean;
 };
+
+export type FilterValues = {
+  price: [number, number];
+  color: string[];
+  material: string[];
+  furnitureCategory: string[];
+  roomCategory: string[];
+};

@@ -10,7 +10,8 @@ type AddToCartButtonProps = {
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
   const materialOptions = formatArrayToStringWithLine(product.material);
   const colorOptions = formatArrayToStringWithLine(product.color);
-  const productUrl = `https://jippyhome-be-node-express-mongodb.onrender.com/products/id/${product._id}`;
+  // const productUrl = `https://jippyhome-be-node-express-mongodb.onrender.com/products/id/${product._id}`;
+  const productUrl = `http://localhost:3000/products/id/${product._id}`;
 
   return (
     <Button

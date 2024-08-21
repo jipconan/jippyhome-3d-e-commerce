@@ -155,7 +155,9 @@ export async function getUserDetails(): Promise<UserDetailsProps> {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      address: "",
+      addressLine1: "",
+      addressLine2: "",
+      postalCode: "",
     };
   } catch (error) {
     if (axios.isAxiosError(error)) {
