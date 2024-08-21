@@ -18,7 +18,7 @@ export const parseURLFilters = (params: URLSearchParams): FilterValues => {
     }
   }
 
-  params.forEach((value, key) => {
+  params.forEach((key) => {
     if (key !== "price") {
       // Only use getAll for keys other than price
       filters[key as keyof Omit<FilterValues, "price">] = params.getAll(key);
