@@ -27,18 +27,14 @@ const StorePage: React.FC = () => {
   async function fetchProducts() {
     setLoading(true);
     try {
+      let data;
       if (category) {
-        console.log(category);
-        setProducts([]);
-        // Fetch products by category
-        const data = await getProductsByCategory(category);
-        setProducts(data);
+        data = await getProductsByCategory(category);
       } else {
-        setProducts([]);
-        // Fetch all products
-        const data = await getAllProducts();
-        setProducts(data);
+        data = await getAllProducts();
       }
+      setProducts(data);
+      setFilteredProducts(data);
     } catch (error) {
       console.error("Error fetching products:", error);
     } finally {
@@ -46,34 +42,43 @@ const StorePage: React.FC = () => {
     }
   }
 
-  function handleSortChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    const value = e.target.value;
-    setSortOrder(value);
-
-    const sortedProducts = [...filteredProducts].sort((a, b) => {
-      if (value === "price-low-high") {
+  // Sort products based on the current sort order
+  function sortProducts(productsToSort: Product[]) {
+    return productsToSort.sort((a, b) => {
+      if (sortOrder === "price-low-high") {
         return a.price - b.price;
-      } else if (value === "price-high-low") {
+      } else if (sortOrder === "price-high-low") {
         return b.price - a.price;
       } else {
-        return 0;
+        return 0; // Default or "Sort by" state (unsorted)
       }
     });
-
-    setFilteredProducts(sortedProducts);
   }
 
-  function handleFilterChange(filteredProducts: Product[]) {
-    setFilteredProducts(filteredProducts);
-  }
+  // When sort order changes, sort the filtered products
+  useEffect(() => {
+    setFilteredProducts(sortProducts([...filteredProducts]));
+  }, [sortOrder]);
 
+  // When the category changes or products are fetched, reapply the sorting
   useEffect(() => {
     fetchProducts();
-  }, [category]); // Fetch products whenever category changes
+  }, [category]);
 
+  // Sorting the products when they are initially loaded or when the category changes
   useEffect(() => {
-    setFilteredProducts(products); // Initialize filtered products
+    setFilteredProducts(sortProducts([...products]));
   }, [products]);
+
+  // Sort order is updated and will trigger the sorting in useEffect
+  function handleSortChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    setSortOrder(e.target.value);
+  }
+
+  // Apply sorting after filtering
+  function handleFilterChange(filteredProducts: Product[]) {
+    setFilteredProducts(sortProducts([...filteredProducts]));
+  }
 
   if (loading) {
     return <LoadingComponent />;
