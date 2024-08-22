@@ -1,7 +1,9 @@
 import axios from "axios";
 import { type Category } from "../types/dataTypes";
 
-const BASE_URL = "http://localhost:3000/categories";
+// const BASE_URL = "http://localhost:3000/categories";
+const BASE_URL =
+  "https://jippyhome-be-node-express-mongodb.onrender.com/categories";
 
 // Fetches all categories from the backend.
 export async function getAllCategories(): Promise<Category[]> {

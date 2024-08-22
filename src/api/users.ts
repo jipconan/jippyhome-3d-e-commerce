@@ -8,7 +8,8 @@ import {
 import { getUserIdFromToken } from "../utils/security";
 import { TicketFormData } from "../types/dataTypes";
 
-const BASE_URL = "http://localhost:3000/users";
+// const BASE_URL = "http://localhost:3000/users";
+const BASE_URL = "https://jippyhome-be-node-express-mongodb.onrender.com/users";
 
 // Registers a new user with the provided user data.
 export async function signUp(user: User): Promise<string> {

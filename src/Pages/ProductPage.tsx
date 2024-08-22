@@ -13,7 +13,7 @@ import { Product } from "../types/dataTypes";
 import * as Comps from "../components";
 import { formatArrayToStringWithComma, useLoading } from "../utils/PageUtils";
 import { useParams } from "react-router-dom";
-import { getProductsById } from "../service/products";
+import { getProductById } from "../service/products";
 
 // Keyframes for the spin animation
 const spin = keyframes`
@@ -34,7 +34,7 @@ const ProductPage: React.FC = () => {
     }
 
     try {
-      const data: Product = await getProductsById(id);
+      const data: Product = await getProductById(id);
       setProduct(data);
     } catch (error) {
       console.error("Failed to fetch product:", error);
