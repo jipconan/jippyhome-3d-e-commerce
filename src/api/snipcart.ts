@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000/snipcart";
+// const BASE_URL = "http://localhost:3000/snipcart";
+const BASE_URL =
+  "https://jippyhome-be-node-express-mongodb.onrender.com/snipcart";
 
 // Function to get snipcart API key from backend
 export async function getSnipcartApiKey(): Promise<string> {

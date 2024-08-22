@@ -1,9 +1,11 @@
 import axios from "axios";
 import { getToken, getUserIdFromToken } from "../utils/security";
-import { Product } from "../types/dataTypes";
+import { Product, ProductWithUrl } from "../types/dataTypes";
 import { Filters } from "../types/propsTypes";
 
-const BASE_URL = "http://localhost:3000/products";
+// const BASE_URL = "http://localhost:3000/products";
+const BASE_URL =
+  "https://jippyhome-be-node-express-mongodb.onrender.com/products";
 
 // Fetches all products from the backend.
 export async function getAllProducts(): Promise<Product[]> {
@@ -92,6 +94,19 @@ export async function deleteProduct(id: string): Promise<void> {
 export async function getProductById(id: string): Promise<Product> {
   try {
     const response = await axios.get<Product>(`${BASE_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch product by ID:", error);
+    throw new Error("Failed to fetch product by ID. Please try again later.");
+  }
+}
+
+// Retrieves a Snipcart product by its ID.
+export async function getSnipcartProductById(
+  id: string
+): Promise<ProductWithUrl> {
+  try {
+    const response = await axios.get<ProductWithUrl>(`${BASE_URL}/id/${id}`);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch product by ID:", error);

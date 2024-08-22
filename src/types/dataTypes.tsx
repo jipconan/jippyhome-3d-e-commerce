@@ -58,7 +58,7 @@ export type ProductWithUrl = {
   color: string[];
   tags: string[];
   modelUrl: string;
-  productUrl?: string;
+  url?: string;
 };
 
 // Defines the structure of products organized by category and subcategory

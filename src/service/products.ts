@@ -1,5 +1,6 @@
 import * as productsAPI from "../api/products";
-import { Product } from "../types/dataTypes";
+import { Product, ProductWithUrl } from "../types/dataTypes";
+import { Filters } from "../types/propsTypes";
 
 // Fetches all products from the API and handles potential errors
 export async function getAllProducts(): Promise<Product[]> {
@@ -53,10 +54,24 @@ export async function deleteProduct(id: string): Promise<void> {
 }
 
 // Fetches a product by its ID and handles potential errors
-export async function getProductsById(id: string): Promise<Product> {
+export async function getProductById(id: string): Promise<Product> {
   try {
     0;
     const product = await productsAPI.getProductById(id);
+    return product;
+  } catch (error) {
+    console.error("Error fetching product by ID:", error);
+    throw error;
+  }
+}
+
+// Fetches a product by its ID and handles potential errors
+export async function getSnipcartProductById(
+  id: string
+): Promise<ProductWithUrl> {
+  try {
+    0;
+    const product = await productsAPI.getSnipcartProductById(id);
     return product;
   } catch (error) {
     console.error("Error fetching product by ID:", error);
@@ -75,7 +90,9 @@ export async function getProductsByCategory(param: string): Promise<Product[]> {
   }
 }
 
-export async function getProductsByFilters(filters: any): Promise<Product[]> {
+export async function getProductsByFilters(
+  filters: Filters
+): Promise<Product[]> {
   try {
     // Call the API function with the filters
     const products = await getProductsByFilters(filters);

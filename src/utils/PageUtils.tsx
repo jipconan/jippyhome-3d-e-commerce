@@ -5,8 +5,8 @@ import { useState } from "react";
 // import { Category, ProductsByCategory } from "../types/dataTypes";
 
 // format array into strings join with |
-export const formatArrayToStringWithLine = (items: string[]): string => {
-  return items.map((item) => `${item}`).join(" | ");
+export const formatArrayToStringWithPipe = (items: string[]): string => {
+  return items.join("|");
 };
 
 // format array into strings join with |

@@ -1,5 +1,6 @@
 {
   "name": "frontend",
+  "proxy": "https://jippyhome-be-node-express-mongodb.onrender.com/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -23,6 +24,7 @@
     "dotenv": "^16.4.5",
     "framer-motion": "^11.3.21",
     "fuse.js": "^7.0.0",
+    "ngrok": "^5.0.0-beta.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.2.1",
@@ -33,7 +35,7 @@
   },
   "devDependencies": {
     "@types/crypto-js": "^4.2.2",
-    "@types/react": "^18.3.3",
+    "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.15.0",
     "@typescript-eslint/parser": "^7.15.0",

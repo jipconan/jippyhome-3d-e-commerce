@@ -1,17 +1,18 @@
 import React from "react";
 import { Button } from "@chakra-ui/react";
 import { Product } from "../../types/dataTypes";
-import { formatArrayToStringWithLine } from "../../utils/PageUtils";
+import { formatArrayToStringWithPipe } from "../../utils/PageUtils";
 
 type AddToCartButtonProps = {
   product: Product;
 };
 
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
-  const materialOptions = formatArrayToStringWithLine(product.material);
-  const colorOptions = formatArrayToStringWithLine(product.color);
-  // const productUrl = `https://jippyhome-be-node-express-mongodb.onrender.com/products/id/${product._id}`;
-  const productUrl = `http://localhost:3000/products/id/${product._id}`;
+  const materialOptions = formatArrayToStringWithPipe(product.material);
+  const colorOptions = formatArrayToStringWithPipe(product.color);
+  // const productUrl = `http://localhost:3000/products/id/${product._id}`;
+  const productUrl = `https://jippyhome-be-node-express-mongodb.onrender.com/products/id/${product._id}`;
+  console.log(productUrl);
 
   return (
     <Button
