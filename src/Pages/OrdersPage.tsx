@@ -39,7 +39,7 @@ const OrderPage: React.FC<OrderPageProps> = ({ user }) => {
     try {
       const orders = await getOrdersByUserId(user);
       setOrderIds(orders);
-      // console.log("Fetched Order IDs:", orders);
+      console.log("Fetched Order IDs:", orders);
     } catch (error) {
       console.error("Error fetching order IDs:", error);
       setError("Failed to fetch order IDs.");

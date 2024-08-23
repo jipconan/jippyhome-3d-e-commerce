@@ -62,7 +62,6 @@ const AppContent: React.FC<{ user: User | null }> = ({ user }) => {
           <Route path="/" element={<Pages.HomePage />} />
           <Route path="/contact" element={<Pages.ContactPage />} />
           <Route path="/faq" element={<Pages.FaqPage />} />
-          <Route path="/myorders" element={<Pages.OrdersPage user={user} />} />
           <Route path="/store" element={<Pages.StorePage />} />
           <Route path="/store/:category" element={<Pages.StorePage />} />
           <Route path="/store/product/:id" element={<Pages.ProductPage />} />
@@ -92,7 +91,7 @@ const AppContent: React.FC<{ user: User | null }> = ({ user }) => {
             path="/account"
             element={
               <ProtectedRoute isUserLoggedIn={!!user} redirectTo="/">
-                <Pages.AccountPage />
+                <Pages.AccountPage user={user} />
               </ProtectedRoute>
             }
           />
