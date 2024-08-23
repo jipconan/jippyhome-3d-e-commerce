@@ -33,3 +33,6 @@ export { default as ProductModel } from "./threeComponents/ProductModel";
 
 // UI Components
 export { default as BoxShadow } from "./uiComponents/BoxShadow";
+
+// Order Components
+export { default as OrderCardModal } from "./orderComponents/OrderCardModal";

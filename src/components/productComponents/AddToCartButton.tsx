@@ -10,12 +10,36 @@ type AddToCartButtonProps = {
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
   const materialOptions = formatArrayToStringWithPipe(product.material);
   const colorOptions = formatArrayToStringWithPipe(product.color);
-  // const productUrl = `http://localhost:3000/products/id/${product._id}`;
   const productUrl = `https://jippyhome-be-node-express-mongodb.onrender.com/products/id/${product._id}`;
-  console.log(productUrl);
+
+  const handleClick = () => {
+    // Create JSON object to log
+    const productData = {
+      id: product.public_id,
+      name: product.name,
+      price: product.price,
+      url: productUrl,
+      description: product.description,
+      image: product.imageUrl[0],
+      customFields: [
+        {
+          name: "material",
+          options: materialOptions,
+        },
+        {
+          name: "color",
+          options: colorOptions,
+        },
+      ],
+    };
+
+    // Log JSON data to console
+    console.log(JSON.stringify(productData, null, 2));
+  };
 
   return (
     <Button
+      onClick={handleClick}
       className="snipcart-add-item"
       data-item-id={product.public_id}
       data-item-name={product.name}
