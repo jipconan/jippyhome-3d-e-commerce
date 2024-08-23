@@ -15,4 +15,7 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
+  globals: {
+    Snipcart: 'readonly',
+  },
 }
