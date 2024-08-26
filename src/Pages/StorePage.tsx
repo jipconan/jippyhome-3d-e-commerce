@@ -20,11 +20,14 @@ import { sortProductPage } from "../constants/queryConstants";
 const StorePage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [sortOrder, setSortOrder] = useState<string>("default");
+  const [sortOrder, setSortOrder] =
+    useState<keyof typeof sortProductPage>("Name A-Z"); // Define sortOrder as one of the keys
   const { loading, setLoading, LoadingComponent } = useLoading();
   const { category } = useParams<{ category?: string }>();
 
-  const sortOptions = Object.keys(sortProductPage);
+  const sortOptions = Object.keys(sortProductPage) as Array<
+    keyof typeof sortProductPage
+  >; // Ensure sortOptions is typed correctly
 
   async function fetchProducts() {
     setLoading(true);
@@ -53,7 +56,7 @@ const StorePage: React.FC = () => {
   }, [products, sortOrder]);
 
   function handleSortChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    setSortOrder(e.target.value);
+    setSortOrder(e.target.value as keyof typeof sortProductPage);
   }
 
   function handleFilterChange(filteredProducts: Product[]) {
