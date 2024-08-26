@@ -14,6 +14,11 @@ import * as Comps from "../components";
 import { formatArrayToStringWithComma, useLoading } from "../utils/PageUtils";
 import { useParams } from "react-router-dom";
 import { getProductById } from "../service/products";
+import { User } from "../types/propsTypes";
+
+type ProductPageProps = {
+  user: User;
+};
 
 // Keyframes for the spin animation
 const spin = keyframes`
@@ -22,7 +27,7 @@ const spin = keyframes`
   100% { transform: rotate(360deg); }
 `;
 
-const ProductPage: React.FC = () => {
+const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const { LoadingComponent } = useLoading();
@@ -192,7 +197,7 @@ const ProductPage: React.FC = () => {
             {product.dimensions.height} x {product.dimensions.depth} cm
           </Text>
           <Stack key={product.public_id}>
-            <Comps.AddToCartButton product={product} />
+            <Comps.AddToCartButton product={product} user={user} />
           </Stack>
         </Stack>
       </Stack>

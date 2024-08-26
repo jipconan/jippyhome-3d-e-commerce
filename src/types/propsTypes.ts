@@ -9,9 +9,12 @@ export type Prop = {
 // Defines the user type, which can be a string or null
 export type User = string | null;
 
+export type Admin = boolean;
+
 // Defines props related to user information
 export type UserProps = {
   user: User;
+  admin: Admin;
 };
 
 // Defines the props required for the ProtectedRoute component
@@ -52,9 +55,16 @@ export type Filters = {
 };
 
 export type FilterValues = {
-  price: [number, number];
+  price: [number, number] | string[];
   color: string[];
   material: string[];
   furnitureCategory: string[];
   roomCategory: string[];
+};
+
+export type Order = {
+  id: string;
+  date: string;
+  total: number;
+  status: string;
 };

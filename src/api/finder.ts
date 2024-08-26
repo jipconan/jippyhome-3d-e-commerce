@@ -2,8 +2,9 @@ import axios from "axios";
 import { ProductsByCategory } from "../types/dataTypes";
 
 // const BASE_URL = "http://localhost:3000/finder";
-const BASE_URL =
-  "https://jippyhome-be-node-express-mongodb.onrender.com/finder";
+// const BASE_URL =
+//   "https://jippyhome-be-node-express-mongodb.onrender.com/finder";
+const BASE_URL = "https://jippy.home.ngrok.app/finder";
 
 // Fetches all products based on sub-category.
 export async function getProductsBySubCategory(): Promise<ProductsByCategory> {

@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import * as Comps from "../../components";
 import { UserProps } from "../../types/propsTypes";
 
-const Header: React.FC<UserProps> = ({ user }) => {
+const Header: React.FC<UserProps> = ({ user, admin }) => {
   return (
     <Flex
       as="header"
@@ -73,7 +73,7 @@ const Header: React.FC<UserProps> = ({ user }) => {
         </Flex>
 
         {/* User Navigation */}
-        <Comps.UserNav user={user} />
+        <Comps.UserNav user={user} admin={admin} />
       </Flex>
     </Flex>
   );

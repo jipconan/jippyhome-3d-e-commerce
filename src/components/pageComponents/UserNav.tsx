@@ -1,13 +1,14 @@
 import React from "react";
 import { Flex, IconButton, Text } from "@chakra-ui/react";
 import { PiShoppingCartSimple } from "react-icons/pi";
+import { SiSuperuser } from "react-icons/si";
 import { SlUser } from "react-icons/sl";
 import { CiLogout } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import { UserProps } from "../../types/propsTypes";
 import { logoutUser } from "../../service/users";
 
-const UserNav: React.FC<UserProps> = ({ user }) => {
+const UserNav: React.FC<UserProps> = ({ user, admin }) => {
   // Handles user logout and reloads the page
   async function handleLogout() {
     await logoutUser();
@@ -16,6 +17,21 @@ const UserNav: React.FC<UserProps> = ({ user }) => {
 
   return (
     <Flex align="center" mr={4} gap={8}>
+      {/* Merchant button */}
+      {admin && (
+        <Link to="/merchant">
+          <Flex align="center" cursor="pointer">
+            <IconButton
+              aria-label="Merchant"
+              variant="ghost"
+              colorScheme="white"
+              icon={<SiSuperuser />}
+              fontSize="lg"
+            />
+            <Text ml={2}>Merchant</Text>
+          </Flex>
+        </Link>
+      )}
       {/* Render account and logout options if user is logged in */}
       {user ? (
         <>
@@ -79,19 +95,17 @@ const UserNav: React.FC<UserProps> = ({ user }) => {
       )}
 
       {/* Link to the shopping cart */}
-      <Link to="/cart">
-        <Flex align="center">
-          <IconButton
-            aria-label="Cart"
-            variant="ghost"
-            colorScheme="white"
-            icon={<PiShoppingCartSimple />}
-            size="lg"
-            fontSize="2xl"
-          />
-          <Text ml={2}>Cart</Text>
-        </Flex>
-      </Link>
+      <Flex align="center" className="snipcart-checkout" cursor="pointer">
+        <IconButton
+          aria-label="Cart"
+          variant="ghost"
+          colorScheme="white"
+          icon={<PiShoppingCartSimple />}
+          size="lg"
+          fontSize="2xl"
+        />
+        <Text ml={2}>Cart</Text>
+      </Flex>
     </Flex>
   );
 };

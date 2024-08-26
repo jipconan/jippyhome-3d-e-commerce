@@ -36,3 +36,4 @@ export { default as BoxShadow } from "./uiComponents/BoxShadow";
 
 // Order Components
 export { default as OrderCardModal } from "./orderComponents/OrderCardModal";
+export { default as OrderGrid } from "./orderComponents/OrderGrid";

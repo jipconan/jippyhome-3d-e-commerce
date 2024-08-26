@@ -37,6 +37,22 @@ const ProductFilters: React.FC<ProductFiltersProps> = ({
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const initialFilters = Comps.parseURLFilters(params);
+
+    const price = params.get("price");
+    if (price) {
+      const [minPrice, maxPrice] = price.split(",").map(Number);
+      if (!isNaN(minPrice) && !isNaN(maxPrice)) {
+        initialFilters.price = [minPrice, maxPrice];
+      }
+    }
+
+    params.forEach((value, key) => {
+      if (key !== "price") {
+        const allValues = params.getAll(key);
+        initialFilters[key as keyof FilterValues] =
+          allValues.length > 1 ? allValues : [value];
+      }
+    });
     setSelectedFilters(initialFilters);
   }, [location.search]);
 

@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Box, Heading, List, ListItem, Text, Spinner } from "@chakra-ui/react";
+import { Box, Heading, List, ListItem, Text } from "@chakra-ui/react";
+import { useLoading, useError } from "../../utils/PageUtils";
+import { Order } from "../../types/propsTypes";
 import axios from "axios";
-
-interface Order {
-  id: string;
-  date: string;
-  total: number;
-  status: string;
-}
 
 const MyOrders: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { loading, setLoading, LoadingComponent } = useLoading();
+  const { setError, ErrorComponent } = useError();
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -30,30 +25,30 @@ const MyOrders: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <Spinner />;
-  }
-
-  if (error) {
-    return <Text color="red.500">{error}</Text>;
+    return <LoadingComponent />;
   }
 
   return (
-    <Box>
-      <Heading as="h3" size="md" mb={4}>
-        My Orders
-      </Heading>
-      <List spacing={3}>
-        {orders.map((order) => (
-          <ListItem key={order.id}>
-            <Text fontWeight="bold">Order ID:</Text> {order.id}
-            <Text fontWeight="bold">Date:</Text>{" "}
-            {new Date(order.date).toLocaleDateString()}
-            <Text fontWeight="bold">Total:</Text> ${order.total.toFixed(2)}
-            <Text fontWeight="bold">Status:</Text> {order.status}
-          </ListItem>
-        ))}
-      </List>
-    </Box>
+    <>
+      <Box>
+        <Heading as="h3" size="md" mb={4}>
+          My Orders
+        </Heading>
+        <List spacing={3}>
+          {orders.map((order) => (
+            <ListItem key={order.id}>
+              <Text fontWeight="bold">Order ID:</Text> {order.id}
+              <Text fontWeight="bold">Date:</Text>{" "}
+              {new Date(order.date).toLocaleDateString()}
+              <Text fontWeight="bold">Total:</Text> ${order.total.toFixed(2)}
+              <Text fontWeight="bold">Status:</Text> {order.status}
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+      {/* Show error message if there's an error */}
+      <ErrorComponent />
+    </>
   );
 };
 

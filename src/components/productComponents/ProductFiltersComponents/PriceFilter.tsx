@@ -18,6 +18,7 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
   selectedFilters,
   onChange,
 }) => {
+  const [minPrice, maxPrice] = selectedFilters.price as [number, number];
   return (
     <Box mb={4}>
       <Text fontWeight="bold">Price</Text>
@@ -26,7 +27,7 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
         min={0}
         max={1000}
         step={10}
-        defaultValue={selectedFilters.price}
+        defaultValue={[minPrice, maxPrice]}
         onChangeEnd={(value) => onChange(value as [number, number])}
       >
         <RangeSliderTrack>

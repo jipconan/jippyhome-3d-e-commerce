@@ -2,12 +2,14 @@ import React from "react";
 import { Button } from "@chakra-ui/react";
 import { Product } from "../../types/dataTypes";
 import { formatArrayToStringWithPipe } from "../../utils/PageUtils";
+import { User } from "../../types/propsTypes";
 
 type AddToCartButtonProps = {
   product: Product;
+  user: User;
 };
 
-const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
+const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product, user }) => {
   const materialOptions = formatArrayToStringWithPipe(product.material);
   const colorOptions = formatArrayToStringWithPipe(product.color);
   const productUrl = `https://jippyhome-be-node-express-mongodb.onrender.com/products/id/${product._id}`;
@@ -30,6 +32,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
           name: "color",
           options: colorOptions,
         },
+        { name: "userId", options: user },
       ],
     };
 
@@ -51,6 +54,8 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
       data-item-custom1-options={materialOptions}
       data-item-custom2-name="color"
       data-item-custom2-options={colorOptions}
+      data-item-custom3-name="userId"
+      data-item-custom3-options={user}
       bg="gray.500"
       color="gray.100"
       width="full"

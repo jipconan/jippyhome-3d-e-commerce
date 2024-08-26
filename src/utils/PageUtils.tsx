@@ -1,8 +1,5 @@
 import { useState } from "react";
-// import { useEffect } from "react";
-// import { getCategoriesByType } from "../service/categories";
-// import { getProductsByCategory } from "../service/products";
-// import { Category, ProductsByCategory } from "../types/dataTypes";
+import { Spinner, Text, Flex } from "@chakra-ui/react";
 
 // format array into strings join with |
 export const formatArrayToStringWithPipe = (items: string[]): string => {
@@ -20,12 +17,37 @@ export function useLoading() {
   // Component to show during loading
   const LoadingComponent = () => {
     if (loading) {
-      return null;
+      return (
+        <Flex align="center" justify="center" height="full">
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="gray.500"
+            size="xl"
+          />
+        </Flex>
+      );
     }
     return null;
   };
 
   return { loading, setLoading, LoadingComponent };
+}
+
+// Hook to manage error state
+export function useError() {
+  const [error, setError] = useState<string | null>(null);
+
+  // Component to show during error
+  const ErrorComponent = () => {
+    if (error) {
+      return <Text color="red.500">{error}</Text>;
+    }
+    return null;
+  };
+
+  return { error, setError, ErrorComponent };
 }
 
 // Delay function

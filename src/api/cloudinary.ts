@@ -1,8 +1,9 @@
 import axios from "axios";
 
 // const BASE_URL = "http://localhost:3000/api/cloudinary";
-const BASE_URL =
-  "https://jippyhome-be-node-express-mongodb.onrender.com/api/cloudinary";
+// const BASE_URL =
+//   "https://jippyhome-be-node-express-mongodb.onrender.com/api/cloudinary";
+const BASE_URL = "https://jippy.home.ngrok.app/api/cloudinary";
 
 // Uploads an image file to Cloudinary and returns the URL of the uploaded image.
 export async function uploadImage(file: File, folder: string): Promise<string> {

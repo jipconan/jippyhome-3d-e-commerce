@@ -24,6 +24,7 @@ const OrderCardModal: React.FC<OrderCardModalProps> = ({
   onClose,
   order,
 }) => {
+  console.log(order);
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="lg">
       <ModalOverlay />

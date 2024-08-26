@@ -8,3 +8,7 @@ export const getColumnTemplate = (numColumns: number): string => {
   const columnWidth = 1 / numColumns;
   return `repeat(${numColumns}, ${columnWidth}fr)`;
 };
+
+export const getRowTemplate = (numRows: number): string => {
+  return `repeat(${numRows}, 1fr)`;
+};
