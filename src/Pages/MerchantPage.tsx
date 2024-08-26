@@ -9,14 +9,98 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useLoading } from "../utils/PageUtils";
-import { getProductsBySubCategory } from "../service/finder";
-import { ProductsByCategory, Category } from "../types/dataTypes";
+import { Category, Product } from "../types/dataTypes";
 import * as Comps from "../components";
 import { getCategoriesByLevel } from "../service/categories";
+import { sortMerchantProducts } from "../utils/queryUtils";
+import { sortMerchantPage } from "../constants/queryConstants";
+import { getProductsByCategory, getAllProducts } from "../service/products";
 
 const MerchantPage: React.FC = () => {
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [sortOrder, setSortOrder] =
+    useState<keyof typeof sortMerchantPage>("Name A-Z");
+
+  const sortOptions = Object.keys(sortMerchantPage) as Array<
+    keyof typeof sortMerchantPage
+  >;
+
+  const [products, setProducts] = useState<Product[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+
+  const { loading, setLoading, LoadingComponent } = useLoading();
+
+  async function fetchAllCategories() {
+    setLoading(true);
+    try {
+      const data: Category[] = await getCategoriesByLevel(1);
+      setCategories(data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function fetchAllProducts() {
+    setLoading(true);
+    try {
+      const data: Product[] = await getAllProducts();
+      setProducts(data);
+      setFilteredProducts(data); // Initially set all products
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function fetchProductsByCategory(categoryName: string) {
+    setLoading(true);
+    try {
+      const data: Product[] = await getProductsByCategory(categoryName);
+
+      if (data.length === 0) {
+        setFilteredProducts([]);
+      } else {
+        setFilteredProducts(data);
+      }
+    } catch (error) {
+      console.error("Error fetching products by category:", error);
+
+      // Handle specific errors (like 404)
+      if (error instanceof Error && error.message.includes("404")) {
+        setFilteredProducts([]);
+      } else {
+        setFilteredProducts([]);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    // console.log("Fetching categories and products");
+    fetchAllCategories();
+    fetchAllProducts();
+  }, []);
+
+  useEffect(() => {
+    // console.log("Category changed:", selectedCategory);
+    if (selectedCategory) {
+      fetchProductsByCategory(selectedCategory);
+    } else {
+      setFilteredProducts(products);
+    }
+  }, [selectedCategory, products]);
+
+  useEffect(() => {
+    // console.log("Sorting products");
+    const sorted = sortMerchantProducts(filteredProducts, sortOrder);
+    setFilteredProducts(sorted);
+  }, [sortOrder]);
 
   const handleUploadModelClick = () => {
     setIsUploadModalOpen(true);
@@ -26,52 +110,20 @@ const MerchantPage: React.FC = () => {
     setIsUploadModalOpen(false);
   };
 
-  // State to store products by category
-  const [productsByCategory, setProductsByCategory] =
-    useState<ProductsByCategory>({});
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCategory(e.target.value);
+  };
 
-  // Custom hook for loading state management
-  const { loading, setLoading, LoadingComponent } = useLoading();
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortOrder(e.target.value as keyof typeof sortMerchantPage);
+  };
 
-  async function fetchAllCategories() {
-    try {
-      const data: Category[] = await getCategoriesByLevel(1);
-      setCategories(data);
-      // console.log(data);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  // Function to fetch products by subcategory
-  async function fetchProducts() {
-    setLoading(true);
-    try {
-      const data: ProductsByCategory = await getProductsBySubCategory();
-      setProductsByCategory(data);
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  // Fetch products on component mount
-  useEffect(() => {
-    fetchAllCategories();
-    fetchProducts();
-  }, []);
-
-  // Show loading component while data is being fetched
   if (loading) {
     return <LoadingComponent />;
   }
 
   return (
     <Box p={4}>
-      {/* Upload Button */}
       <Box px={12} my={4} display="flex" justifyContent="center">
         <Flex
           width="full"
@@ -96,7 +148,13 @@ const MerchantPage: React.FC = () => {
           <Flex gap={8}>
             <Flex align="center" gap={4}>
               <Text fontWeight="bold">Category Filter:</Text>
-              <Select size="lg" w="10vw">
+              <Select
+                size="lg"
+                w="10vw"
+                placeholder="All Categories"
+                onChange={handleCategoryChange}
+                value={selectedCategory}
+              >
                 {categories.map((category) => (
                   <option key={category.name} value={category.name}>
                     {category.name}
@@ -106,10 +164,15 @@ const MerchantPage: React.FC = () => {
             </Flex>
             <Flex align="center" gap={4}>
               <Text fontWeight="bold">Sorter:</Text>
-              <Select size="lg" w="10vw">
-                {categories.map((category) => (
-                  <option key={category.name} value={category.name}>
-                    {category.name}
+              <Select
+                size="lg"
+                w="10vw"
+                onChange={handleSortChange}
+                value={sortOrder}
+              >
+                {sortOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
                   </option>
                 ))}
               </Select>
@@ -118,33 +181,20 @@ const MerchantPage: React.FC = () => {
         </Flex>
       </Box>
 
-      {/* Render categories and subcategories */}
-      {Object.entries(productsByCategory || {}).map(
-        ([category, subCategories]) => (
-          <Box key={category} my={4} px={12}>
-            <Heading as="h2" size="lg" mb={4}>
-              {category}
-            </Heading>
-            {Object.entries(subCategories).map(([subCategory, products]) => (
-              <Box
-                key={subCategory}
-                borderRadius="md"
-                border="solid 2px lightgrey"
-                boxShadow="md"
-                p={8}
-                mb={4}
-              >
-                <Heading as="h3" size="md" mb={4}>
-                  {subCategory}
-                </Heading>
-                <Comps.MerchantGrid products={products} />
-              </Box>
-            ))}
-          </Box>
-        )
-      )}
+      <Box my={4} px={12}>
+        <Heading as="h2" size="lg" mb={4}>
+          Products
+        </Heading>
 
-      {/* Upload Modal */}
+        {filteredProducts.length === 0 ? (
+          <Text fontSize="lg" color="gray.500">
+            No products available
+          </Text>
+        ) : (
+          <Comps.MerchantGrid products={filteredProducts} />
+        )}
+      </Box>
+
       <Comps.MerchantUploadModal
         isOpen={isUploadModalOpen}
         onClose={handleCloseModals}

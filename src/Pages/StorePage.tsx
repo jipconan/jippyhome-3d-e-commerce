@@ -21,13 +21,13 @@ const StorePage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [sortOrder, setSortOrder] =
-    useState<keyof typeof sortProductPage>("Name A-Z"); // Define sortOrder as one of the keys
+    useState<keyof typeof sortProductPage>("Name A-Z");
   const { loading, setLoading, LoadingComponent } = useLoading();
   const { category } = useParams<{ category?: string }>();
 
   const sortOptions = Object.keys(sortProductPage) as Array<
     keyof typeof sortProductPage
-  >; // Ensure sortOptions is typed correctly
+  >;
 
   async function fetchProducts() {
     setLoading(true);

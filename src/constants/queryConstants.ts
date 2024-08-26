@@ -11,14 +11,14 @@ const sortProductPage = {
 };
 
 const sortMerchantPage = {
-  "name-A-Z": (a: MerchantSort, b: MerchantSort) =>
+  "Name A-Z": (a: MerchantSort, b: MerchantSort) =>
     a.name.localeCompare(b.name),
-  "name-Z-A": (a: MerchantSort, b: MerchantSort) =>
+  "Name Z-A": (a: MerchantSort, b: MerchantSort) =>
     b.name.localeCompare(a.name),
-  "stock-Low-High": (a: MerchantSort, b: MerchantSort) => a.stock - b.stock,
-  "stock-High-Low": (a: MerchantSort, b: MerchantSort) => b.stock - a.stock,
-  "price-Low-High": (a: MerchantSort, b: MerchantSort) => a.price - b.price,
-  "price-High-Low": (a: MerchantSort, b: MerchantSort) => b.price - a.price,
+  "Stock-Low-High": (a: MerchantSort, b: MerchantSort) => a.stock - b.stock,
+  "Stock-High-Low": (a: MerchantSort, b: MerchantSort) => b.stock - a.stock,
+  "Price Low-High": (a: MerchantSort, b: MerchantSort) => a.price - b.price,
+  "Price High-Low": (a: MerchantSort, b: MerchantSort) => b.price - a.price,
 };
 
 export { sortProductPage, sortMerchantPage };
