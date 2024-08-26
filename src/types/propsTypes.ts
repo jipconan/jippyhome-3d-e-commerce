@@ -68,3 +68,14 @@ export type Order = {
   total: number;
   status: string;
 };
+
+export type ProductSort = {
+  name: string;
+  price: number;
+};
+
+export type MerchantSort = {
+  name: string;
+  price: number;
+  stock: number;
+};
