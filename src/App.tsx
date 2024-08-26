@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ChakraProvider, Flex, Box } from "@chakra-ui/react";
 import {
   BrowserRouter as Router,
@@ -11,38 +11,32 @@ import * as Pages from "./Pages";
 import * as Comps from "./components";
 import { theme } from "./utils/themeOverride/theme";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import { getUser } from "./service/users";
-import { User } from "./types/propsTypes";
-import { initializeSnipcartEventHandlers } from "./utils/SnipcartHandler";
+import { getUser, getAdmin } from "./service/users";
+import { User, Admin } from "./types/propsTypes";
 import "./App.css";
 
 const App: React.FC = () => {
   const user: User | null = getUser();
+  const admin: Admin = getAdmin();
 
   return (
     <ChakraProvider theme={theme}>
       <Box maxW="100vw" w="100vw">
         <Router>
-          <AppContent user={user} />
+          <AppContent user={user} admin={admin} />
         </Router>
       </Box>
     </ChakraProvider>
   );
 };
 
-const AppContent: React.FC<{ user: User | null }> = ({ user }) => {
+const AppContent: React.FC<{ user: User | null; admin: Admin }> = ({
+  user,
+  admin,
+}) => {
   const location = useLocation();
   const isSignUpPage = location.pathname === "/signup";
   const isSignInPage = location.pathname === "/signin";
-
-  // Initialize Snipcart event handlers when the component mounts
-  useEffect(() => {
-    if (user) {
-      initializeSnipcartEventHandlers(user); // Pass user ID to the handler
-    } else {
-      console.warn("User is not logged in.");
-    }
-  }, [user]);
 
   return (
     <div>
@@ -51,7 +45,7 @@ const AppContent: React.FC<{ user: User | null }> = ({ user }) => {
           <header className="header">
             <Flex direction="column">
               <Comps.AnnouncementHeader />
-              <Comps.Header user={user} />
+              <Comps.Header user={user} admin={admin} />
               <Comps.CategoryBar />
             </Flex>
           </header>
@@ -64,8 +58,11 @@ const AppContent: React.FC<{ user: User | null }> = ({ user }) => {
           <Route path="/faq" element={<Pages.FaqPage />} />
           <Route path="/store" element={<Pages.StorePage />} />
           <Route path="/store/:category" element={<Pages.StorePage />} />
-          <Route path="/store/product/:id" element={<Pages.ProductPage />} />
-          <Route path="/store/merchant" element={<Pages.MerchantPage />} />
+          <Route
+            path="/store/product/:id"
+            element={<Pages.ProductPage user={user} />}
+          />
+          <Route path="/merchant" element={<Pages.MerchantPage />} />
           <Route path="*" element={<Navigate to="/" />} />
 
           {/* Public Routes */}

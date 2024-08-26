@@ -1,11 +1,8 @@
 import React from "react";
 import { Box, Heading, Text, Button } from "@chakra-ui/react";
 import { UserDetailsProps } from "../../types/autheticationTypes";
-
-// Function to get the CSS grid template string for a given number of rows
-const getRowTemplate = (numRows: number): string => {
-  return `repeat(${numRows}, 1fr)`;
-};
+import { getRowTemplate } from "../../utils/mathUtil";
+import { useLoading } from "../../utils/PageUtils";
 
 type AccountInformationProps = {
   userDetails: UserDetailsProps | null;
@@ -14,13 +11,10 @@ type AccountInformationProps = {
 const AccountInformation: React.FC<AccountInformationProps> = ({
   userDetails,
 }) => {
+  const { LoadingComponent } = useLoading();
   // Handle case where userDetails might be null
   if (!userDetails) {
-    return (
-      <Box p={4} textAlign="center">
-        <Text>Loading...</Text>
-      </Box>
-    );
+    return <LoadingComponent />;
   }
 
   // Number of rows in the grid

@@ -67,10 +67,6 @@ interface PaymentSessionResponse {
   // Define properties based on your needs
 }
 
-interface SnipcartEvents {
-  on(event: string, callback: (event: CartConfirmResponse) => void): void;
-}
-
 export interface SnipcartOrder {
   token?: string;
   creationDate?: string;
@@ -118,15 +114,3 @@ export interface SnipcartOrdersResponse {
   limit?: number;
   items?: SnipcartOrder[];
 }
-
-declare const Snipcart: {
-  events: SnipcartEvents;
-};
-
-declare global {
-  interface Window {
-    Snipcart: typeof Snipcart;
-  }
-}
-
-export {};

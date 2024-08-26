@@ -3,7 +3,7 @@ import { Box, Button, Flex, Grid, Heading, Text } from "@chakra-ui/react";
 import { getUserDetails, logoutUser } from "../service/users";
 import { getColumnTemplate } from "../utils/mathUtil";
 import * as Comps from "./AccountPageComponents";
-import OrderPage from "./OrdersPage";
+import OrderGrid from "../components/orderComponents/OrderGrid";
 import { UserDetailsProps } from "../types/autheticationTypes";
 
 type AccountPageProps = {
@@ -42,11 +42,11 @@ const AccountPage: React.FC<AccountPageProps> = ({ user }) => {
       case "account-info":
         return <Comps.AccountInformation userDetails={userDetails} />;
       case "orders":
-        return <OrderPage user={user} />;
+        return <OrderGrid user={user} />;
       case "wishlist":
         return <div>Your Wishlist (Coming Soon!)</div>;
       case "change-password":
-        return <div>Change Password</div>;
+        return <div>Change Password (Coming Soon!)</div>;
       case "logout":
         return (
           <Box p={4}>

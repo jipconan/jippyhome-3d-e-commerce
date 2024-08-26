@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Box, Heading, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Button,
+  Spacer,
+  Flex,
+  Select,
+  Text,
+} from "@chakra-ui/react";
 import { useLoading } from "../utils/PageUtils";
 import { getProductsBySubCategory } from "../service/finder";
-import { ProductsByCategory } from "../types/dataTypes";
+import { ProductsByCategory, Category } from "../types/dataTypes";
 import * as Comps from "../components";
+import { getCategoriesByLevel } from "../service/categories";
 
 const MerchantPage: React.FC = () => {
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [categories, setCategories] = useState<Category[]>([]);
 
   const handleUploadModelClick = () => {
     setIsUploadModalOpen(true);
@@ -23,6 +33,18 @@ const MerchantPage: React.FC = () => {
   // Custom hook for loading state management
   const { loading, setLoading, LoadingComponent } = useLoading();
 
+  async function fetchAllCategories() {
+    try {
+      const data: Category[] = await getCategoriesByLevel(1);
+      setCategories(data);
+      // console.log(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   // Function to fetch products by subcategory
   async function fetchProducts() {
     setLoading(true);
@@ -38,6 +60,7 @@ const MerchantPage: React.FC = () => {
 
   // Fetch products on component mount
   useEffect(() => {
+    fetchAllCategories();
     fetchProducts();
   }, []);
 
@@ -50,7 +73,7 @@ const MerchantPage: React.FC = () => {
     <Box p={4}>
       {/* Upload Button */}
       <Box px={12} my={4} display="flex" justifyContent="center">
-        <Box
+        <Flex
           width="full"
           px={8}
           py={4}
@@ -69,7 +92,30 @@ const MerchantPage: React.FC = () => {
           >
             Upload
           </Button>
-        </Box>
+          <Spacer />
+          <Flex gap={8}>
+            <Flex align="center" gap={4}>
+              <Text fontWeight="bold">Category Filter:</Text>
+              <Select size="lg" w="10vw">
+                {categories.map((category) => (
+                  <option key={category.name} value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
+              </Select>
+            </Flex>
+            <Flex align="center" gap={4}>
+              <Text fontWeight="bold">Sorter:</Text>
+              <Select size="lg" w="10vw">
+                {categories.map((category) => (
+                  <option key={category.name} value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
+              </Select>
+            </Flex>
+          </Flex>
+        </Flex>
       </Box>
 
       {/* Render categories and subcategories */}

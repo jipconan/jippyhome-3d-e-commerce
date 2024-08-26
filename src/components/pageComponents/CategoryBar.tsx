@@ -39,7 +39,25 @@ const CategoryBar: React.FC = () => {
       h="100%"
     >
       {/* Main container for category items */}
-      <Flex align="center" justify="space-between" maxW="75vw" w="100%">
+      <Flex align="center" maxW="75vw" w="100%">
+        {/* Link to category page */}
+        <Box w="4vw">
+          <Link to={`/store`}>
+            <Button
+              variant="unstyled"
+              w="100%"
+              h="5vh"
+              color="white"
+              borderBottom="solid 3px transparent"
+              borderRadius="0"
+              _hover={{ borderBottom: "solid white 3px" }}
+              display="flex"
+              alignItems="center"
+            >
+              <Text fontSize="sm">All</Text>
+            </Button>
+          </Link>
+        </Box>
         {/* Container to hold categories */}
         <Flex align="center" justify="space-between" maxW="40vw" w="100%">
           {categoriesContents.map((category: CategoryPopOver) => (
