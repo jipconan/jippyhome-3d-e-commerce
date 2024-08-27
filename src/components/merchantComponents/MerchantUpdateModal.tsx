@@ -16,7 +16,7 @@ import { updateProduct } from "../../service/products";
 import { uploadImage } from "../../service/cloudinary";
 import { Product, UpdateFormData } from "../../types/dataTypes";
 import * as Files from "./MerchantModalFiles";
-import * as Comps from "../";
+import * as Comps from "..";
 
 type MerchantUpdateModalProps = {
   isOpen: boolean;

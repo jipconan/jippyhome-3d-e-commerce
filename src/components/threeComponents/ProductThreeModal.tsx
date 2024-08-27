@@ -8,7 +8,7 @@ import {
   Flex,
   Text,
 } from "@chakra-ui/react";
-import * as Comps from "../../components";
+import * as Comps from "..";
 
 const ProductThreeModal: React.FC<{
   isOpen: boolean;

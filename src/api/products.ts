@@ -55,6 +55,8 @@ export async function updateProduct(
     const user = getUserIdFromToken();
     const url = `${BASE_URL}/updateproduct/${id}`;
 
+    // console.log(token);
+
     const response = await axios.put<Product>(
       url,
       { ...product, user_id: user },

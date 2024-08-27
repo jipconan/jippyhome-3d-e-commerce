@@ -12,7 +12,7 @@ export async function uploadImage(file: File, folder: string): Promise<string> {
   formData.append("folder", folder);
 
   try {
-    console.log("Uploading file to Cloudinary:", file);
+    // console.log("Uploading file to Cloudinary:", file);
 
     const response = await axios.post(`${BASE_URL}/upload`, formData, {
       headers: {
@@ -20,7 +20,7 @@ export async function uploadImage(file: File, folder: string): Promise<string> {
       },
     });
 
-    console.log("Cloudinary POST Response:", response);
+    // console.log("Cloudinary POST Response:", response);
 
     return response.data.url;
   } catch (error) {

@@ -14,35 +14,35 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product, user }) => {
   const colorOptions = formatArrayToStringWithPipe(product.color);
   const productUrl = `https://jippyhome-be-node-express-mongodb.onrender.com/products/id/${product._id}`;
 
-  const handleClick = () => {
-    // Create JSON object to log
-    const productData = {
-      id: product.public_id,
-      name: product.name,
-      price: product.price,
-      url: productUrl,
-      description: product.description,
-      image: product.imageUrl[0],
-      customFields: [
-        {
-          name: "material",
-          options: materialOptions,
-        },
-        {
-          name: "color",
-          options: colorOptions,
-        },
-        { name: "userId", options: user },
-      ],
-    };
+  // const handleClick = () => {
+  //   // Create JSON object to log
+  //   const productData = {
+  //     id: product.public_id,
+  //     name: product.name,
+  //     price: product.price,
+  //     url: productUrl,
+  //     description: product.description,
+  //     image: product.imageUrl[0],
+  //     customFields: [
+  //       {
+  //         name: "material",
+  //         options: materialOptions,
+  //       },
+  //       {
+  //         name: "color",
+  //         options: colorOptions,
+  //       },
+  //       { name: "userId", options: user },
+  //     ],
+  //   };
 
-    // Log JSON data to console
-    console.log(JSON.stringify(productData, null, 2));
-  };
+  //   // Log JSON data to console
+  //   console.log(JSON.stringify(productData, null, 2));
+  // };
 
   return (
     <Button
-      onClick={handleClick}
+      // onClick={handleClick}
       className="snipcart-add-item"
       data-item-id={product.public_id}
       data-item-name={product.name}

@@ -10,7 +10,7 @@ import {
 import * as Pages from "./Pages";
 import * as Comps from "./components";
 import { theme } from "./utils/themeOverride/theme";
-import ProtectedRoute from "./utils/ProtectedRoute";
+import { ProtectedRoute, AdminRoute } from "./utils/RouteChecker";
 import { getUser, getAdmin } from "./service/users";
 import { User, Admin } from "./types/propsTypes";
 import "./App.css";
@@ -62,7 +62,6 @@ const AppContent: React.FC<{ user: User | null; admin: Admin }> = ({
             path="/store/product/:id"
             element={<Pages.ProductPage user={user} />}
           />
-          <Route path="/merchant" element={<Pages.MerchantPage />} />
           <Route path="*" element={<Navigate to="/" />} />
 
           {/* Public Routes */}
@@ -90,6 +89,14 @@ const AppContent: React.FC<{ user: User | null; admin: Admin }> = ({
               <ProtectedRoute isUserLoggedIn={!!user} redirectTo="/">
                 <Pages.AccountPage user={user} />
               </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/merchant"
+            element={
+              <AdminRoute isUserAdmin={!!admin} redirectTo="/">
+                <Pages.MerchantPage />
+              </AdminRoute>
             }
           />
         </Routes>
