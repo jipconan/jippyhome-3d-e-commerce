@@ -14,9 +14,9 @@ export { default as ProductCard } from "./productComponents/ProductCard";
 export { default as ProductFilters } from "./productComponents/ProductFilters";
 
 // modalComponents
-export { default as MerchantUploadModal } from "./modalComponents/MerchantUploadModal";
-export { default as MerchantDeleteModal } from "./modalComponents/MerchantDeleteModal";
-export { default as MerchantUpdateModal } from "./modalComponents/MerchantUpdateModal";
+export { default as MerchantUploadModal } from "./merchantComponents/MerchantUploadModal";
+export { default as MerchantDeleteModal } from "./merchantComponents/MerchantDeleteModal";
+export { default as MerchantUpdateModal } from "./merchantComponents/MerchantUpdateModal";
 
 // dataComponents
 export { default as TicketForm } from "./dataComponents/TicketForm";
@@ -28,7 +28,7 @@ export { default as SignInForm } from "./userComponents/SignInForm";
 
 // React Three Components
 export { default as ProductCanvas } from "./threeComponents/ProductCanvas";
-export { default as ProductThreeModal } from "./modalComponents/ProductThreeModal";
+export { default as ProductThreeModal } from "./threeComponents/ProductThreeModal";
 export { default as ProductModel } from "./threeComponents/ProductModel";
 
 // UI Components

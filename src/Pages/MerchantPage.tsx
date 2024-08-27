@@ -118,8 +118,16 @@ const MerchantPage: React.FC = () => {
     setSortOrder(e.target.value as keyof typeof sortMerchantPage);
   };
 
+  const handleRefreshQuery = () => {
+    window.location.reload();
+  };
+
   if (loading) {
-    return <LoadingComponent />;
+    return (
+      <Box h="80vh">
+        <LoadingComponent />
+      </Box>
+    );
   }
 
   return (
@@ -177,6 +185,14 @@ const MerchantPage: React.FC = () => {
                 ))}
               </Select>
             </Flex>
+            <Button
+              colorScheme="red"
+              variant="outline"
+              size="lg"
+              onClick={handleRefreshQuery}
+            >
+              Refresh Query
+            </Button>
           </Flex>
         </Flex>
       </Box>

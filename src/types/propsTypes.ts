@@ -24,6 +24,13 @@ export type ProtectedRouteProps = {
   children: React.ReactNode;
 };
 
+// Defines the props required for the ProtectedRoute component
+export type AdminRouteProps = {
+  isUserAdmin: boolean;
+  redirectTo: string;
+  children: React.ReactNode;
+};
+
 // Defines the props for pagination results
 export type PaginationResultProps = {
   currentPage: number;

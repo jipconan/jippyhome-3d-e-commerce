@@ -18,7 +18,7 @@ export async function createProduct(
   product: Partial<Product>
 ): Promise<Product> {
   try {
-    console.log("service/product/createProduct product: ", product);
+    // console.log("service/product/createProduct product: ", product);
     const createdProduct = await productsAPI.createProduct(product);
     return createdProduct;
   } catch (error) {
@@ -33,7 +33,7 @@ export async function updateProduct(
   product: Partial<Product>
 ): Promise<Product> {
   try {
-    console.log("service/product/updateProduct product: ", product);
+    // console.log("service/product/updateProduct product: ", product);
     const updatedProduct = await productsAPI.updateProduct(id, product);
     return updatedProduct;
   } catch (error) {
@@ -45,7 +45,7 @@ export async function updateProduct(
 // Deletes a product and handles potential errors
 export async function deleteProduct(id: string): Promise<void> {
   try {
-    console.log("service/product/deleteProduct product: ", id);
+    // console.log("service/product/deleteProduct product: ", id);
     await productsAPI.deleteProduct(id);
   } catch (error) {
     console.error("Error deleting product:", error);

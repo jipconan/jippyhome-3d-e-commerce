@@ -1,6 +1,6 @@
 import { FormControl, FormLabel, Input, GridItem } from "@chakra-ui/react";
 import { FormDataFileProp } from "../../../types/dataTypes";
-import * as Comps from "../../";
+import * as Comps from "../..";
 
 const ModelUpload: React.FC<FormDataFileProp> = ({
   handleChange,

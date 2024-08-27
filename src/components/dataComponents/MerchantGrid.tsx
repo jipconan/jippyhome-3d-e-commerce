@@ -5,7 +5,7 @@ import { Grid, GridItem, Box, Divider } from "@chakra-ui/react";
 import { Product } from "../../types/dataTypes";
 import { getColumnTemplate } from "../../utils/mathUtil";
 import * as Comps from "../../components";
-import * as Files from "../modalComponents/MerchantModalFiles";
+import * as Files from "../merchantComponents/MerchantModalFiles";
 
 const headerItems = [
   "public_id",
