@@ -93,9 +93,8 @@ export type UpdateFormData = {
   color?: string;
   tags?: string;
   modelUrl?: string;
-  file?: File[] | null;
   modelFile?: File | null;
-  imageFile?: File | null;
+  imageFile?: File[] | null;
 };
 
 export type FormDataInfoProp = {

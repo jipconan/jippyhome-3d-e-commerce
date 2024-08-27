@@ -13,7 +13,7 @@ import {
   FormLabel,
 } from "@chakra-ui/react";
 import { updateProduct } from "../../service/products";
-import { uploadImage } from "../../service/cloudinary";
+import { uploadImage, uploadModel } from "../../service/cloudinary";
 import { Product, UpdateFormData } from "../../types/dataTypes";
 import * as Files from "./MerchantModalFiles";
 import * as Comps from "..";
@@ -48,8 +48,7 @@ const MerchantUpdateModal: React.FC<MerchantUpdateModalProps> = ({
     color: product.color.join(", ") || "",
     tags: product.tags.join(", ") || "",
     modelUrl: product.modelUrl || "",
-    file: null,
-    imageFile: null,
+    imageFile: [],
     modelFile: null,
   });
 
@@ -73,8 +72,7 @@ const MerchantUpdateModal: React.FC<MerchantUpdateModalProps> = ({
       color: product.color.join(", "),
       tags: product.tags.join(", "),
       modelUrl: product.modelUrl,
-      file: null,
-      imageFile: null,
+      imageFile: [],
       modelFile: null,
     });
   }, [product]);
@@ -87,10 +85,17 @@ const MerchantUpdateModal: React.FC<MerchantUpdateModalProps> = ({
     const { name, value, type, files } = event.target as HTMLInputElement;
 
     if (type === "file" && files) {
-      setFormState((prevState) => ({
-        ...prevState,
-        [name]: files[0],
-      }));
+      if (name === "imageFile") {
+        setFormState((prevState) => ({
+          ...prevState,
+          imageFile: Array.from(files),
+        }));
+      } else if (name === "modelFile") {
+        setFormState((prevState) => ({
+          ...prevState,
+          modelFile: files[0] || null,
+        }));
+      }
     } else if (type === "number") {
       if (name.startsWith("dimensions.")) {
         const dimensionKey = name.split(".")[1];
@@ -110,7 +115,7 @@ const MerchantUpdateModal: React.FC<MerchantUpdateModalProps> = ({
     } else if (["material", "color", "tags"].includes(name)) {
       setFormState((prevState) => ({
         ...prevState,
-        [name]: value ? value.split(",").map((item) => item.trim()) : [],
+        [name]: value,
       }));
     } else {
       setFormState((prevState) => ({
@@ -128,18 +133,23 @@ const MerchantUpdateModal: React.FC<MerchantUpdateModalProps> = ({
     try {
       handleLoad();
 
-      let imageUrl = formState.imageUrl || [];
+      let imageUrl: string[] = formState.imageUrl || [];
       let modelUrl = formState.modelUrl || "";
 
       const folderPath = `${formState.furnitureCategory || ""}/${formState.subCategory || ""}`;
 
-      if (formState.imageFile) {
-        const uploadResult = await uploadImage(formState.imageFile, folderPath);
-        imageUrl = [uploadResult];
+      if (formState.imageFile && formState.imageFile.length > 0) {
+        const uploadResults = await uploadImage(
+          formState.imageFile,
+          folderPath
+        );
+        console.log("imageUrl:", uploadResults);
+        imageUrl = uploadResults;
       }
 
       if (formState.modelFile) {
-        const uploadResult = await uploadImage(formState.modelFile, folderPath);
+        const uploadResult = await uploadModel(formState.modelFile, folderPath);
+        console.log("modelUrl:", uploadResult);
         modelUrl = uploadResult;
       }
 
@@ -155,15 +165,22 @@ const MerchantUpdateModal: React.FC<MerchantUpdateModalProps> = ({
             depth: 0,
           };
 
-      const material = formState.material
-        ? formState.material.split(",").map((item) => item.trim())
-        : [];
-      const color = formState.color
-        ? formState.color.split(",").map((item) => item.trim())
-        : [];
-      const tags = formState.tags
-        ? formState.tags.split(",").map((item) => item.trim())
-        : [];
+      console.log(formState.material);
+      console.log(formState.color);
+      console.log(formState.tags);
+      // Ensure material, color, and tags are arrays
+      const material =
+        typeof formState.material === "string"
+          ? formState.material.split(",").map((item) => item.trim())
+          : [];
+      const color =
+        typeof formState.color === "string"
+          ? formState.color.split(",").map((item) => item.trim())
+          : [];
+      const tags =
+        typeof formState.tags === "string"
+          ? formState.tags.split(",").map((item) => item.trim())
+          : [];
 
       const updatedData: Partial<Product> = {
         ...formState,
@@ -176,6 +193,7 @@ const MerchantUpdateModal: React.FC<MerchantUpdateModalProps> = ({
         tags,
       };
 
+      console.log("updatedData:", updatedData);
       await updateProduct(product._id, updatedData);
 
       handleStopLoad();
@@ -243,6 +261,16 @@ const MerchantUpdateModal: React.FC<MerchantUpdateModalProps> = ({
                   handleChange={handleChange}
                 />
 
+                {/* Insert the CategoryInfo component here */}
+                <Comps.BoxShadow>
+                  <Files.CategoryInfo
+                    roomCategory={formState.roomCategory}
+                    furnitureCategory={formState.furnitureCategory}
+                    subCategory={formState.subCategory}
+                    handleChange={handleChange}
+                  />
+                </Comps.BoxShadow>
+
                 <Comps.BoxShadow>
                   <GridItem>
                     <Stack spacing={4}>
@@ -268,14 +296,14 @@ const MerchantUpdateModal: React.FC<MerchantUpdateModalProps> = ({
                 <Comps.BoxShadow>
                   <GridItem>
                     <Stack spacing={4}>
-                      <Files.ModelUpload
-                        handleChange={handleChange}
-                        fileInputRef={modelFileInputRef}
-                      />
-
                       <Files.ImageUpload
                         handleChange={handleChange}
                         fileInputRef={imageFileInputRef}
+                      />
+
+                      <Files.ModelUpload
+                        handleChange={handleChange}
+                        fileInputRef={modelFileInputRef}
                       />
                     </Stack>
                   </GridItem>

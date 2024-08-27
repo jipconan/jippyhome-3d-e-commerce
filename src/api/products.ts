@@ -12,6 +12,7 @@ const BASE_URL = "https://jippy.home.ngrok.app/products";
 export async function getAllProducts(): Promise<Product[]> {
   try {
     const response = await axios.get<Product[]>(BASE_URL);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch products:", error);
@@ -55,7 +56,7 @@ export async function updateProduct(
     const user = getUserIdFromToken();
     const url = `${BASE_URL}/updateproduct/${id}`;
 
-    // console.log(token);
+    console.log(token);
 
     const response = await axios.put<Product>(
       url,
