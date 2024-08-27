@@ -9,11 +9,14 @@ import {
   ModalBody,
   ModalCloseButton,
   Grid,
+  GridItem,
+  FormLabel,
 } from "@chakra-ui/react";
 import { createProduct } from "../../service/products";
-import { uploadImage } from "../../service/cloudinary";
+import { uploadImage, uploadModel } from "../../service/cloudinary";
 import { Product, UpdateFormData } from "../../types/dataTypes";
 import * as Files from "./MerchantModalFiles";
+import * as Comps from "..";
 
 type MerchantUploadModalProps = {
   isOpen: boolean;
@@ -39,8 +42,10 @@ const MerchantUploadModal: React.FC<MerchantUploadModalProps> = ({
     color: "",
     tags: "",
     modelUrl: "",
-    file: null,
+    imageFile: [],
+    modelFile: null,
   });
+
   const [load, setLoad] = useState(false);
   const modelFileInputRef = useRef<HTMLInputElement | null>(null);
   const imageFileInputRef = useRef<HTMLInputElement | null>(null);
@@ -53,10 +58,17 @@ const MerchantUploadModal: React.FC<MerchantUploadModalProps> = ({
     const { name, value, type, files } = event.target as HTMLInputElement;
 
     if (type === "file" && files) {
-      setFormState((prevState) => ({
-        ...prevState,
-        [name]: files[0],
-      }));
+      if (name === "imageFile") {
+        setFormState((prevState) => ({
+          ...prevState,
+          imageFile: Array.from(files),
+        }));
+      } else if (name === "modelFile") {
+        setFormState((prevState) => ({
+          ...prevState,
+          modelFile: files[0] || null,
+        }));
+      }
     } else if (type === "number") {
       if (name.startsWith("dimensions.")) {
         const dimensionKey = name.split(".")[1];
@@ -76,7 +88,7 @@ const MerchantUploadModal: React.FC<MerchantUploadModalProps> = ({
     } else if (["material", "color", "tags"].includes(name)) {
       setFormState((prevState) => ({
         ...prevState,
-        [name]: value ? value.split(",").map((item) => item.trim()) : [],
+        [name]: value,
       }));
     } else {
       setFormState((prevState) => ({
@@ -95,21 +107,24 @@ const MerchantUploadModal: React.FC<MerchantUploadModalProps> = ({
       handleLoad();
 
       // Initialize variables
-      let imageUrl = formState.imageUrl || [];
-      let modelUrl = formState.modelUrl || "";
+      let imageUrl: string[] = [];
+      let modelUrl = "";
 
       // Construct the folder path
       const folderPath = `${formState.furnitureCategory || ""}/${formState.subCategory || ""}`;
 
-      // Upload the image file if present
-      if (formState.imageFile) {
-        const uploadResult = await uploadImage(formState.imageFile, folderPath);
-        imageUrl = [uploadResult];
+      // Upload the image files if present
+      if (formState.imageFile && formState.imageFile.length > 0) {
+        const uploadResults = await uploadImage(
+          formState.imageFile,
+          folderPath
+        );
+        imageUrl = uploadResults;
       }
 
       // Upload the model file if present
       if (formState.modelFile) {
-        const uploadResult = await uploadImage(formState.modelFile, folderPath);
+        const uploadResult = await uploadModel(formState.modelFile, folderPath);
         modelUrl = uploadResult;
       }
 
@@ -126,7 +141,7 @@ const MerchantUploadModal: React.FC<MerchantUploadModalProps> = ({
             depth: 0,
           };
 
-      // Ensure material, color, and tags are arrays
+      // Convert comma-separated strings to arrays
       const material = formState.material
         ? formState.material.split(",").map((item) => item.trim())
         : [];
@@ -169,71 +184,127 @@ const MerchantUploadModal: React.FC<MerchantUploadModalProps> = ({
     }
   };
 
+  const [isUploadProductThreeModalOpen, setUploadIsProductThreeModalOpen] =
+    useState(false);
+
+  const handleOpenUploadProductThreeModal = () => {
+    setUploadIsProductThreeModalOpen(true);
+  };
+
+  const handleCloseUploadProductThreeModal = () => {
+    setUploadIsProductThreeModalOpen(false);
+  };
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent maxW="90vw" maxH="100vh" p={4}>
-        <ModalHeader>Create New Product</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <form onSubmit={handleSubmit}>
-            <Grid templateColumns="repeat(3, 1fr)" gap={4} mb={4}>
-              {/* Row 1 */}
-              <Files.ProductInfo
-                formState={formState}
-                handleChange={handleChange}
-              />
+    <>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent maxW="90vw" maxH="100vh" p={4}>
+          <ModalHeader>Create New Product</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <form onSubmit={handleSubmit}>
+              <Grid templateColumns="repeat(3, 1fr)" gap={4} mb={4}>
+                {/* Row 1 */}
+                <Files.ProductInfo
+                  formState={formState}
+                  handleChange={handleChange}
+                />
 
-              <Files.Dimensions
-                formState={formState}
-                handleChange={handleChange}
-              />
+                <Files.Dimensions
+                  formState={formState}
+                  handleChange={handleChange}
+                />
 
-              <Files.PriceStock
-                formState={formState}
-                handleChange={handleChange}
-              />
+                <Files.PriceStock
+                  formState={formState}
+                  handleChange={handleChange}
+                />
 
-              {/* Row 2 */}
-              <Files.MaterialColorTags
-                formState={formState}
-                handleChange={handleChange}
-              />
+                {/* Row 2 */}
+                <Files.MaterialColorTags
+                  formState={formState}
+                  handleChange={handleChange}
+                />
 
-              <Files.DescriptionInfo
-                formState={formState}
-                handleChange={handleChange}
-              />
+                <Files.DescriptionInfo
+                  formState={formState}
+                  handleChange={handleChange}
+                />
 
-              <Files.ModelUpload
-                handleChange={handleChange}
-                fileInputRef={modelFileInputRef}
-              />
+                {/* Insert the CategoryInfo component here */}
+                <Comps.BoxShadow>
+                  <Files.CategoryInfo
+                    roomCategory={formState.roomCategory}
+                    furnitureCategory={formState.furnitureCategory}
+                    subCategory={formState.subCategory}
+                    handleChange={handleChange}
+                  />
+                </Comps.BoxShadow>
 
-              {/* Row 3 */}
-              <Files.ImageUpload
-                handleChange={handleChange}
-                fileInputRef={imageFileInputRef}
-              />
-            </Grid>
+                <Comps.BoxShadow>
+                  <GridItem>
+                    <Stack spacing={4}>
+                      <Files.ImageUpload
+                        handleChange={handleChange}
+                        fileInputRef={imageFileInputRef}
+                      />
 
-            <Stack mt={4}>
-              <Button
-                type="submit"
-                isLoading={load}
-                loadingText="Creating"
-                bg="gray.500"
-                color="gray.100"
-                width="full"
-                _hover={{ bg: "gray.700", color: "gray.300" }}
-              >
-                Create
-              </Button>
-            </Stack>
-          </form>
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+                      <Files.ModelUpload
+                        handleChange={handleChange}
+                        fileInputRef={modelFileInputRef}
+                      />
+                    </Stack>
+                  </GridItem>
+                </Comps.BoxShadow>
+
+                <Comps.BoxShadow>
+                  <GridItem>
+                    <Stack spacing={4}>
+                      <FormLabel>Images Upload</FormLabel>
+                      <Files.ImageUploadPreview fileRef={imageFileInputRef} />
+                      <FormLabel>3D Model Upload</FormLabel>
+                      <Button
+                        bg="gray.500"
+                        color="gray.100"
+                        size="md"
+                        w="5vw"
+                        _hover={{ bg: "gray.700", color: "gray.300" }}
+                        onClick={handleOpenUploadProductThreeModal}
+                      >
+                        VIEW 3D
+                      </Button>
+                    </Stack>
+                  </GridItem>
+                </Comps.BoxShadow>
+              </Grid>
+
+              <Stack mt={4}>
+                <Button
+                  type="submit"
+                  isLoading={load}
+                  loadingText="Creating"
+                  bg="gray.500"
+                  color="gray.100"
+                  width="full"
+                  _hover={{ bg: "gray.700", color: "gray.300" }}
+                >
+                  Create
+                </Button>
+              </Stack>
+            </form>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+
+      <Comps.ProductThreeModal
+        isOpen={isUploadProductThreeModalOpen}
+        onClose={handleCloseUploadProductThreeModal}
+        modelUrl={
+          formState.modelFile ? URL.createObjectURL(formState.modelFile) : ""
+        }
+      />
+    </>
   );
 };
 

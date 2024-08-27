@@ -9,3 +9,4 @@ export { default as RenderProductGridItems } from "./RenderProductGridItems";
 export { default as ModelUpload } from "./ModelUpload";
 export { default as ImageExistingPreview } from "./ImageExistingPreview";
 export { default as ImageUploadPreview } from "./ImageUploadPreview";
+export { default as CategoryInfo } from "./CategoryInfo";
