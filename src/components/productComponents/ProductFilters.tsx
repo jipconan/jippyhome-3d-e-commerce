@@ -140,8 +140,12 @@ const ProductFilters: React.FC<ProductFiltersProps> = ({
       <Comps.ColorFilter
         colors={colors}
         selectedFilters={selectedFilters}
-        onChange={(color, checked) =>
-          handleFilterChange("color", color, checked)
+        onChange={(color) =>
+          handleFilterChange(
+            "color",
+            color,
+            !selectedFilters.color.includes(color)
+          )
         }
       />
       <Comps.MaterialFilter

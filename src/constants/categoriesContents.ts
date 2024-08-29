@@ -159,7 +159,7 @@ export const categoriesContents: CategoriesPopOverContents = [
     name: "Spaces",
     subcategories: [
       { _id: "7-1-1", name: "Living Room" },
-      { _id: "7-1-2", name: "Bedroom" },
+      { _id: "7-1-2", name: "Bed room" },
       { _id: "7-1-3", name: "Kids Room" },
     ],
   },

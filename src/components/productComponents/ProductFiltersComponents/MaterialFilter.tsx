@@ -1,6 +1,7 @@
 import React from "react";
 import { Checkbox, Stack, Box, Text } from "@chakra-ui/react";
 import { FilterValues } from "../../../types/propsTypes";
+import { capitalizeWords } from "../../../utils/PageUtils";
 
 type MaterialFilterProps = {
   materials: string[];
@@ -23,7 +24,7 @@ const MaterialFilter: React.FC<MaterialFilterProps> = ({
             isChecked={selectedFilters.material.includes(material)}
             onChange={(e) => onChange(material, e.target.checked)}
           >
-            {material}
+            {capitalizeWords(material)}
           </Checkbox>
         ))}
       </Stack>

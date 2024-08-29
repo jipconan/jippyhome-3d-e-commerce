@@ -19,27 +19,42 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
   onChange,
 }) => {
   const [minPrice, maxPrice] = selectedFilters.price as [number, number];
+
   return (
-    <Box mb={4}>
-      <Text fontWeight="bold">Price</Text>
-      <RangeSlider
-        aria-label={["min", "max"]}
-        min={0}
-        max={1000}
-        step={10}
-        defaultValue={[minPrice, maxPrice]}
-        onChangeEnd={(value) => onChange(value as [number, number])}
-      >
-        <RangeSliderTrack>
-          <RangeSliderFilledTrack />
-        </RangeSliderTrack>
-        <RangeSliderThumb index={0} />
-        <RangeSliderThumb index={1} />
-      </RangeSlider>
-      <Text>
-        Price Range: ${selectedFilters.price[0]} - ${selectedFilters.price[1]}
+    <>
+      <Text fontWeight="bold" my={4}>
+        Price
       </Text>
-    </Box>
+      <Box mb={4} mx={4}>
+        <RangeSlider
+          aria-label={["min", "max"]}
+          min={0}
+          max={1000}
+          step={10}
+          defaultValue={[minPrice, maxPrice]}
+          onChangeEnd={(value) => onChange(value as [number, number])}
+        >
+          <RangeSliderTrack>
+            <RangeSliderFilledTrack />
+          </RangeSliderTrack>
+          <RangeSliderThumb
+            index={0}
+            border="2px solid lightgrey"
+            borderRadius="full"
+            boxSize="24px"
+          />
+          <RangeSliderThumb
+            index={1}
+            border="2px solid lightgrey"
+            borderRadius="full"
+            boxSize="24px"
+          />
+        </RangeSlider>
+        <Text align="center">
+          ${selectedFilters.price[0]} - ${selectedFilters.price[1]}
+        </Text>
+      </Box>
+    </>
   );
 };
 

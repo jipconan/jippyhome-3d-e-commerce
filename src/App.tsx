@@ -1,5 +1,5 @@
 import React from "react";
-import { ChakraProvider, Flex, Box } from "@chakra-ui/react";
+import { ChakraProvider, Box, Flex } from "@chakra-ui/react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -43,24 +43,65 @@ const AppContent: React.FC<{ user: User | null; admin: Admin }> = ({
       {!(isSignInPage || isSignUpPage) && (
         <>
           <header className="header">
-            <Flex direction="column">
-              <Comps.AnnouncementHeader />
-              <Comps.Header user={user} admin={admin} />
-              <Comps.CategoryBar />
-            </Flex>
+            <Comps.FadingBox>
+              <Flex direction="column">
+                <Comps.AnnouncementHeader />
+                <Comps.Header user={user} admin={admin} />
+                <Comps.CategoryBar />
+              </Flex>
+            </Comps.FadingBox>
           </header>
         </>
       )}
       <main>
         <Routes>
-          <Route path="/" element={<Pages.HomePage />} />
-          <Route path="/contact" element={<Pages.ContactPage />} />
-          <Route path="/faq" element={<Pages.FaqPage />} />
-          <Route path="/store" element={<Pages.StorePage />} />
-          <Route path="/store/:category" element={<Pages.StorePage />} />
+          <Route
+            path="/"
+            element={
+              <Comps.FadingBox>
+                <Pages.HomePage />
+              </Comps.FadingBox>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <Comps.FadingBox>
+                <Pages.ContactPage />
+              </Comps.FadingBox>
+            }
+          />
+          <Route
+            path="/faq"
+            element={
+              <Comps.FadingBox>
+                <Pages.FaqPage />
+              </Comps.FadingBox>
+            }
+          />
+          <Route
+            path="/store"
+            element={
+              <Comps.FadingBox>
+                <Pages.StorePage />
+              </Comps.FadingBox>
+            }
+          />
+          <Route
+            path="/store/:category"
+            element={
+              <Comps.FadingBox>
+                <Pages.StorePage />
+              </Comps.FadingBox>
+            }
+          />
           <Route
             path="/store/product/:id"
-            element={<Pages.ProductPage user={user} />}
+            element={
+              <Comps.FadingBox>
+                <Pages.ProductPage user={user} />
+              </Comps.FadingBox>
+            }
           />
           <Route path="*" element={<Navigate to="/" />} />
 
@@ -69,7 +110,9 @@ const AppContent: React.FC<{ user: User | null; admin: Admin }> = ({
             path="/signup"
             element={
               <ProtectedRoute isUserLoggedIn={!user} redirectTo="/">
-                <Pages.SignUpPage />
+                <Comps.FadingBox>
+                  <Pages.SignUpPage />
+                </Comps.FadingBox>
               </ProtectedRoute>
             }
           />
@@ -77,7 +120,9 @@ const AppContent: React.FC<{ user: User | null; admin: Admin }> = ({
             path="/signin"
             element={
               <ProtectedRoute isUserLoggedIn={!user} redirectTo="/">
-                <Pages.SignInPage />
+                <Comps.FadingBox>
+                  <Pages.SignInPage />
+                </Comps.FadingBox>
               </ProtectedRoute>
             }
           />
@@ -87,7 +132,9 @@ const AppContent: React.FC<{ user: User | null; admin: Admin }> = ({
             path="/account"
             element={
               <ProtectedRoute isUserLoggedIn={!!user} redirectTo="/">
-                <Pages.AccountPage user={user} />
+                <Comps.FadingBox>
+                  <Pages.AccountPage user={user} />
+                </Comps.FadingBox>
               </ProtectedRoute>
             }
           />
@@ -95,7 +142,9 @@ const AppContent: React.FC<{ user: User | null; admin: Admin }> = ({
             path="/merchant"
             element={
               <AdminRoute isUserAdmin={!!admin} redirectTo="/">
-                <Pages.MerchantPage />
+                <Comps.FadingBox>
+                  <Pages.MerchantPage />
+                </Comps.FadingBox>
               </AdminRoute>
             }
           />

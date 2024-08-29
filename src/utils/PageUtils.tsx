@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Spinner, Text, Flex } from "@chakra-ui/react";
+import { Spinner, Text, Flex, Box } from "@chakra-ui/react";
 
 // format array into strings join with |
 export const formatArrayToStringWithPipe = (items: string[]): string => {
@@ -18,15 +18,17 @@ export function useLoading() {
   const LoadingComponent = () => {
     if (loading) {
       return (
-        <Flex align="center" justify="center" height="full">
-          <Spinner
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="gray.200"
-            color="gray.500"
-            size="xl"
-          />
-        </Flex>
+        <Box h="80vh">
+          <Flex align="center" justify="center" height="full">
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="gray.500"
+              size="xl"
+            />
+          </Flex>
+        </Box>
       );
     }
     return null;
@@ -53,3 +55,10 @@ export function useError() {
 // Delay function
 export const delay = (ms: number): Promise<void> =>
   new Promise((resolve) => setTimeout(resolve, ms));
+
+export const capitalizeWords = (text: string): string => {
+  return text
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
