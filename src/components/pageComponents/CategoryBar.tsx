@@ -21,8 +21,8 @@ const CategoryBar: React.FC = () => {
   const [openPopover, setOpenPopover] = useState<string | null>(null);
 
   // Handle mouse enter event to show popover
-  const handleMouseEnter = (categoryId: string) => {
-    setOpenPopover(categoryId);
+  const handleMouseEnter = (categoryId: string | null) => {
+    setOpenPopover(categoryId); // If categoryId is null, it will close any popover
   };
 
   // Handle mouse leave event to hide popover
@@ -34,12 +34,12 @@ const CategoryBar: React.FC = () => {
     <Flex as="nav" align="center" justify="center" bg="gray.700" color="white">
       {/* Main container for category items */}
       <Flex align="center" maxW="75vw" w="full" position="relative">
-        {/* Link to category page */}
-        <Box w="4vw" alignContent="center" justifyContent="center">
+        {/* Link to "All" category page */}
+        <Box mr={4}>
           <Link to={`/store`}>
             <Button
               variant="unstyled"
-              w="100%"
+              w="5vw"
               h="5vh"
               color="white"
               borderBottom="solid 3px transparent"
@@ -47,13 +47,15 @@ const CategoryBar: React.FC = () => {
               _hover={{ borderBottom: "solid white 3px" }}
               display="flex"
               alignItems="center"
+              onMouseEnter={() => handleMouseEnter(null)}
             >
               <Text fontSize="sm">All</Text>
             </Button>
           </Link>
         </Box>
+
         {/* Container to hold categories */}
-        <Flex align="center" justify="space-between">
+        <Flex align="center" justify="space-between" gap={4}>
           {categoriesContents.map((category: CategoryPopOver) => (
             <Popover
               key={category._id}
@@ -74,7 +76,7 @@ const CategoryBar: React.FC = () => {
                   <Link to={`/store/${category.name}`}>
                     <Button
                       variant="unstyled"
-                      w="100%"
+                      w="5vw"
                       h="5vh"
                       color="white"
                       borderBottom="solid 3px transparent"
