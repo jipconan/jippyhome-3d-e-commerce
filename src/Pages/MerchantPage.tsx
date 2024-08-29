@@ -123,11 +123,7 @@ const MerchantPage: React.FC = () => {
   };
 
   if (loading) {
-    return (
-      <Box h="80vh">
-        <LoadingComponent />
-      </Box>
-    );
+    return <LoadingComponent />;
   }
 
   return (

@@ -36,6 +36,7 @@ const SearchDropDown = forwardRef<HTMLDivElement, SearchDropDownProps>(
         p={8}
         width="100%"
         zIndex={20}
+        boxShadow="md"
       >
         <Flex direction="column" gap={8}>
           {/* Products Section */}

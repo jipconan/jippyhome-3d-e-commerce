@@ -1,6 +1,7 @@
 import React from "react";
 import { Checkbox, Stack, Box, Text } from "@chakra-ui/react";
 import { FilterValues } from "../../../types/propsTypes";
+import { capitalizeWords } from "../../../utils/PageUtils";
 
 type RoomCategoryFilterProps = {
   roomCategories: { [id: string]: string };
@@ -23,7 +24,7 @@ const RoomCategoryFilter: React.FC<RoomCategoryFilterProps> = ({
             isChecked={selectedFilters.roomCategory.includes(id)}
             onChange={(e) => onChange(id, e.target.checked)}
           >
-            {name}
+            {capitalizeWords(name)}
           </Checkbox>
         ))}
       </Stack>

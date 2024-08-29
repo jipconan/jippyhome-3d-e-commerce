@@ -20,12 +20,29 @@ export async function getAllCategories(): Promise<Category[]> {
 // Fetches categories of a specific type from the backend.
 export async function getCategoriesByType(type: string): Promise<Category[]> {
   try {
-    const response = await axios.get<Category[]>(`${BASE_URL}/${type}`);
+    const response = await axios.get<Category[]>(
+      `${BASE_URL}/categorytype/${type}`
+    );
     return response.data;
   } catch (error) {
     console.error(`Failed to fetch categories of type ${type}:`, error);
     throw new Error(
       `Failed to fetch categories of type ${type}. Please try again later.`
+    );
+  }
+}
+
+// Fetches categories of a specific name from the backend.
+export async function getCategoriesByName(name: string): Promise<Category> {
+  try {
+    const response = await axios.get<Category>(
+      `${BASE_URL}/categoryname/${name}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(`Failed to fetch categories of name ${name}:`, error);
+    throw new Error(
+      `Failed to fetch categories of name ${name}. Please try again later.`
     );
   }
 }

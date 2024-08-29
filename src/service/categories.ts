@@ -23,6 +23,17 @@ export async function getCategoriesByType(type: string): Promise<Category[]> {
   }
 }
 
+// Retrieves categories based on the specified name from the API
+export async function getCategoriesByName(name: string): Promise<Category> {
+  try {
+    const categories = await categoriesAPI.getCategoriesByName(name);
+    return categories;
+  } catch (error) {
+    console.error("Error fetching user categories:", error);
+    throw error;
+  }
+}
+
 // Retrieves categories based on the specified type from the API
 export async function getCategoriesByLevel(level: number): Promise<Category[]> {
   try {
