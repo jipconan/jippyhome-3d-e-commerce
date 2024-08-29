@@ -1,25 +1,69 @@
-import { HomeCategoryProps } from "../types/propsTypes";
-import { CategoriesPopOverContents } from "../types/categoryTypes";
+import {
+  CategoriesPopOverContents,
+  HomePageContentType,
+} from "../types/categoryTypes";
 
 // HomePage Category Contents
-export const homePageCategoryContent: HomeCategoryProps[] = [
+export const homePageCategoryContent: HomePageContentType[] = [
   {
-    src: "/media/homepagebutton1.png",
-    alt: "Category1",
-    link: "/store/category1",
-    buttonText: "Category1",
+    _id: "1",
+    name: "Sofas",
+    image: "https://fakeimg.pl/300x300",
   },
   {
-    src: "/media/homepagebutton2.png",
-    alt: "Category2",
-    link: "/store/category2",
-    buttonText: "Category2",
+    _id: "2",
+    name: "Bed Frames",
+    image: "https://fakeimg.pl/300x300",
   },
   {
-    src: "/media/homepagebutton3.png",
-    alt: "Category3",
-    link: "/store/category3",
-    buttonText: "Category3",
+    _id: "3",
+    name: "Mattress",
+    image: "https://fakeimg.pl/300x300",
+  },
+  {
+    _id: "4",
+    name: "Chairs",
+    image: "https://fakeimg.pl/300x300",
+  },
+  {
+    _id: "5",
+    name: "Recliners",
+    image: "https://fakeimg.pl/300x300",
+  },
+  {
+    _id: "6",
+    name: "Dining Chairs",
+    image: "https://fakeimg.pl/300x300",
+  },
+  {
+    _id: "7",
+    name: "Cabinets",
+    image: "https://fakeimg.pl/300x300",
+  },
+  {
+    _id: "8",
+    name: "Wardrobes",
+    image: "https://fakeimg.pl/300x300",
+  },
+  {
+    _id: "9",
+    name: "Shelves",
+    image: "https://fakeimg.pl/300x300",
+  },
+  {
+    _id: "10",
+    name: "Lamps",
+    image: "https://fakeimg.pl/300x300",
+  },
+  {
+    _id: "11",
+    name: "Rugs",
+    image: "https://fakeimg.pl/300x300",
+  },
+  {
+    _id: "12",
+    name: "Tables",
+    image: "https://fakeimg.pl/300x300",
   },
 ];
 
@@ -38,18 +82,18 @@ export const categoriesContents: CategoriesPopOverContents = [
         _id: "1-1",
         name: "Sofa by Material",
         subcategories: [
-          { _id: "1-1-1", name: "Leather Sofa" },
-          { _id: "1-1-2", name: "Fabric Sofa" },
-          { _id: "1-1-3", name: "Rattan Sofa" },
+          { _id: "1-1-1", name: "Leather Sofas" },
+          { _id: "1-1-2", name: "Fabric Sofas" },
+          { _id: "1-1-3", name: "Rattan Sofas" },
         ],
       },
       {
         _id: "1-2",
         name: "Sofa by Type",
         subcategories: [
-          { _id: "1-2-1", name: "Sectional Sofa" },
-          { _id: "1-2-2", name: "Sleeper Sofa" },
-          { _id: "1-2-3", name: "Recliner Sofa" },
+          { _id: "1-2-1", name: "Sectional Sofas" },
+          { _id: "1-2-2", name: "Sleeper Sofas" },
+          { _id: "1-2-3", name: "Recliner Sofas" },
         ],
       },
     ],
@@ -67,18 +111,18 @@ export const categoriesContents: CategoriesPopOverContents = [
         _id: "2-1",
         name: "Table by Material",
         subcategories: [
-          { _id: "2-1-1", name: "Wooden Table" },
-          { _id: "2-1-2", name: "Glass Table" },
-          { _id: "2-1-3", name: "Metal Table" },
+          { _id: "2-1-1", name: "Wooden Tables" },
+          { _id: "2-1-2", name: "Glass Tables" },
+          { _id: "2-1-3", name: "Metal Tables" },
         ],
       },
       {
         _id: "2-2",
         name: "Table by Type",
         subcategories: [
-          { _id: "2-2-1", name: "Coffee Table" },
-          { _id: "2-2-2", name: "Dining Table" },
-          { _id: "2-2-3", name: "Side Table" },
+          { _id: "2-2-1", name: "Coffee Tables" },
+          { _id: "2-2-2", name: "Dining Tables" },
+          { _id: "2-2-3", name: "Side Tables" },
         ],
       },
     ],
@@ -96,18 +140,18 @@ export const categoriesContents: CategoriesPopOverContents = [
         _id: "3-1",
         name: "Chair by Material",
         subcategories: [
-          { _id: "3-1-1", name: "Leather Chair" },
-          { _id: "3-1-2", name: "Fabric Chair" },
-          { _id: "3-1-3", name: "Wooden Chair" },
+          { _id: "3-1-1", name: "Leather Chairs" },
+          { _id: "3-1-2", name: "Fabric Chairs" },
+          { _id: "3-1-3", name: "Wooden Chairs" },
         ],
       },
       {
         _id: "3-2",
         name: "Chair by Type",
         subcategories: [
-          { _id: "3-2-1", name: "Office Chair" },
-          { _id: "3-2-2", name: "Dining Chair" },
-          { _id: "3-2-3", name: "Accent Chair" },
+          { _id: "3-2-1", name: "Office Chairs" },
+          { _id: "3-2-2", name: "Dining Chairs" },
+          { _id: "3-2-3", name: "Accent Chairs" },
         ],
       },
     ],
@@ -125,18 +169,18 @@ export const categoriesContents: CategoriesPopOverContents = [
         _id: "4-1",
         name: "Bed by Size",
         subcategories: [
-          { _id: "4-1-1", name: "King Bed" },
-          { _id: "4-1-2", name: "Queen Bed" },
-          { _id: "4-1-3", name: "Twin Bed" },
+          { _id: "4-1-1", name: "King Beds" },
+          { _id: "4-1-2", name: "Queen Beds" },
+          { _id: "4-1-3", name: "Twin Beds" },
         ],
       },
       {
         _id: "4-2",
         name: "Bed by Style",
         subcategories: [
-          { _id: "4-2-1", name: "Platform Bed" },
-          { _id: "4-2-2", name: "Sleigh Bed" },
-          { _id: "4-2-3", name: "Canopy Bed" },
+          { _id: "4-2-1", name: "Platform Beds" },
+          { _id: "4-2-2", name: "Sleigh Beds" },
+          { _id: "4-2-3", name: "Canopy Beds" },
         ],
       },
     ],
@@ -154,18 +198,18 @@ export const categoriesContents: CategoriesPopOverContents = [
         _id: "5-1",
         name: "Storage by Type",
         subcategories: [
-          { _id: "5-1-1", name: "Wardrobe" },
-          { _id: "5-1-2", name: "Bookshelf" },
-          { _id: "5-1-3", name: "Cabinet" },
+          { _id: "5-1-1", name: "Wardrobes" },
+          { _id: "5-1-2", name: "Bookshelfs" },
+          { _id: "5-1-3", name: "Cabinets" },
         ],
       },
       {
         _id: "5-2",
         name: "Storage by Material",
         subcategories: [
-          { _id: "5-2-1", name: "Wooden Storage" },
-          { _id: "5-2-2", name: "Metal Storage" },
-          { _id: "5-2-3", name: "Plastic Storage" },
+          { _id: "5-2-1", name: "Wooden Storages" },
+          { _id: "5-2-2", name: "Metal Storages" },
+          { _id: "5-2-3", name: "Plastic Storages" },
         ],
       },
     ],

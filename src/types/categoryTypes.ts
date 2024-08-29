@@ -38,3 +38,10 @@ export type CategoryPopOver = {
 
 // Represents the structure of all categories content. (popover content)
 export type CategoriesPopOverContents = CategoryPopOver[];
+
+// Represents a subcategory with array of mini categories. (HomePage content)
+export type HomePageContentType = {
+  _id: string;
+  name: string;
+  image: string;
+};
