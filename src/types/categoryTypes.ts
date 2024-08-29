@@ -32,6 +32,7 @@ export type SubCategoryPopOver = {
 export type CategoryPopOver = {
   _id: string;
   name: string;
+  images: string[];
   subcategories?: SubCategoryPopOver[];
 };
 

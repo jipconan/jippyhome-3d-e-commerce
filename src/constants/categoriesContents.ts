@@ -28,6 +28,11 @@ export const categoriesContents: CategoriesPopOverContents = [
   {
     _id: "1",
     name: "Sofas",
+    images: [
+      "/media/categoryimages/sofa-image-1.JPG",
+      "/media/categoryimages/sofa-image-2.JPG",
+      "/media/categoryimages/sofa-image-3.JPG",
+    ],
     subcategories: [
       {
         _id: "1-1",
@@ -52,6 +57,11 @@ export const categoriesContents: CategoriesPopOverContents = [
   {
     _id: "2",
     name: "Tables",
+    images: [
+      "/media/categoryimages/table-image-1.JPG",
+      "/media/categoryimages/table-image-2.JPG",
+      "/media/categoryimages/table-image-3.JPG",
+    ],
     subcategories: [
       {
         _id: "2-1",
@@ -76,6 +86,11 @@ export const categoriesContents: CategoriesPopOverContents = [
   {
     _id: "3",
     name: "Chairs",
+    images: [
+      "/media/categoryimages/chair-image-1.JPG",
+      "/media/categoryimages/chair-image-2.JPG",
+      "/media/categoryimages/chair-image-3.JPG",
+    ],
     subcategories: [
       {
         _id: "3-1",
@@ -100,6 +115,11 @@ export const categoriesContents: CategoriesPopOverContents = [
   {
     _id: "4",
     name: "Beds",
+    images: [
+      "/media/categoryimages/bed-image-1.JPG",
+      "/media/categoryimages/bed-image-2.JPG",
+      "/media/categoryimages/bed-image-3.JPG",
+    ],
     subcategories: [
       {
         _id: "4-1",
@@ -124,6 +144,11 @@ export const categoriesContents: CategoriesPopOverContents = [
   {
     _id: "5",
     name: "Storages",
+    images: [
+      "/media/categoryimages/storage-image-1.JPG",
+      "/media/categoryimages/storage-image-2.JPG",
+      "/media/categoryimages/storage-image-3.JPG",
+    ],
     subcategories: [
       {
         _id: "5-1",
@@ -148,6 +173,11 @@ export const categoriesContents: CategoriesPopOverContents = [
   {
     _id: "6",
     name: "Decors",
+    images: [
+      "/media/categoryimages/decor-image-1.JPG",
+      "/media/categoryimages/decor-image-2.JPG",
+      "/media/categoryimages/decor-image-3.JPG",
+    ],
     subcategories: [
       { _id: "6-1-1", name: "Lamps" },
       { _id: "6-1-2", name: "Mirrors" },
@@ -157,6 +187,11 @@ export const categoriesContents: CategoriesPopOverContents = [
   {
     _id: "7",
     name: "Spaces",
+    images: [
+      "/media/categoryimages/space-image-1.JPG",
+      "/media/categoryimages/space-image-2.JPG",
+      "/media/categoryimages/space-image-3.JPG",
+    ],
     subcategories: [
       { _id: "7-1-1", name: "Living Room" },
       { _id: "7-1-2", name: "Bed room" },
