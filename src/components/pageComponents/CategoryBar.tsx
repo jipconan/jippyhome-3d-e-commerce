@@ -31,17 +31,9 @@ const CategoryBar: React.FC = () => {
   };
 
   return (
-    <Flex
-      as="nav"
-      align="center"
-      justify="center"
-      bg="gray.700"
-      color="white"
-      w="100%"
-      h="100%"
-    >
+    <Flex as="nav" align="center" justify="center" bg="gray.700" color="white">
       {/* Main container for category items */}
-      <Flex align="center" maxW="75vw" w="full">
+      <Flex align="center" maxW="75vw" w="full" position="relative">
         {/* Link to category page */}
         <Box w="4vw" alignContent="center" justifyContent="center">
           <Link to={`/store`}>
@@ -61,7 +53,7 @@ const CategoryBar: React.FC = () => {
           </Link>
         </Box>
         {/* Container to hold categories */}
-        <Flex align="center" justify="space-between" maxW="40vw" w="100%">
+        <Flex align="center" justify="space-between">
           {categoriesContents.map((category: CategoryPopOver) => (
             <Popover
               key={category._id}
@@ -103,16 +95,19 @@ const CategoryBar: React.FC = () => {
                 bg="white"
                 color="gray.500"
                 borderColor="gray.500"
-                width="full"
+                width="100vw"
                 borderRadius="0"
+                left="0"
                 onMouseEnter={() => handleMouseEnter(category._id)}
                 onMouseLeave={handleMouseLeave}
               >
-                <Flex gap={12}>
+                <Flex justifyContent="center" gap={12} align="start">
                   <PopoverBody
                     display="flex"
                     flexDirection="column"
                     textAlign="start"
+                    justifyContent="flex-start"
+                    alignItems="flex-start"
                     w="10vw"
                   >
                     {/* Map and display subcategories */}
@@ -123,11 +118,16 @@ const CategoryBar: React.FC = () => {
                   </PopoverBody>
 
                   {/* Content on the right side */}
-                  <Flex>
+                  <Flex justifyContent="center" alignItems="center">
                     <Box p={4} mx={12}>
-                      <SimpleGrid columns={3} spacing={12}>
+                      <SimpleGrid
+                        columns={3}
+                        spacing={12}
+                        justifyContent="center"
+                        alignItems="center"
+                      >
                         {category.images?.map((image, index) => (
-                          <Box key={index}>
+                          <Box key={index} justifyContent="center">
                             <Image
                               src={image}
                               alt={`Category image ${index}`}
