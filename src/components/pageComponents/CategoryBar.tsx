@@ -41,9 +41,9 @@ const CategoryBar: React.FC = () => {
       h="100%"
     >
       {/* Main container for category items */}
-      <Flex align="center" maxW="75vw" w="100%">
+      <Flex align="center" maxW="75vw" w="full">
         {/* Link to category page */}
-        <Box w="4vw">
+        <Box w="4vw" alignContent="center" justifyContent="center">
           <Link to={`/store`}>
             <Button
               variant="unstyled"
@@ -75,7 +75,6 @@ const CategoryBar: React.FC = () => {
               <PopoverTrigger>
                 <Box
                   flex="1"
-                  maxW="200px"
                   data-category-id={category._id}
                   onMouseEnter={() => handleMouseEnter(category._id)}
                 >
@@ -104,9 +103,8 @@ const CategoryBar: React.FC = () => {
                 bg="white"
                 color="gray.500"
                 borderColor="gray.500"
-                width="100vw"
+                width="full"
                 borderRadius="0"
-                display="flex"
                 onMouseEnter={() => handleMouseEnter(category._id)}
                 onMouseLeave={handleMouseLeave}
               >
@@ -115,7 +113,7 @@ const CategoryBar: React.FC = () => {
                     display="flex"
                     flexDirection="column"
                     textAlign="start"
-                    minW="300px"
+                    w="10vw"
                   >
                     {/* Map and display subcategories */}
                     {MapSubcategories(
@@ -126,7 +124,7 @@ const CategoryBar: React.FC = () => {
 
                   {/* Content on the right side */}
                   <Flex>
-                    <Box p={4} mx={12} minW="300px">
+                    <Box p={4} mx={12}>
                       <SimpleGrid columns={3} spacing={12}>
                         {category.images?.map((image, index) => (
                           <Box key={index}>
