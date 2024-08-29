@@ -8,6 +8,8 @@ import {
   Button,
   Box,
   Text,
+  Image,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { categoriesContents } from "../../constants/categoriesContents";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
@@ -19,8 +21,8 @@ const CategoryBar: React.FC = () => {
   const [openPopover, setOpenPopover] = useState<string | null>(null);
 
   // Handle mouse enter event to show popover
-  const handleMouseEnter = (categoryName: string) => {
-    setOpenPopover(categoryName);
+  const handleMouseEnter = (categoryId: string) => {
+    setOpenPopover(categoryId);
   };
 
   // Handle mouse leave event to hide popover
@@ -66,7 +68,7 @@ const CategoryBar: React.FC = () => {
               placement="bottom-start"
               isLazy
               isOpen={openPopover === category._id}
-              onClose={() => setOpenPopover(null)}
+              onClose={handleMouseLeave}
               offset={[0, 0]}
             >
               {/* Trigger element for the popover */}
@@ -104,20 +106,42 @@ const CategoryBar: React.FC = () => {
                 borderColor="gray.500"
                 width="100vw"
                 borderRadius="0"
+                display="flex"
                 onMouseEnter={() => handleMouseEnter(category._id)}
                 onMouseLeave={handleMouseLeave}
               >
-                <PopoverBody
-                  display="flex"
-                  flexDirection="column"
-                  textAlign="start"
-                >
-                  {/* Map and display subcategories */}
-                  {MapSubcategories(
-                    category.subcategories as Subcategory[],
-                    category.name
-                  )}
-                </PopoverBody>
+                <Flex gap={12}>
+                  <PopoverBody
+                    display="flex"
+                    flexDirection="column"
+                    textAlign="start"
+                    minW="300px"
+                  >
+                    {/* Map and display subcategories */}
+                    {MapSubcategories(
+                      category.subcategories as Subcategory[],
+                      category.name
+                    )}
+                  </PopoverBody>
+
+                  {/* Content on the right side */}
+                  <Flex>
+                    <Box p={4} mx={12} minW="300px">
+                      <SimpleGrid columns={3} spacing={12}>
+                        {category.images?.map((image, index) => (
+                          <Box key={index}>
+                            <Image
+                              src={image}
+                              alt={`Category image ${index}`}
+                              boxSize="300px"
+                              objectFit="cover"
+                            />
+                          </Box>
+                        ))}
+                      </SimpleGrid>
+                    </Box>
+                  </Flex>
+                </Flex>
               </PopoverContent>
             </Popover>
           ))}
