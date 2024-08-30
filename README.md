@@ -2,7 +2,7 @@
 
 ## Summary
 
-This e-commerce website allows users to browse and purchase furnitures with excellent catalogues. The app provides a seamless shopping experience with a responsive 3D model previewer to allow shopper to see the furinure in a 3 dimensional.
+This e-commerce website allows users to browse and purchase furniture with excellent catalogs. The app provides a seamless shopping experience with a responsive 3D model previewer to allow shoppers to see the furniture in a 3 dimensions.
 
 ## Key Features
 
@@ -86,16 +86,16 @@ You can access the deployed URL at [JippyHome 3D E-Commerce](https://jippyhome-3
 - **Crypto.js**
 - **dotenv**
 
-## Challanges Faced
+## Challenges Faced
 
 ### Cloudinary problems
 
 - **Implementing uploading 3D model:**
   </br>
-  I coudln't upload 3D model at first so I have to check with the snipcart team what have went wrong.
+  I couldn't upload 3D model at first so I have to check with the snipcart team what went wrong.
 - **Implementing snipcart with backend to record order id:**
   </br>
-  I had a hard time trying to response back to snipcart.
+  I had a hard time trying to respond back to snipcart.
 
 ### Snipcart problems
 
@@ -124,7 +124,7 @@ You can access the deployed URL at [JippyHome 3D E-Commerce](https://jippyhome-3
   Add a wishlist feature for users to save products they are interested in.
 - **Social Media Sharing:**
   </br>
-  Intergrate with social media platform sharing like whatsapp, facebook, etc.
+  Integrate with social media platform sharing like Whatsapp, Facebook, etc.
 - **User account management:**
   </br>
   Manage user accounts so that I can control who has access to certain features.
