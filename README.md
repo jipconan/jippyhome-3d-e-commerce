@@ -36,26 +36,20 @@ You can access the deployed URL at [JippyHome 3D E-Commerce](https://jippyhome-3
 
 |                             **Landing Page**                              |                           **Signup Page**                            |
 | :-----------------------------------------------------------------------: | :------------------------------------------------------------------: | 
-|            ![Landing Page](./public/media/github/landingpage.jpg)             |            ![Signup Page](./public/media/github/signuppage.jpg)             |
+|            ![Landing Page](./public/media/github/landingpage.JPG)             |            ![Signup Page](./public/media/github/signuppage.JPG)             |
 |                              **Login Page**                               |                           **Account Page**                           |                  
-|            ![Login Page](./public/media/github/loginpage.jpg)              |          ![Account Page](./public/media/github/accountpage.jpg)            |
+|            ![Login Page](./public/media/github/loginpage.JPG)              |          ![Account Page](./public/media/github/accountpage.JPG)            |
 |                              **Store Page**                               |                           **Category Page**                          |                  
-|            ![Store Page](./public/media/github/storepage.jpg)              |         ![Category Page](./public/media/github/categorypage.jpg)           |
+|            ![Store Page](./public/media/github/storepage.JPG)              |         ![Category Page](./public/media/github/categorypage.JPG)           |
 |                         **Product Page**                                  |                    **3D Preview Modal (Default)**                    |                  
-|            ![Product Page](./public/media/github/productpage.jpg)          |      ![3D Preview Modal Default](./public/media/github/3dpreviewmodal-default.jpg)      |
+|            ![Product Page](./public/media/github/productpage.JPG)          |      ![3D Preview Modal Default](./public/media/github/3dpreviewmodal-default.JPG)      |
 |                      **3D Preview Modal (Warm)**                          |                      **3D Preview Modal (Cool)**                     |                  
-| ![3D Preview Modal Warm](./public/media/github/3dpreviewmodal-warm.jpg)    |     ![3D Preview Modal Cool](./public/media/github/3dpreviewmodal-cool.jpg) |
+| ![3D Preview Modal Warm](./public/media/github/3dpreviewmodal-warm.JPG)    |     ![3D Preview Modal Cool](./public/media/github/3dpreviewmodal-cool.JPG) |
 |                              **Category Bar**                             |                          **Checkout Page**                           |                  
-|            ![Category Bar](./public/media/github/categorybar.jpg)          |         ![Checkout Page](./public/media/github/checkoutpage.jpg)          |
+|            ![Category Bar](./public/media/github/categorybar.JPG)          |         ![Checkout Page](./public/media/github/checkoutpage.JPG)          |
 |                              **Contact Page**                             |                          **Merchant Page**                           |                  
-|            ![Contact Page](./public/media/github/contactpage.jpg)          |         ![Merchant Page](./public/media/github/merchantpage.jpg)          |
+|            ![Contact Page](./public/media/github/contactpage.JPG)          |         ![Merchant Page](./public/media/github/merchantpage.JPG)          |
 
-
-## Check it out!
-
-### Deployed URL
-
-You can access the deployed URL at [Jippie E-Commerce](https://jippie-e-commerce-app.onrender.com/).
 
 ## Technologies Used
 
