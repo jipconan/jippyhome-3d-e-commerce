@@ -25,11 +25,7 @@ const ProductThreeModal: React.FC<{
           {modelUrl ? (
             <Comps.ProductCanvas modelUrl={modelUrl} />
           ) : (
-            <Flex
-              align="center"
-              justify="center"
-              h="full" // Make the Flex container fill the height of the ModalBody
-            >
+            <Flex align="center" justify="center" h="full">
               <Text fontSize="lg" color="gray.500">
                 3D Model Unavailable
               </Text>
