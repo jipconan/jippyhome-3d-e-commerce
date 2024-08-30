@@ -107,16 +107,16 @@ const HomePage: React.FC = () => {
           <SimpleGrid columns={{ base: 2, md: 3, lg: 6 }} spacing={8}>
             {homePageCategoryContent.map((category) => (
               <Link key={category._id} to={`/store/${category.name}`}>
-                <Flex direction="column" align="center">
+                <Flex direction="column" align="center" h="100%">
                   <Image
                     src={category.image}
                     alt={category.name}
-                    h="100%"
-                    w="100%"
+                    boxSize="250px"
                     objectFit="cover"
-                    borderRadius="50%"
                   />
-                  <Text mt={4}>{category.name}</Text>
+                  <Text mt={4} textAlign="center">
+                    {category.name}
+                  </Text>
                 </Flex>
               </Link>
             ))}

@@ -9,62 +9,62 @@ export const homePageCategoryContent: HomePageContentType[] = [
   {
     _id: "1",
     name: "Sofas",
-    image: "https://fakeimg.pl/300x300",
+    image: "/media/iconimages/fabricsofa-image-1.jpg",
   },
   {
     _id: "2",
     name: "Bed Frames",
-    image: "https://fakeimg.pl/300x300",
+    image: "/media/iconimages/metalbedframe-image-1.jpg",
   },
   {
     _id: "3",
     name: "Mattress",
-    image: "https://fakeimg.pl/300x300",
+    image: "/media/iconimages/queen-image-1.jpg",
   },
   {
     _id: "4",
     name: "Chairs",
-    image: "https://fakeimg.pl/300x300",
+    image: "/media/iconimages/woodenchair-image-1.jpg",
   },
   {
     _id: "5",
     name: "Recliners",
-    image: "https://fakeimg.pl/300x300",
+    image: "/media/iconimages/reclinerchair-image-1.JPG",
   },
   {
     _id: "6",
     name: "Dining Chairs",
-    image: "https://fakeimg.pl/300x300",
+    image: "/media/iconimages/dininggreychair-image-1.JPG",
   },
   {
     _id: "7",
     name: "Cabinets",
-    image: "https://fakeimg.pl/300x300",
+    image: "/media/iconimages/cabinet-image-1.jpg",
   },
   {
     _id: "8",
     name: "Wardrobes",
-    image: "https://fakeimg.pl/300x300",
+    image: "/media/iconimages/wardrobe-image-1.jpg",
   },
   {
     _id: "9",
     name: "Shelves",
-    image: "https://fakeimg.pl/300x300",
+    image: "/media/iconimages/shelve-image-1.jpg",
   },
   {
     _id: "10",
     name: "Lamps",
-    image: "https://fakeimg.pl/300x300",
+    image: "/media/iconimages/lamp-image-1.jpg",
   },
   {
     _id: "11",
     name: "Rugs",
-    image: "https://fakeimg.pl/300x300",
+    image: "/media/iconimages/rug-image-1.jpg",
   },
   {
     _id: "12",
     name: "Tables",
-    image: "https://fakeimg.pl/300x300",
+    image: "/media/iconimages/woodenroundtable-image-1.JPG",
   },
 ];
 
