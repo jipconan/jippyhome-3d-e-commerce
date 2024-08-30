@@ -116,7 +116,7 @@ export const categoriesContents: CategoriesPopOverContents = [
         _id: "1-2",
         name: "Sofa by Type",
         subcategories: [
-          { _id: "1-2-1", name: "Recliner Beds" },
+          { _id: "1-2-1", name: "Recliner Sofas" },
           { _id: "1-2-2", name: "Sleeper Sofas" },
           { _id: "1-2-3", name: "Sofa Beds" },
         ],
@@ -184,7 +184,7 @@ export const categoriesContents: CategoriesPopOverContents = [
   },
   {
     _id: "4",
-    name: "Beds",
+    name: "Bed Frames",
     images: [
       "/media/categoryimages/bed-image-1.JPG",
       "/media/categoryimages/bed-image-2.JPG",
