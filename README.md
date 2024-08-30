@@ -1,30 +1,144 @@
-# React + TypeScript + Vite
+# JippyHome 3D E-Commerce
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Summary
 
-Currently, two official plugins are available:
+This e-commerce website allows users to browse and purchase furnitures with excellent catalogues. The app provides a seamless shopping experience with a responsive 3D model previewer to allow shopper to see the furinure in a 3 dimensional.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Key Features
 
-## Expanding the ESLint configuration
+- **3D model previewer:**
+  </br>
+  Preview the model in 3D with different lighting modes.
+- **Product Catalog:**
+  </br>
+  Display a wide range of products with detailed descriptions, images, and pricing.
+- **Shopping Cart:**
+  </br>
+  Offer a smooth checkout process with various payment and shipping options.
+- **Checkout Process:**
+  </br>
+  Provide a streamlined checkout process with options for payment and shipping.
+- **Admin Dashboard:**
+  </br>
+ Provide an admin dashboard for managing products, orders, inventory, and user accounts.
+- **Responsive Design:**
+  </br>
+  Ensure the website adapts to different devices and screen sizes for an optimal user experience.
+- **Performance Optimization:**
+  </br>
+  Enhance website performance for quick load times and easy navigation.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Deployed URL
 
-- Configure the top-level `parserOptions` property like this:
+You can access the deployed URL at [JippyHome 3D E-Commerce](https://jippyhome-3d-e-commerce.onrender.com/).
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Website Screenshots
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+|                             **Landing Page**                              |                           **Signup Page**                            |
+| :-----------------------------------------------------------------------: | :------------------------------------------------------------------: | 
+|            ![Landing Page](./public/media/github/landingpage.jpg)             |            ![Signup Page](./public/media/github/signuppage.jpg)             |
+|                              **Login Page**                               |                           **Account Page**                           |                  
+|            ![Login Page](./public/media/github/loginpage.jpg)              |          ![Account Page](./public/media/github/accountpage.jpg)            |
+|                              **Store Page**                               |                           **Category Page**                          |                  
+|            ![Store Page](./public/media/github/storepage.jpg)              |         ![Category Page](./public/media/github/categorypage.jpg)           |
+|                         **Product Page**                                  |                    **3D Preview Modal (Default)**                    |                  
+|            ![Product Page](./public/media/github/productpage.jpg)          |      ![3D Preview Modal Default](./public/media/github/3dpreviewmodal-default.jpg)      |
+|                      **3D Preview Modal (Warm)**                          |                      **3D Preview Modal (Cool)**                     |                  
+| ![3D Preview Modal Warm](./public/media/github/3dpreviewmodal-warm.jpg)    |     ![3D Preview Modal Cool](./public/media/github/3dpreviewmodal-cool.jpg) |
+|                              **Category Bar**                             |                          **Checkout Page**                           |                  
+|            ![Category Bar](./public/media/github/categorybar.jpg)          |         ![Checkout Page](./public/media/github/checkoutpage.jpg)          |
+|                              **Contact Page**                             |                          **Merchant Page**                           |                  
+|            ![Contact Page](./public/media/github/contactpage.jpg)          |         ![Merchant Page](./public/media/github/merchantpage.jpg)          |
+
+
+## Check it out!
+
+### Deployed URL
+
+You can access the deployed URL at [Jippie E-Commerce](https://jippie-e-commerce-app.onrender.com/).
+
+## Technologies Used
+
+### Front-End
+
+- **Project Setup**
+  - **Vite**
+  - **React**
+  - **Typescript**
+- **React Tools**
+  - **React Three Fiber**
+  - **React Three Drei**
+  - **Three.js**
+  - **React Router**
+  - **React Icons**
+  - **React Intersection Observer**
+- **Chakra UI**
+- **Tailwind CSS**
+- **Snipcart API**
+
+### Back-End
+- **Node.js**
+- **Express.js**
+- **MongoDB + Mongoose:**
+  </br>
+  For database management
+- **Cloudinary API:**
+  </br>
+  For image cloud & 3d model management
+
+### Tools and Dependencies
+
+- **Ngrok**
+- **Crypto.js**
+- **dotenv**
+
+## Challanges Faced
+
+### Cloudinary problems
+
+- **Implementing uploading 3D model:**
+  </br>
+  I coudln't upload 3D model at first so I have to check with the snipcart team what have went wrong.
+- **Implementing snipcart with backend to record order id:**
+  </br>
+  I had a hard time trying to response back to snipcart.
+
+### Snipcart problems
+
+- **Implementing Snipcart webhooks:**
+  </br>
+  I had a hard time to understand how to use webhook for the first time, but I managed to pull through after reading the document properly.
+- **Implementing snipcart with backend to record order id :**
+  </br>
+  I had a hard time trying to response back to snipcart.
+
+## Next Steps
+
+### Planned Future Enhancements
+
+- **Website Responsiveness & Compatibility:**
+  </br>
+  Implement responsive design and ensure compatibility across all device sizes.
+- *More product suggestions:**
+  </br>
+  Implement related products, new products, on-sale products.
+- **Product Reviews:**
+  </br>
+  Enable users to leave reviews and ratings for products.
+- **Wishlist:**
+  </br>
+  Add a wishlist feature for users to save products they are interested in.
+- **Social Media Sharing:**
+  </br>
+  Intergrate with social media platform sharing like whatsapp, facebook, etc.
+- **User account management:**
+  </br>
+  Manage user accounts so that I can control who has access to certain features.
+- **Discount system:**
+  </br>
+  I want user to able to apply discount code to their cart.
+- **Newsletter system:**
+  </br>
+  I want user to sign up for newsletter so that can stay updated on new products & promotions.
+
+For more details and updates, stay tuned to the repository and the project board.
