@@ -4,9 +4,9 @@ import { Product, ProductWithUrl } from "../types/dataTypes";
 import { Filters } from "../types/propsTypes";
 
 // const BASE_URL = "http://localhost:3000/products";
-// const BASE_URL =
-//   "https://jippyhome-be-node-express-mongodb.onrender.com/products";
-const BASE_URL = "https://jippy.home.ngrok.app/products";
+// const BASE_URL = "https://jippy.home.ngrok.app/products";
+const BASE_URL =
+  "https://jippyhome-be-node-express-mongodb.onrender.com/products";
 
 // Fetches all products from the backend.
 export async function getAllProducts(): Promise<Product[]> {
