@@ -59,10 +59,11 @@ You can access the deployed URL at [JippyHome 3D E-Commerce](https://jippyhome-3
   - **Vite**
   - **React**
   - **Typescript**
-- **React Tools**
+- **3D Tools**
+  - **Three.js**
   - **React Three Fiber**
   - **React Three Drei**
-  - **Three.js**
+- **React Tools**
   - **React Router**
   - **React Icons**
   - **React Intersection Observer**
