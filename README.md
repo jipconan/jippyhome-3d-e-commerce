@@ -32,6 +32,11 @@ This e-commerce website allows users to browse and purchase furniture with excel
 
 You can access the deployed URL at [JippyHome 3D E-Commerce](https://jippyhome-3d-e-commerce.onrender.com/).
 
+## Trello Board
+
+You can access the trello board URL at [JippyHomeTrello Board](https://trello.com/b/W6SJDniH/project-4-jippyhome).
+In my board, I have included links to ERD diagrams, wireframes.
+
 ## Website Screenshots
 
 |                             **Landing Page**                              |                           **Signup Page**                            |
