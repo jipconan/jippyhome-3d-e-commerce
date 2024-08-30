@@ -45,3 +45,9 @@ export type HomePageContentType = {
   name: string;
   image: string;
 };
+
+export type HomePageBenefitType = {
+  image: string;
+  heading: string;
+  description: string;
+};

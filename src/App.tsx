@@ -13,6 +13,7 @@ import { theme } from "./utils/themeOverride/theme";
 import { ProtectedRoute, AdminRoute } from "./utils/RouteChecker";
 import { getUser, getAdmin } from "./service/users";
 import { User, Admin } from "./types/propsTypes";
+import ScrollToTop from "./utils/PageUtils";
 import "./App.css";
 
 const App: React.FC = () => {
@@ -23,6 +24,7 @@ const App: React.FC = () => {
     <ChakraProvider theme={theme}>
       <Box maxW="100vw" w="100vw">
         <Router>
+          <ScrollToTop />
           <AppContent user={user} admin={admin} />
         </Router>
       </Box>

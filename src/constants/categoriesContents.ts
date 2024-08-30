@@ -1,6 +1,7 @@
 import {
   CategoriesPopOverContents,
   HomePageContentType,
+  HomePageBenefitType,
 } from "../types/categoryTypes";
 
 // HomePage Category Contents
@@ -64,6 +65,30 @@ export const homePageCategoryContent: HomePageContentType[] = [
     _id: "12",
     name: "Tables",
     image: "https://fakeimg.pl/300x300",
+  },
+];
+
+// HomePage Benefits Contents
+export const homePageBenefitsContent: HomePageBenefitType[] = [
+  {
+    image: "https://www.svgrepo.com/show/456869/dollar-paper.svg",
+    heading: "Price Match Guarantee",
+    description: "Found a better price? We’ll match it!",
+  },
+  {
+    image: "https://www.svgrepo.com/show/395397/calender.svg",
+    heading: "Furniture Protection",
+    description: "Coverage starts the day your furniture arrives.",
+  },
+  {
+    image: "https://www.svgrepo.com/show/532329/shield-check.svg",
+    heading: "Easy Returns",
+    description: "Not satisfied? Return within 30 days",
+  },
+  {
+    image: "https://www.svgrepo.com/show/521010/truck-speed.svg",
+    heading: "Expert Delivery and Setup",
+    description: "Skilled professionals handle delivery and installation.",
   },
 ];
 
