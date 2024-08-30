@@ -40,6 +40,7 @@ const StorePage: React.FC = () => {
       let data;
       let details;
       if (category) {
+        // console.log(category);
         data = await getProductsByCategory(category);
         details = await getCategoriesByName(category);
 
