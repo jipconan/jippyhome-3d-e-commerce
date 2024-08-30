@@ -113,7 +113,7 @@ const StorePage: React.FC = () => {
             <Box
               maxBlockSize="400px"
               boxSize="400px"
-              border="1px solid black"
+              border="1px solid lightgrey"
               boxShadow="lg"
               key={index}
             >
