@@ -45,7 +45,7 @@ const StorePage: React.FC = () => {
 
         if (details) {
           setCategoryDetails(details);
-          console.log(details);
+          // console.log(details);
         } else {
           setCategoryDetails(null);
         }
@@ -114,9 +114,9 @@ const StorePage: React.FC = () => {
               boxSize="400px"
               border="1px solid black"
               boxShadow="lg"
+              key={index}
             >
               <Image
-                key={index}
                 src={image}
                 alt={image}
                 style={{
