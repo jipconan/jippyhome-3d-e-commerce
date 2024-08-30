@@ -116,9 +116,9 @@ export const categoriesContents: CategoriesPopOverContents = [
         _id: "1-2",
         name: "Sofa by Type",
         subcategories: [
-          { _id: "1-2-1", name: "Sectional Sofas" },
+          { _id: "1-2-1", name: "Recliner Beds" },
           { _id: "1-2-2", name: "Sleeper Sofas" },
-          { _id: "1-2-3", name: "Recliner Sofas" },
+          { _id: "1-2-3", name: "Sofa Beds" },
         ],
       },
     ],
@@ -168,6 +168,7 @@ export const categoriesContents: CategoriesPopOverContents = [
           { _id: "3-1-1", name: "Leather Chairs" },
           { _id: "3-1-2", name: "Fabric Chairs" },
           { _id: "3-1-3", name: "Wooden Chairs" },
+          { _id: "3-1-4", name: "Plastic Chairs" },
         ],
       },
       {
@@ -176,7 +177,7 @@ export const categoriesContents: CategoriesPopOverContents = [
         subcategories: [
           { _id: "3-2-1", name: "Office Chairs" },
           { _id: "3-2-2", name: "Dining Chairs" },
-          { _id: "3-2-3", name: "Accent Chairs" },
+          { _id: "3-2-3", name: "Recliners" },
         ],
       },
     ],
@@ -192,20 +193,21 @@ export const categoriesContents: CategoriesPopOverContents = [
     subcategories: [
       {
         _id: "4-1",
-        name: "Bed by Size",
+        name: "Bed frames by Style",
         subcategories: [
-          { _id: "4-1-1", name: "King Beds" },
-          { _id: "4-1-2", name: "Queen Beds" },
-          { _id: "4-1-3", name: "Twin Beds" },
+          { _id: "4-1-1", name: "Wooden Bed Frames" },
+          { _id: "4-1-2", name: "Metal Bed Frames" },
+          { _id: "4-1-3", name: "Bunk Bed Frames" },
         ],
       },
       {
         _id: "4-2",
-        name: "Bed by Style",
+        name: "Mattress by Size",
         subcategories: [
-          { _id: "4-2-1", name: "Platform Beds" },
-          { _id: "4-2-2", name: "Sleigh Beds" },
-          { _id: "4-2-3", name: "Canopy Beds" },
+          { _id: "4-2-1", name: "King Mattress" },
+          { _id: "4-2-2", name: "Queen Mattress" },
+          { _id: "4-2-3", name: "Twin Mattress" },
+          { _id: "4-2-4", name: "Single Mattress" },
         ],
       },
     ],
