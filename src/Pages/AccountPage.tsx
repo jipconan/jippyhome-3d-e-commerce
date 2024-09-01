@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Flex, Grid, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  Heading,
+  Text,
+  BoxProps,
+} from "@chakra-ui/react";
 import { getUserDetails, logoutUser } from "../service/users";
 import { getColumnTemplate } from "../utils/mathUtil";
 import * as Comps from "./AccountPageComponents";
 import OrderGrid from "../components/orderComponents/OrderGrid";
 import { UserDetailsProps } from "../types/autheticationTypes";
+import ContactPage from "./ContactPage";
 
 type AccountPageProps = {
   user: string | null;
 };
+
+type ContentWrapperProps = BoxProps;
 
 const AccountPage: React.FC<AccountPageProps> = ({ user }) => {
   const [selectedOption, setSelectedOption] = useState<string>("account-info");
@@ -23,6 +34,17 @@ const AccountPage: React.FC<AccountPageProps> = ({ user }) => {
     }
   };
 
+  const BoxWrapper: React.FC<ContentWrapperProps> = ({
+    children,
+    ...props
+  }) => {
+    return (
+      <Box p={4} minH="80vh" {...props}>
+        {children}
+      </Box>
+    );
+  };
+
   useEffect(() => {
     fetchUserDetails();
   }, []);
@@ -31,8 +53,8 @@ const AccountPage: React.FC<AccountPageProps> = ({ user }) => {
   const userName = (userDetails?.firstName ?? "Guest").toUpperCase();
 
   // Set gridHeight and number of buttons.
-  const gridHeight = "50vh";
-  const numberOfButtons = 5;
+  const gridHeight = "60vh";
+  const numberOfButtons = 6;
 
   // Calculate button height based on the grid height and number of buttons
   const buttonHeight = `calc(${gridHeight} / ${numberOfButtons})`;
@@ -40,16 +62,30 @@ const AccountPage: React.FC<AccountPageProps> = ({ user }) => {
   const renderContent = () => {
     switch (selectedOption) {
       case "account-info":
-        return <Comps.AccountInformation userDetails={userDetails} />;
+        return (
+          <BoxWrapper>
+            <Comps.AccountInformation userDetails={userDetails} />
+          </BoxWrapper>
+        );
       case "orders":
-        return <OrderGrid user={user} />;
+        return (
+          <BoxWrapper>
+            <OrderGrid user={user} />
+          </BoxWrapper>
+        );
       case "wishlist":
-        return <div>Your Wishlist (Coming Soon!)</div>;
+        return <BoxWrapper>Your Wishlist (Coming Soon!)</BoxWrapper>;
       case "change-password":
-        return <div>Change Password (Coming Soon!)</div>;
+        return <BoxWrapper>Change Password (Coming Soon!)</BoxWrapper>;
+      case "contact-us":
+        return (
+          <BoxWrapper>
+            <ContactPage />
+          </BoxWrapper>
+        );
       case "logout":
         return (
-          <Box p={4}>
+          <BoxWrapper>
             <Text mb={4}>Are you sure you want to log out?</Text>
             <Button
               colorScheme="red"
@@ -59,7 +95,7 @@ const AccountPage: React.FC<AccountPageProps> = ({ user }) => {
             >
               Logout
             </Button>
-          </Box>
+          </BoxWrapper>
         );
       default:
         return <div>Welcome to your account page</div>;
@@ -87,7 +123,7 @@ const AccountPage: React.FC<AccountPageProps> = ({ user }) => {
       {/* Main Content */}
       <Flex>
         {/* Left Side - Navigation */}
-        <Flex direction="column" w="20%" h="80vh" border="1px solid lightgrey">
+        <Flex direction="column" w="20%" border="1px solid lightgrey">
           <Grid
             templateRows={getColumnTemplate(numberOfButtons)}
             gap={0}
@@ -148,6 +184,19 @@ const AccountPage: React.FC<AccountPageProps> = ({ user }) => {
               onClick={() => setSelectedOption("change-password")}
             >
               CHANGE PASSWORD
+            </Button>
+            <Button
+              variant="ghost"
+              justifyContent="flex-start"
+              borderBottom="1px solid lightgrey"
+              borderRadius="0"
+              height={buttonHeight}
+              color={selectedOption === "contact-us" ? "black" : "gray.500"}
+              fontWeight={selectedOption === "contact-us" ? "bold" : "normal"}
+              _hover={{ bg: "gray.100" }}
+              onClick={() => setSelectedOption("contact-us")}
+            >
+              CONTACT US
             </Button>
             <Button
               variant="ghost"

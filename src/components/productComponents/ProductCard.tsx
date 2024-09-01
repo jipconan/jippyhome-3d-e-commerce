@@ -30,7 +30,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       cursor="pointer"
     >
       {/* Image of the product */}
-      <Box flex="1" alignContent="center" p={12}>
+      <Box flex="1" alignContent="center" p={4}>
         <Image src={imageUrl[0]} alt={name} objectFit="cover" />
       </Box>
 

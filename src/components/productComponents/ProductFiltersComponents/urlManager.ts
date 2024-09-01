@@ -6,6 +6,7 @@ export const parseURLFilters = (params: URLSearchParams): FilterValues => {
     price: [0, 1000],
     color: [],
     material: [],
+    subCategory: [],
     furnitureCategory: [],
     roomCategory: [],
   };
@@ -44,7 +45,7 @@ export const updateURL = (
         params.set(key, `${value[0]},${value[1]}`);
       }
     } else if (Array.isArray(value) && value.length > 0) {
-      value.forEach((val) => params.append(key, String(val))); // Convert val to string
+      value.forEach((val) => params.append(key, String(val)));
     }
   }
 

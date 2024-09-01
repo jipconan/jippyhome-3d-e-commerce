@@ -1,27 +1,28 @@
 import React from "react";
-import { Checkbox, Stack, Box, Text } from "@chakra-ui/react";
+import { Checkbox, Stack, Box } from "@chakra-ui/react";
 import { FilterValues } from "../../../types/propsTypes";
 import { capitalizeWords } from "../../../utils/formatUtils";
 
 type FurnitureCategoryFilterProps = {
-  furnitureCategories: { [id: string]: string };
+  categories: { [id: string]: string };
   selectedFilters: FilterValues;
   onChange: (id: string, checked: boolean) => void;
+  categoryType: keyof Omit<FilterValues, "price">;
 };
 
 const FurnitureCategoryFilter: React.FC<FurnitureCategoryFilterProps> = ({
-  furnitureCategories,
+  categories,
   selectedFilters,
   onChange,
+  categoryType,
 }) => {
   return (
     <Box mb={4}>
-      <Text fontWeight="bold">Furnitures</Text>
       <Stack spacing={1}>
-        {Object.entries(furnitureCategories).map(([id, name]) => (
+        {Object.entries(categories).map(([id, name]) => (
           <Checkbox
             key={id}
-            isChecked={selectedFilters.furnitureCategory.includes(id)}
+            isChecked={selectedFilters[categoryType].includes(id)}
             onChange={(e) => onChange(id, e.target.checked)}
           >
             {capitalizeWords(name)}

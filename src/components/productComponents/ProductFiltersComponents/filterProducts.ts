@@ -29,6 +29,14 @@ export const filterProducts = (products: Product[], filters: FilterValues) => {
       return false;
     }
 
+    // Filtering by sub category
+    if (
+      filters.subCategory.length > 0 &&
+      !filters.subCategory.includes(product.subCategory)
+    ) {
+      return false;
+    }
+
     // Filtering by furniture category
     if (
       filters.furnitureCategory.length > 0 &&

@@ -4,7 +4,6 @@ import { PiShoppingCartSimple } from "react-icons/pi";
 import { SiSuperuser } from "react-icons/si";
 import { SlUser } from "react-icons/sl";
 import { CiLogout } from "react-icons/ci";
-import { TfiEmail } from "react-icons/tfi";
 import { GrUserNew } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import { UserProps } from "../../types/propsTypes";
@@ -95,20 +94,6 @@ const UserNav: React.FC<UserProps> = ({ user, admin }) => {
           </Link>
         </>
       )}
-
-      {/* Link to contact page */}
-      <Link to="/contact">
-        <Flex align="center">
-          <IconButton
-            aria-label="Contact"
-            variant="ghost"
-            colorScheme="white"
-            icon={<TfiEmail />}
-            size="lg"
-          />
-          <Text ml={2}>Contact</Text>
-        </Flex>
-      </Link>
 
       {/* Link to the shopping cart */}
       <Flex align="center" className="snipcart-checkout" cursor="pointer">
