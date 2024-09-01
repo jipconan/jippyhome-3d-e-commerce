@@ -53,6 +53,7 @@ interface Order {
     status?: string;
     currency?: string;
     finalGrandTotal?: string;
+    creationDate?: string;
   }[];
 }
 

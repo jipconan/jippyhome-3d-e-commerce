@@ -70,45 +70,6 @@ const AccountInformation: React.FC<AccountInformationProps> = ({
             {userDetails.lastName}
           </Text>
         </Box>
-        <Box
-          p={4}
-          borderBottom="1px solid lightgrey"
-          display="flex"
-          alignItems="center"
-        >
-          <Text fontWeight="bold" color="gray.600" flex="1">
-            Address Line 1:
-          </Text>
-          <Text color="gray.800" flex="2">
-            {userDetails.addressLine1 || "Not provided"}
-          </Text>
-        </Box>
-        <Box
-          p={4}
-          borderBottom="1px solid lightgrey"
-          display="flex"
-          alignItems="center"
-        >
-          <Text fontWeight="bold" color="gray.600" flex="1">
-            Address Line 2:
-          </Text>
-          <Text color="gray.800" flex="2">
-            {userDetails.addressLine2 || "Not provided"}
-          </Text>
-        </Box>
-        <Box
-          p={4}
-          borderBottom="1px solid lightgrey"
-          display="flex"
-          alignItems="center"
-        >
-          <Text fontWeight="bold" color="gray.600" flex="1">
-            Postal Code:
-          </Text>
-          <Text color="gray.800" flex="2">
-            {userDetails.postalCode || "Not provided"}
-          </Text>
-        </Box>
         <Box mt={4} display="flex" alignItems="start">
           <Button
             size="lg"

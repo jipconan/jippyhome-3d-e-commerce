@@ -35,7 +35,8 @@ export type AdminRouteProps = {
 export type PaginationResultProps = {
   currentPage: number;
   totalPages: number;
-  currentProducts: Product[];
+  currentProducts?: Product[];
+  currentOrders?: Order[];
   handlePageChange: (page: number) => void;
 };
 

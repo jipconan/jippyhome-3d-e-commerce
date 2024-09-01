@@ -12,7 +12,8 @@ import {
   Text,
   Image,
 } from "@chakra-ui/react";
-import { useLoading, capitalizeWords } from "../utils/PageUtils";
+import { useLoading } from "../utils/PageUtils";
+import { capitalizeWords } from "../utils/formatUtils";
 import { getAllProducts, getProductsByCategory } from "../service/products";
 import { getCategoriesByName } from "../service/categories";
 import { Product, Category } from "../types/dataTypes";
