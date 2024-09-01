@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Box, Stack } from "@chakra-ui/react";
+import { Text, Stack } from "@chakra-ui/react";
 import { footerContent } from "../../constants/textContents";
 
 const Footer: React.FC = () => {
