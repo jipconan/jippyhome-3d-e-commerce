@@ -27,6 +27,19 @@ const MerchantGrid: React.FC<{ products: Product[] }> = ({ products }) => {
   const [isModelModalOpen, setIsModelModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 5;
+  const totalPages = Math.ceil(products.length / itemsPerPage);
+
+  const currentData = products.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   const handleEditClick = (product: Product) => {
     setSelectedProduct(product);
     setIsUpdateModalOpen(true);
@@ -54,35 +67,46 @@ const MerchantGrid: React.FC<{ products: Product[] }> = ({ products }) => {
 
   return (
     <>
-      <Grid templateColumns={gridTemplate} gap={4}>
-        {headerItems.map((header) => (
-          <GridItem key={header}>
-            <strong>{header}</strong>
-          </GridItem>
-        ))}
-
-        {products.map((product) => (
-          <React.Fragment key={product._id}>
-            <GridItem colSpan={numColumns}>
-              <Box borderWidth="2px" borderRadius="md" boxShadow="sm">
-                <Grid
-                  templateColumns={gridTemplate}
-                  gap={4}
-                  alignItems="center"
-                >
-                  {Files.RenderProductGridItems({
-                    product,
-                    onEdit: () => handleEditClick(product),
-                    onDelete: () => handleDeleteClick(product),
-                    onModel: () => handleModelClick(product),
-                  })}
-                </Grid>
-                <Divider orientation="horizontal" />
-              </Box>
+      <Box minH="50vh">
+        <Grid templateColumns={gridTemplate} gap={4}>
+          {headerItems.map((header) => (
+            <GridItem key={header}>
+              <strong>{header}</strong>
             </GridItem>
-          </React.Fragment>
-        ))}
-      </Grid>
+          ))}
+
+          {currentData.map((product) => (
+            <React.Fragment key={product._id}>
+              <GridItem colSpan={numColumns}>
+                <Box borderWidth="2px" borderRadius="md" boxShadow="sm">
+                  <Grid
+                    templateColumns={gridTemplate}
+                    gap={4}
+                    alignItems="center"
+                  >
+                    {Files.RenderProductGridItems({
+                      product,
+                      onEdit: () => handleEditClick(product),
+                      onDelete: () => handleDeleteClick(product),
+                      onModel: () => handleModelClick(product),
+                    })}
+                  </Grid>
+                  <Divider orientation="horizontal" />
+                </Box>
+              </GridItem>
+            </React.Fragment>
+          ))}
+        </Grid>
+      </Box>
+
+      <Box my={10}>
+        {/* Pagination */}
+        <Comps.Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </Box>
 
       {selectedProduct && (
         <Comps.MerchantUpdateModal

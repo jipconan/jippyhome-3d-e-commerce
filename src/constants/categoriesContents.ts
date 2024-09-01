@@ -184,7 +184,7 @@ export const categoriesContents: CategoriesPopOverContents = [
   },
   {
     _id: "4",
-    name: "Bed Frames",
+    name: "Beds",
     images: [
       "/media/categoryimages/bed-image-1.JPG",
       "/media/categoryimages/bed-image-2.JPG",

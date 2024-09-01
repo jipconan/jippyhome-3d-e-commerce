@@ -27,7 +27,7 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <Box margin={4} display="flex" justifyContent="center" alignItems="center">
+    <Box display="flex" justifyContent="center" alignItems="center">
       {/* Button for previous page */}
       <Button
         onClick={handlePrevPage}
@@ -45,7 +45,7 @@ const Pagination: React.FC<PaginationProps> = ({
           onClick={() => onPageChange(i + 1)}
           marginX={1}
           _hover={{ bgColor: "gray.500" }}
-          bgColor={currentPage === i + 1 ? "gray.600" : "lightgrey"}
+          bgColor={currentPage === i + 1 ? "gray.600" : "gray.200"}
           color={currentPage === i + 1 ? "white" : "black"}
         >
           {i + 1}

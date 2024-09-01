@@ -72,8 +72,13 @@ const CategoryBar: React.FC = () => {
                   data-category-id={category._id}
                   onMouseEnter={() => handleMouseEnter(category._id)}
                 >
-                  {/* Link to category page */}
-                  <Link to={`/store/${category.name}`}>
+                  <Link
+                    to={
+                      category.name.toLowerCase() === "spaces"
+                        ? "/store"
+                        : `/store/${category.name.toLowerCase()}`
+                    }
+                  >
                     <Button
                       variant="unstyled"
                       w="5vw"
