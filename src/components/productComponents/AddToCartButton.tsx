@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@chakra-ui/react";
 import { Product } from "../../types/dataTypes";
-import { formatArrayToStringWithPipe } from "../../utils/PageUtils";
+import { formatArrayToStringWithPipe } from "../../utils/formatUtils";
 import { User } from "../../types/propsTypes";
 
 type AddToCartButtonProps = {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Checkbox, Stack, Box, Text } from "@chakra-ui/react";
 import { FilterValues } from "../../../types/propsTypes";
-import { capitalizeWords } from "../../../utils/PageUtils";
+import { capitalizeWords } from "../../../utils/formatUtils";
 
 type MaterialFilterProps = {
   materials: string[];

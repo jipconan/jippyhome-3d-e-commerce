@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import * as Comps from "../../components";
 import { useLoading, useError } from "../../utils/PageUtils";
+import { formatDate } from "../../utils/formatUtils";
 import { getColumnTemplate } from "../../utils/mathUtil";
 
 type OrderPageProps = {
@@ -33,6 +34,18 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
   const { loading, setLoading, LoadingComponent } = useLoading();
   const { setError, ErrorComponent } = useError();
 
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 5;
+  const totalPages = Math.ceil(snipcartOrders.length / itemsPerPage);
+
+  const currentData = snipcartOrders.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
   const fetchOrderIds = async () => {
     if (!user) {
       setError("User is not logged in.");
@@ -59,6 +72,11 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
     }
   };
 
+  const handleCardClick = (order: SnipcartOrdersResponse[number]) => {
+    setSelectedOrder(order);
+    onOpen();
+  };
+
   useEffect(() => {
     if (user) {
       fetchOrderIds();
@@ -70,11 +88,6 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
       fetchSnipcartOrders(orderIds);
     }
   }, [orderIds]);
-
-  const handleCardClick = (order: SnipcartOrdersResponse[number]) => {
-    setSelectedOrder(order);
-    onOpen();
-  };
 
   if (loading) {
     return <LoadingComponent />;
@@ -99,40 +112,55 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
             ))}
           </Grid>
         </Box>
-        {snipcartOrders.map((order) => (
-          <Box
-            key={order.invoiceNumber}
-            borderWidth="1px"
-            borderRadius="md"
-            p={4}
-            boxShadow="md"
-            bg="white"
-            cursor="pointer"
-            onClick={() => handleCardClick(order)}
-          >
-            <Grid
-              templateColumns={getColumnTemplate(headerItems.length)}
-              gap={4}
-              alignItems="center"
+
+        <Stack minH="35vh">
+          {currentData.map((order) => (
+            <Box
+              key={order.invoiceNumber}
+              borderWidth="1px"
+              borderRadius="md"
+              p={4}
+              boxShadow="md"
+              bg="white"
+              cursor="pointer"
+              onClick={() => handleCardClick(order)}
             >
-              <GridItem>{order.invoiceNumber}</GridItem>
-              <GridItem>{order.items[0].status}</GridItem>
-              <GridItem>
-                <Stack direction="row">
-                  <Text textTransform="uppercase">
-                    {order.items[0].currency}
-                  </Text>
-                  <Text>{order.items[0].finalGrandTotal}</Text>
-                </Stack>
-              </GridItem>
-              <GridItem>{order.items[0]?.cardHolderName}</GridItem>
-              <GridItem>{order.items[0].user?.email}</GridItem>
-              <GridItem>
-                {order.items[0].user?.shippingAddress?.fullAddress}
-              </GridItem>
-            </Grid>
-          </Box>
-        ))}
+              <Grid
+                templateColumns={getColumnTemplate(headerItems.length)}
+                gap={4}
+                alignItems="center"
+              >
+                <GridItem>
+                  {formatDate(order.items[0]?.creationDate ?? "")}
+                </GridItem>
+                <GridItem>{order.invoiceNumber}</GridItem>
+                <GridItem>{order.items[0].status}</GridItem>
+                <GridItem>
+                  <Stack direction="row">
+                    <Text textTransform="uppercase">
+                      {order.items[0].currency}
+                    </Text>
+                    <Text>{order.items[0].finalGrandTotal}</Text>
+                  </Stack>
+                </GridItem>
+
+                <GridItem>{order.items[0].user?.email}</GridItem>
+                <GridItem>
+                  {order.items[0].user?.shippingAddress?.fullAddress}
+                </GridItem>
+              </Grid>
+            </Box>
+          ))}
+        </Stack>
+
+        <Box py={4}>
+          {/* Pagination */}
+          <Comps.Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        </Box>
 
         {selectedOrder && (
           <Comps.OrderCardModal

@@ -44,8 +44,9 @@ const Pagination: React.FC<PaginationProps> = ({
           key={i}
           onClick={() => onPageChange(i + 1)}
           marginX={1}
-          variant={currentPage === i + 1 ? "solid" : "outline"}
-          colorScheme={currentPage === i + 1 ? "red" : "gray"}
+          _hover={{ bgColor: "gray.500" }}
+          bgColor={currentPage === i + 1 ? "gray.600" : "lightgrey"}
+          color={currentPage === i + 1 ? "white" : "black"}
         >
           {i + 1}
         </Button>

@@ -13,7 +13,7 @@ import { theme } from "./utils/themeOverride/theme";
 import { ProtectedRoute, AdminRoute } from "./utils/RouteChecker";
 import { getUser, getAdmin } from "./service/users";
 import { User, Admin } from "./types/propsTypes";
-import ScrollToTop from "./utils/PageUtils";
+import { ScrollToTop } from "./utils/PageUtils";
 import "./App.css";
 
 const App: React.FC = () => {

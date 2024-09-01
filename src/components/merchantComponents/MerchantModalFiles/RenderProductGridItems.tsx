@@ -1,7 +1,7 @@
 // src/components/ProductGridItems.tsx
 import { GridItem, Image, Button } from "@chakra-ui/react";
 import { Product } from "../../../types/dataTypes";
-import { formatArrayToStringWithComma } from "../../../utils/PageUtils";
+import { formatArrayToStringWithComma } from "../../../utils/formatUtils";
 
 const gridItemStyle = {
   maxWidth: "150px",

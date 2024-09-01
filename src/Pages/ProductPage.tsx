@@ -11,7 +11,8 @@ import {
 import { MdArrowBack, MdArrowForward, Md3dRotation } from "react-icons/md";
 import { Product } from "../types/dataTypes";
 import * as Comps from "../components";
-import { formatArrayToStringWithComma, useLoading } from "../utils/PageUtils";
+import { useLoading } from "../utils/PageUtils";
+import { formatArrayToStringWithComma } from "../utils/formatUtils";
 import { useParams } from "react-router-dom";
 import { getProductById } from "../service/products";
 import { User } from "../types/propsTypes";
