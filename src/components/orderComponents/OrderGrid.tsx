@@ -20,7 +20,14 @@ type OrderPageProps = {
   user: string | null;
 };
 
-const headerItems = ["Order ID", "Status", "Total", "Name", "Email", "Address"];
+const headerItems = [
+  "Date",
+  "Status",
+  "Order ID",
+  "Total",
+  "Payment Method",
+  "Address",
+];
 
 const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
   const [orderIds, setOrderIds] = useState<string[]>([]);
@@ -35,7 +42,7 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
   const { setError, ErrorComponent } = useError();
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 8;
   const totalPages = Math.ceil(snipcartOrders.length / itemsPerPage);
 
   const currentData = snipcartOrders.slice(
@@ -133,8 +140,8 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
                 <GridItem>
                   {formatDate(order.items[0]?.creationDate ?? "")}
                 </GridItem>
-                <GridItem>{order.invoiceNumber}</GridItem>
                 <GridItem>{order.items[0].status}</GridItem>
+                <GridItem>{order.invoiceNumber}</GridItem>
                 <GridItem>
                   <Stack direction="row">
                     <Text textTransform="uppercase">
@@ -144,7 +151,7 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
                   </Stack>
                 </GridItem>
 
-                <GridItem>{order.items[0].user?.email}</GridItem>
+                <GridItem>{order.items[0].paymentMethod}</GridItem>
                 <GridItem>
                   {order.items[0].user?.shippingAddress?.fullAddress}
                 </GridItem>

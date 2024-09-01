@@ -11,11 +11,12 @@ const ContactPage: React.FC = () => {
       justify="center"
       maxWidth="100vw"
       w="75vw"
-      minH="100vh" // Ensures the content takes up the full viewport height
-      mx="auto" // Centers horizontally
+      minH="100vh"
+      mx="auto"
+      my={8}
     >
       <VStack spacing={8} align="center">
-        <Box w="50vw" py={12}>
+        <Box w="50vw">
           <VStack spacing={2}>
             {/* Mapping over the contactPageContent */}
             {contactPageContent.map((content, index) => (

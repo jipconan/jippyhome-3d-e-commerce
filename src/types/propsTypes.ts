@@ -66,6 +66,7 @@ export type FilterValues = {
   price: [number, number] | string[];
   color: string[];
   material: string[];
+  subCategory: string[];
   furnitureCategory: string[];
   roomCategory: string[];
 };

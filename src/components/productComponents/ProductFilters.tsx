@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Box } from "@chakra-ui/react";
+import React from "react";
+import { Box, Stack, Text } from "@chakra-ui/react";
 import { Product } from "../../types/dataTypes";
-import { FilterValues } from "../../types/propsTypes";
-import { getAllCategories } from "../../service/categories";
-import { useNavigate, useLocation } from "react-router-dom";
+
 import * as Comps from "./ProductFiltersComponents";
 
 type ProductFiltersProps = {
@@ -15,121 +13,15 @@ const ProductFilters: React.FC<ProductFiltersProps> = ({
   products,
   onFilterChange,
 }) => {
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const [colors, setColors] = useState<string[]>([]);
-  const [materials, setMaterials] = useState<string[]>([]);
-  const [furnitureCategories, setFurnitureCategories] = useState<{
-    [id: string]: string;
-  }>({});
-  const [roomCategories, setRoomCategories] = useState<{
-    [id: string]: string;
-  }>({});
-  const [selectedFilters, setSelectedFilters] = useState<FilterValues>({
-    price: [0, 1000],
-    color: [],
-    material: [],
-    furnitureCategory: [],
-    roomCategory: [],
-  });
-
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const initialFilters = Comps.parseURLFilters(params);
-
-    const price = params.get("price");
-    if (price) {
-      const [minPrice, maxPrice] = price.split(",").map(Number);
-      if (!isNaN(minPrice) && !isNaN(maxPrice)) {
-        initialFilters.price = [minPrice, maxPrice];
-      }
-    }
-
-    params.forEach((value, key) => {
-      if (key !== "price") {
-        const allValues = params.getAll(key);
-        initialFilters[key as keyof FilterValues] =
-          allValues.length > 1 ? allValues : [value];
-      }
-    });
-    setSelectedFilters(initialFilters);
-  }, [location.search]);
-
-  useEffect(() => {
-    const uniqueColors = Array.from(
-      new Set(products.flatMap((product) => product.color))
-    );
-    const uniqueMaterials = Array.from(
-      new Set(products.flatMap((product) => product.material))
-    );
-
-    const furnitureCategoriesIds = Array.from(
-      new Set(products.map((product) => product.furnitureCategory))
-    );
-    const roomCategoriesIds = Array.from(
-      new Set(products.map((product) => product.roomCategory))
-    );
-
-    setColors(uniqueColors);
-    setMaterials(uniqueMaterials);
-
-    getAllCategories().then((categories) => {
-      const furnitureMap: { [id: string]: string } = {};
-      const roomMap: { [id: string]: string } = {};
-
-      categories.forEach((category) => {
-        if (
-          category.level === 1 &&
-          furnitureCategoriesIds.includes(category._id)
-        ) {
-          furnitureMap[category._id] = category.name;
-        }
-        if (category.level === 0 && roomCategoriesIds.includes(category._id)) {
-          roomMap[category._id] = category.name;
-        }
-      });
-
-      setFurnitureCategories(furnitureMap);
-      setRoomCategories(roomMap);
-    });
-  }, [products]);
-
-  useEffect(() => {
-    const filteredProducts = Comps.filterProducts(products, selectedFilters);
-    onFilterChange(filteredProducts);
-  }, [selectedFilters, products, onFilterChange]);
-
-  const handleFilterChange = (
-    filterType: keyof FilterValues,
-    value: string | [number, number] | string[],
-    checked?: boolean
-  ) => {
-    setSelectedFilters((prevFilters) => {
-      const updatedFilters = { ...prevFilters };
-
-      if (filterType === "price") {
-        updatedFilters[filterType] = value as [number, number];
-      } else if (checked !== undefined) {
-        if (checked) {
-          updatedFilters[filterType] = [
-            ...(prevFilters[filterType] as string[]),
-            value as string,
-          ];
-        } else {
-          updatedFilters[filterType] = (
-            prevFilters[filterType] as string[]
-          ).filter((item) => item !== value);
-        }
-      } else {
-        updatedFilters[filterType] = value as string[];
-      }
-
-      Comps.updateURL(updatedFilters, navigate);
-
-      return updatedFilters;
-    });
-  };
+  const {
+    colors,
+    materials,
+    subCategories,
+    furnitureCategories,
+    roomCategories,
+    selectedFilters,
+    handleFilterChange,
+  } = Comps.UseProductFilters(products, onFilterChange);
 
   return (
     <Box p={4}>
@@ -155,20 +47,41 @@ const ProductFilters: React.FC<ProductFiltersProps> = ({
           handleFilterChange("material", material, checked)
         }
       />
-      <Comps.FurnitureCategoryFilter
-        furnitureCategories={furnitureCategories}
-        selectedFilters={selectedFilters}
-        onChange={(id, checked) =>
-          handleFilterChange("furnitureCategory", id, checked)
-        }
-      />
-      <Comps.RoomCategoryFilter
-        roomCategories={roomCategories}
-        selectedFilters={selectedFilters}
-        onChange={(id, checked) =>
-          handleFilterChange("roomCategory", id, checked)
-        }
-      />
+      <Stack my={4}>
+        <Text fontWeight="bold">Sub Categories</Text>
+        <Comps.FurnitureCategoryFilter
+          categories={subCategories}
+          selectedFilters={selectedFilters}
+          onChange={(id, checked) =>
+            handleFilterChange("subCategory", id, checked)
+          }
+          categoryType="subCategory"
+        />
+      </Stack>
+
+      <Stack my={4}>
+        <Text fontWeight="bold">Furniture Categories</Text>
+        <Comps.FurnitureCategoryFilter
+          categories={furnitureCategories}
+          selectedFilters={selectedFilters}
+          onChange={(id, checked) =>
+            handleFilterChange("furnitureCategory", id, checked)
+          }
+          categoryType="furnitureCategory"
+        />
+      </Stack>
+
+      <Stack my={4}>
+        <Text fontWeight="bold">Room Categories</Text>
+        <Comps.FurnitureCategoryFilter
+          categories={roomCategories}
+          selectedFilters={selectedFilters}
+          onChange={(id, checked) =>
+            handleFilterChange("roomCategory", id, checked)
+          }
+          categoryType="roomCategory"
+        />
+      </Stack>
     </Box>
   );
 };
