@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 import { FilterValues } from "../../../types/propsTypes";
 
 type ColorFilterProps = {
@@ -14,10 +14,7 @@ const ColorFilter: React.FC<ColorFilterProps> = ({
   onChange,
 }) => {
   return (
-    <Box mb={4}>
-      <Text fontWeight="bold" my={4}>
-        Color
-      </Text>
+    <>
       <SimpleGrid columns={5} spacing={4}>
         {colors.map((color, index) => (
           <Box
@@ -63,7 +60,7 @@ const ColorFilter: React.FC<ColorFilterProps> = ({
           />
         ))}
       </SimpleGrid>
-    </Box>
+    </>
   );
 };
 

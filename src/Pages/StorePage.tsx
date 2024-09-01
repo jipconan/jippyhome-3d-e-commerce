@@ -158,7 +158,13 @@ const StorePage: React.FC = () => {
               </Button>
             </Link>
           </Flex>
-          <Box>
+          <Box
+            boxShadow="lg"
+            border="1px"
+            borderColor="rgba(211, 211, 211, 0.5)"
+            borderRadius="20px"
+            p={10}
+          >
             <Comps.ProductGrid products={filteredProducts} />
           </Box>
         </Box>

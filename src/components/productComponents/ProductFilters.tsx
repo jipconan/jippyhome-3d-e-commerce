@@ -24,55 +24,53 @@ const ProductFilters: React.FC<ProductFiltersProps> = ({
   } = Comps.UseProductFilters(products, onFilterChange);
 
   return (
-    <Box p={4}>
-      <Comps.PriceFilter
-        selectedFilters={selectedFilters}
-        onChange={(value) => handleFilterChange("price", value)}
-      />
-      <Comps.ColorFilter
-        colors={colors}
-        selectedFilters={selectedFilters}
-        onChange={(color) =>
-          handleFilterChange(
-            "color",
-            color,
-            !selectedFilters.color.includes(color)
-          )
-        }
-      />
-      <Comps.MaterialFilter
-        materials={materials}
-        selectedFilters={selectedFilters}
-        onChange={(material, checked) =>
-          handleFilterChange("material", material, checked)
-        }
-      />
-      <Stack my={4}>
-        <Text fontWeight="bold">Sub Categories</Text>
-        <Comps.FurnitureCategoryFilter
-          categories={subCategories}
-          selectedFilters={selectedFilters}
-          onChange={(id, checked) =>
-            handleFilterChange("subCategory", id, checked)
-          }
-          categoryType="subCategory"
-        />
-      </Stack>
+    <Box overflow="auto" maxH="80vh">
+      <Box mt={4} mb={12}>
+        <Text fontWeight="bold" mb={4}>
+          Price
+        </Text>
+        <Stack px={4}>
+          <Comps.PriceFilter
+            selectedFilters={selectedFilters}
+            onChange={(value) => handleFilterChange("price", value)}
+          />
+        </Stack>
+      </Box>
 
-      <Stack my={4}>
-        <Text fontWeight="bold">Furniture Categories</Text>
-        <Comps.FurnitureCategoryFilter
-          categories={furnitureCategories}
+      <Box mt={4} mb={12}>
+        <Text fontWeight="bold" mb={4}>
+          Color
+        </Text>
+        <Comps.ColorFilter
+          colors={colors}
           selectedFilters={selectedFilters}
-          onChange={(id, checked) =>
-            handleFilterChange("furnitureCategory", id, checked)
+          onChange={(color) =>
+            handleFilterChange(
+              "color",
+              color,
+              !selectedFilters.color.includes(color)
+            )
           }
-          categoryType="furnitureCategory"
         />
-      </Stack>
+      </Box>
 
-      <Stack my={4}>
-        <Text fontWeight="bold">Room Categories</Text>
+      <Box mt={4} mb={12}>
+        <Text fontWeight="bold" mb={4}>
+          Material
+        </Text>
+        <Comps.MaterialFilter
+          materials={materials}
+          selectedFilters={selectedFilters}
+          onChange={(material, checked) =>
+            handleFilterChange("material", material, checked)
+          }
+        />
+      </Box>
+
+      <Box mt={4} mb={12}>
+        <Text fontWeight="bold" mb={4}>
+          Room Categories
+        </Text>
         <Comps.FurnitureCategoryFilter
           categories={roomCategories}
           selectedFilters={selectedFilters}
@@ -81,7 +79,35 @@ const ProductFilters: React.FC<ProductFiltersProps> = ({
           }
           categoryType="roomCategory"
         />
-      </Stack>
+      </Box>
+
+      <Box mt={4} mb={12}>
+        <Text fontWeight="bold" mb={4}>
+          Furniture Categories
+        </Text>
+        <Comps.FurnitureCategoryFilter
+          categories={furnitureCategories}
+          selectedFilters={selectedFilters}
+          onChange={(id, checked) =>
+            handleFilterChange("furnitureCategory", id, checked)
+          }
+          categoryType="furnitureCategory"
+        />
+      </Box>
+
+      <Box mt={4} mb={12}>
+        <Text fontWeight="bold" mb={4}>
+          Sub Categories
+        </Text>
+        <Comps.FurnitureCategoryFilter
+          categories={subCategories}
+          selectedFilters={selectedFilters}
+          onChange={(id, checked) =>
+            handleFilterChange("subCategory", id, checked)
+          }
+          categoryType="subCategory"
+        />
+      </Box>
     </Box>
   );
 };

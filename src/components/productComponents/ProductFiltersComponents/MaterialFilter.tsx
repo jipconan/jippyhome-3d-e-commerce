@@ -1,5 +1,5 @@
 import React from "react";
-import { Checkbox, Stack, Box, Text } from "@chakra-ui/react";
+import { Checkbox, Stack } from "@chakra-ui/react";
 import { FilterValues } from "../../../types/propsTypes";
 import { capitalizeWords } from "../../../utils/formatUtils";
 
@@ -15,9 +15,8 @@ const MaterialFilter: React.FC<MaterialFilterProps> = ({
   onChange,
 }) => {
   return (
-    <Box mb={4}>
-      <Text fontWeight="bold">Material</Text>
-      <Stack spacing={1}>
+    <>
+      <Stack>
         {materials.map((material, index) => (
           <Checkbox
             key={index}
@@ -28,7 +27,7 @@ const MaterialFilter: React.FC<MaterialFilterProps> = ({
           </Checkbox>
         ))}
       </Stack>
-    </Box>
+    </>
   );
 };
 
