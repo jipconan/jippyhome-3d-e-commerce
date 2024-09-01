@@ -7,7 +7,7 @@ import {
   Heading,
   Flex,
   Divider,
-  Link as ChakraLink, // Import ChakraLink for styling
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import { Product, Category } from "../../../types/dataTypes";
 import { Link } from "react-router-dom";
@@ -46,7 +46,7 @@ const SearchDropDown = forwardRef<HTMLDivElement, SearchDropDownProps>(
                 Products
               </Heading>
               <Divider borderColor="gray.300" my={2} />
-              <List spacing={2}>
+              <List spacing={2} maxHeight="300px" overflowY="auto">
                 {products.map((product) => (
                   <ListItem key={product._id}>
                     <ChakraLink
@@ -85,7 +85,7 @@ const SearchDropDown = forwardRef<HTMLDivElement, SearchDropDownProps>(
                 Categories
               </Heading>
               <Divider borderColor="gray.300" my={2} />
-              <List spacing={2}>
+              <List spacing={2} maxHeight="150px" overflowY="auto">
                 {categories.map((category) => (
                   <ListItem key={category._id}>
                     <ChakraLink

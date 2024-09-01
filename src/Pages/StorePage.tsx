@@ -98,17 +98,14 @@ const StorePage: React.FC = () => {
         my={4}
       >
         {/* Category Header */}
-        <Heading
-          as="h1"
-          fontFamily="'Baskervville', serif"
-          fontWeight={600}
-          my={4}
-        >
+        <Heading as="h1" fontFamily="'Baskervville', serif" fontWeight={600}>
           {category ? capitalizeWords(category) : null}
         </Heading>
 
         {/* Category Details */}
-        <Text>{categoryDetails?.description}</Text>
+        <Text fontSize="sm" maxW="40vw" my={4}>
+          {categoryDetails?.description}
+        </Text>
         <Stack spacing={4} flexDir="row">
           {categoryDetails?.gridImages.map((image, index) => (
             <Box
@@ -135,15 +132,20 @@ const StorePage: React.FC = () => {
       <Divider border="1px solid lightgrey" />
 
       {/* Product Grid & Queries*/}
-      <Stack direction="row" spacing={0} w="100%" p={4}>
-        <VStack align="stretch" w="17vw" mx={4}>
+      <Stack direction="row" w="100%">
+        <VStack align="stretch" w="17vw">
+          <Link to="/store">
+            <Button colorScheme="red" variant="outline" mt={4}>
+              Clear Filters
+            </Button>
+          </Link>
           <Comps.ProductFilters
             products={products}
             onFilterChange={handleFilterChange}
           />
         </VStack>
         <Box w="100%">
-          <Flex justifyContent="flex-end" mb={4} gap={8}>
+          <Flex justifyContent="flex-end" my={4}>
             <Select width="200px" value={sortOrder} onChange={handleSortChange}>
               {sortOptions.map((option) => (
                 <option key={option} value={option}>
@@ -151,12 +153,6 @@ const StorePage: React.FC = () => {
                 </option>
               ))}
             </Select>
-
-            <Link to="/store">
-              <Button colorScheme="red" variant="outline">
-                Clear Filters
-              </Button>
-            </Link>
           </Flex>
           <Box
             boxShadow="lg"

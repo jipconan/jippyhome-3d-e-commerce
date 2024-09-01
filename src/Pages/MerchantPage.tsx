@@ -127,7 +127,7 @@ const MerchantPage: React.FC = () => {
   }
 
   return (
-    <Box p={4}>
+    <>
       <Box px={12} my={4} display="flex" justifyContent="center">
         <Flex
           width="full"
@@ -193,7 +193,7 @@ const MerchantPage: React.FC = () => {
         </Flex>
       </Box>
 
-      <Box my={4} px={12}>
+      <Box px={12}>
         <Heading as="h2" size="lg" mb={4}>
           Products
         </Heading>
@@ -211,7 +211,7 @@ const MerchantPage: React.FC = () => {
         isOpen={isUploadModalOpen}
         onClose={handleCloseModals}
       />
-    </Box>
+    </>
   );
 };
 

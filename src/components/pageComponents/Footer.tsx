@@ -4,13 +4,11 @@ import { footerContent } from "../../constants/textContents";
 
 const Footer: React.FC = () => {
   return (
-    <Stack>
-      <Box>
-        {/* Footer text content */}
-        <Text textAlign="center" my={8} fontSize="1xl">
-          {footerContent}
-        </Text>
-      </Box>
+    <Stack my={4}>
+      {/* Footer text content */}
+      <Text textAlign="center" fontSize="1xl">
+        {footerContent}
+      </Text>
     </Stack>
   );
 };
