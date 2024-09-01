@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Box,
   RangeSlider,
   RangeSliderTrack,
   RangeSliderFilledTrack,
@@ -22,38 +21,33 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
 
   return (
     <>
-      <Text fontWeight="bold" my={4}>
-        Price
+      <RangeSlider
+        aria-label={["min", "max"]}
+        min={0}
+        max={1000}
+        step={10}
+        defaultValue={[minPrice, maxPrice]}
+        onChangeEnd={(value) => onChange(value as [number, number])}
+      >
+        <RangeSliderTrack>
+          <RangeSliderFilledTrack />
+        </RangeSliderTrack>
+        <RangeSliderThumb
+          index={0}
+          border="2px solid lightgrey"
+          borderRadius="full"
+          boxSize="24px"
+        />
+        <RangeSliderThumb
+          index={1}
+          border="2px solid lightgrey"
+          borderRadius="full"
+          boxSize="24px"
+        />
+      </RangeSlider>
+      <Text align="center">
+        ${selectedFilters.price[0]} - ${selectedFilters.price[1]}
       </Text>
-      <Box mb={4} mx={4}>
-        <RangeSlider
-          aria-label={["min", "max"]}
-          min={0}
-          max={1000}
-          step={10}
-          defaultValue={[minPrice, maxPrice]}
-          onChangeEnd={(value) => onChange(value as [number, number])}
-        >
-          <RangeSliderTrack>
-            <RangeSliderFilledTrack />
-          </RangeSliderTrack>
-          <RangeSliderThumb
-            index={0}
-            border="2px solid lightgrey"
-            borderRadius="full"
-            boxSize="24px"
-          />
-          <RangeSliderThumb
-            index={1}
-            border="2px solid lightgrey"
-            borderRadius="full"
-            boxSize="24px"
-          />
-        </RangeSlider>
-        <Text align="center">
-          ${selectedFilters.price[0]} - ${selectedFilters.price[1]}
-        </Text>
-      </Box>
     </>
   );
 };

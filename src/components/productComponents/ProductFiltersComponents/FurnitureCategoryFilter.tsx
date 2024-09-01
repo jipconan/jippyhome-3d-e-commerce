@@ -1,5 +1,5 @@
 import React from "react";
-import { Checkbox, Stack, Box } from "@chakra-ui/react";
+import { Checkbox, Stack } from "@chakra-ui/react";
 import { FilterValues } from "../../../types/propsTypes";
 import { capitalizeWords } from "../../../utils/formatUtils";
 
@@ -17,8 +17,8 @@ const FurnitureCategoryFilter: React.FC<FurnitureCategoryFilterProps> = ({
   categoryType,
 }) => {
   return (
-    <Box mb={4}>
-      <Stack spacing={1}>
+    <>
+      <Stack>
         {Object.entries(categories).map(([id, name]) => (
           <Checkbox
             key={id}
@@ -29,7 +29,7 @@ const FurnitureCategoryFilter: React.FC<FurnitureCategoryFilterProps> = ({
           </Checkbox>
         ))}
       </Stack>
-    </Box>
+    </>
   );
 };
 

@@ -10,7 +10,7 @@ type ProductGridProps = {
 const ProductGrid: React.FC<ProductGridProps> = ({ products }) => {
   return (
     <Stack spacing={4} align="start">
-      <Box overflowY="scroll" minHeight="80vh" maxHeight="80vh">
+      <Box overflowY="scroll" minHeight="70vh" maxHeight="70vh">
         <SimpleGrid columns={4} spacing={4}>
           {products.map((product) => (
             <Comps.ProductCard key={product._id} product={product} />
