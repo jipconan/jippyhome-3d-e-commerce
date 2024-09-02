@@ -5,16 +5,7 @@ import { contentMapper } from "../utils/ContentMapper";
 
 const ContactPage: React.FC = () => {
   return (
-    <Flex
-      direction="column"
-      align="center"
-      justify="center"
-      maxWidth="100vw"
-      w="75vw"
-      minH="100vh"
-      mx="auto"
-      my={8}
-    >
+    <Flex justify="center" maxWidth="100vw" w="75vw">
       <VStack spacing={8} align="center">
         <Box w="50vw">
           <VStack spacing={2}>

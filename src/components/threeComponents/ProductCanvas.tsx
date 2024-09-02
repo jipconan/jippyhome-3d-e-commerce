@@ -21,8 +21,8 @@ const ProductCanvas: React.FC<{ modelUrl: string }> = ({ modelUrl }) => {
 
   return (
     <div id="canvas-container" style={{ width: "100%", height: "100%" }}>
-      <Stack spacing={4} align="center">
-        <div style={{ width: "75vw", height: "70vh" }}>
+      <Stack align="center">
+        <div style={{ width: "70vw", height: "70vh" }}>
           <Canvas shadows>
             {/* Memoized Camera Setup */}
             <CameraSetup />
@@ -40,11 +40,12 @@ const ProductCanvas: React.FC<{ modelUrl: string }> = ({ modelUrl }) => {
             />
           </Canvas>
         </div>
+
         {/* List of Buttons */}
-        <Flex direction="row" gap={4}>
+        <Flex direction="row" gap={8} my={4}>
           <Button
             colorScheme="teal"
-            size="md"
+            size="lg"
             w="10vw"
             onClick={() => setLightingMode("default")}
           >
@@ -52,7 +53,7 @@ const ProductCanvas: React.FC<{ modelUrl: string }> = ({ modelUrl }) => {
           </Button>
           <Button
             colorScheme="orange"
-            size="md"
+            size="lg"
             w="10vw"
             onClick={() => setLightingMode("warm")}
           >
@@ -60,7 +61,7 @@ const ProductCanvas: React.FC<{ modelUrl: string }> = ({ modelUrl }) => {
           </Button>
           <Button
             colorScheme="blue"
-            size="md"
+            size="lg"
             w="10vw"
             onClick={() => setLightingMode("cool")}
           >

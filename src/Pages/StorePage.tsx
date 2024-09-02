@@ -86,24 +86,16 @@ const StorePage: React.FC = () => {
   }
 
   return (
-    <Container maxW="80vw" centerContent>
+    <Container maxW="65vw" centerContent>
       {/* Product or Category Details*/}
-      <Flex
-        direction="column"
-        gap={4}
-        w="100%"
-        p={4}
-        h="12vh"
-        height="full"
-        my={4}
-      >
+      <Flex direction="column" gap={4} w="100%" h="12vh" height="full" my={8}>
         {/* Category Header */}
-        <Heading as="h1" fontFamily="'Baskervville', serif" fontWeight={600}>
+        <Heading as="h1" fontFamily="'Baskervville', serif" fontWeight="bold">
           {category ? capitalizeWords(category) : null}
         </Heading>
 
         {/* Category Details */}
-        <Text fontSize="sm" maxW="40vw" my={4}>
+        <Text fontSize="sm" maxW="30vw" my={4}>
           {categoryDetails?.description}
         </Text>
         <Stack spacing={4} flexDir="row">
@@ -160,6 +152,7 @@ const StorePage: React.FC = () => {
             borderColor="rgba(211, 211, 211, 0.5)"
             borderRadius="20px"
             p={10}
+            ml={4}
           >
             <Comps.ProductGrid products={filteredProducts} />
           </Box>

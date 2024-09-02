@@ -2,9 +2,9 @@ import axios from "axios";
 
 // API base URL
 // const BASE_URL = "http://localhost:3000/orders";
-// const BASE_URL = "https://jippy.home.ngrok.app/orders";
-const BASE_URL =
-  "https://jippyhome-be-node-express-mongodb.onrender.com/orders";
+const BASE_URL = "https://jippy.home.ngrok.app/orders";
+// const BASE_URL =
+//   "https://jippyhome-be-node-express-mongodb.onrender.com/orders";
 
 // Creates a new order with the given user ID and invoice number
 export async function createOrder(
@@ -31,6 +31,7 @@ export async function createOrder(
 export async function getOrdersByUserId(userId: string): Promise<string[]> {
   try {
     const response = await axios.get<string[]>(`${BASE_URL}/${userId}`);
+    // console.log("in - api/getOrdersByUserId - response:", response);
     return response.data;
   } catch (error) {
     console.error("Error fetching orders by user ID:", error);
@@ -46,7 +47,7 @@ export async function updateOrdersByUserId(
   try {
     await axios.put(
       `${BASE_URL}/${userId}`,
-      { invoiceNumber }, // Send invoiceNumber as part of the request body
+      { invoiceNumber },
       {
         headers: {
           "Content-Type": "application/json",

@@ -33,14 +33,14 @@ const CategoryBar: React.FC = () => {
   return (
     <Flex as="nav" align="center" justify="center" bg="gray.700" color="white">
       {/* Main container for category items */}
-      <Flex align="center" maxW="75vw" w="full" position="relative">
+      <Flex align="center" maxW="70vw" w="full" position="relative">
         {/* Link to "All" category page */}
         <Box mr={4}>
           <Link to={`/store`}>
             <Button
               variant="unstyled"
-              w="5vw"
-              h="5vh"
+              w="4vw"
+              h="4vh"
               color="white"
               borderBottom="solid 3px transparent"
               borderRadius="0"
@@ -81,8 +81,8 @@ const CategoryBar: React.FC = () => {
                   >
                     <Button
                       variant="unstyled"
-                      w="5vw"
-                      h="5vh"
+                      w="4vw"
+                      h="4vh"
                       color="white"
                       borderBottom="solid 3px transparent"
                       borderRadius="0"

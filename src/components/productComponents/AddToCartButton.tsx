@@ -14,32 +14,6 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product, user }) => {
   const colorOptions = formatArrayToStringWithPipe(product.color);
   const productUrl = `https://jippyhome-be-node-express-mongodb.onrender.com/products/id/${product._id}`;
 
-  // const handleClick = () => {
-  //   // Create JSON object to log
-  //   const productData = {
-  //     id: product.public_id,
-  //     name: product.name,
-  //     price: product.price,
-  //     url: productUrl,
-  //     description: product.description,
-  //     image: product.imageUrl[0],
-  //     customFields: [
-  //       {
-  //         name: "material",
-  //         options: materialOptions,
-  //       },
-  //       {
-  //         name: "color",
-  //         options: colorOptions,
-  //       },
-  //       { name: "userId", options: user },
-  //     ],
-  //   };
-
-  //   // Log JSON data to console
-  //   console.log(JSON.stringify(productData, null, 2));
-  // };
-
   return (
     <Button
       // onClick={handleClick}
@@ -56,10 +30,10 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product, user }) => {
       data-item-custom2-options={colorOptions}
       data-item-custom3-name="userId"
       data-item-custom3-options={user}
-      bg="gray.500"
+      bg="gray.600"
       color="gray.100"
       width="full"
-      _hover={{ bg: "gray.700", color: "gray.300" }}
+      _hover={{ bg: "gray.800", color: "gray.200" }}
     >
       Add to Cart
     </Button>

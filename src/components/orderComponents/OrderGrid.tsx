@@ -10,6 +10,7 @@ import {
   useDisclosure,
   Heading,
   Stack,
+  Flex,
 } from "@chakra-ui/react";
 import * as Comps from "../../components";
 import { useLoading, useError } from "../../utils/PageUtils";
@@ -37,6 +38,7 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
   const [selectedOrder, setSelectedOrder] = useState<
     SnipcartOrdersResponse[number] | null
   >(null);
+  const [hasOrders, setHasOrders] = useState<boolean>(true); // New state for checking if there are orders
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { loading, setLoading, LoadingComponent } = useLoading();
   const { setError, ErrorComponent } = useError();
@@ -53,6 +55,7 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
   const fetchOrderIds = async () => {
     if (!user) {
       setError("User is not logged in.");
@@ -60,15 +63,25 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
     }
     try {
       const orders = await getOrdersByUserId(user);
+
+      if (orders.length === 0) {
+        setHasOrders(false);
+        return;
+      }
+
       setOrderIds(orders);
+      setHasOrders(true);
     } catch (error) {
       console.error("Error fetching order IDs:", error);
       setError("Failed to fetch order IDs.");
+    } finally {
+      setLoading(false);
     }
   };
 
   const fetchSnipcartOrders = async (orderIds: string[]) => {
     try {
+      setLoading(true);
       const fetchedOrders = await getSnipcartOrdersByOrderId(orderIds);
       setSnipcartOrders(fetchedOrders);
     } catch (error) {
@@ -102,84 +115,93 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
 
   return (
     <Box p={6} maxW="100vw" overflowX="auto">
-      <Stack spacing={4}>
-        <Heading as="h3" size="lg" mb={8} textAlign="start">
-          Your Orders
-        </Heading>
-        <Box px={4}>
-          <Grid
-            templateColumns={getColumnTemplate(headerItems.length)}
-            gap={4}
-            fontWeight="bold"
-          >
-            {headerItems.map((header) => (
-              <GridItem key={header}>
-                <strong>{header}</strong>
-              </GridItem>
-            ))}
-          </Grid>
-        </Box>
+      {hasOrders ? (
+        <Stack spacing={4}>
+          <Heading as="h3" size="lg" mb={8} textAlign="start">
+            Your Orders
+          </Heading>
 
-        <Stack minH="35vh">
-          {currentData.map((order) => (
-            <Box
-              key={order.invoiceNumber}
-              borderWidth="1px"
-              borderRadius="md"
-              p={4}
-              boxShadow="md"
-              bg="white"
-              cursor="pointer"
-              onClick={() => handleCardClick(order)}
+          <Box px={4}>
+            <Grid
+              templateColumns={getColumnTemplate(headerItems.length)}
+              gap={4}
+              fontWeight="bold"
             >
-              <Grid
-                templateColumns={getColumnTemplate(headerItems.length)}
-                gap={4}
-                alignItems="center"
+              {headerItems.map((header) => (
+                <GridItem key={header}>
+                  <strong>{header}</strong>
+                </GridItem>
+              ))}
+            </Grid>
+          </Box>
+
+          <Stack minH="35vh">
+            {currentData.map((order) => (
+              <Box
+                key={order.invoiceNumber}
+                borderWidth="1px"
+                borderRadius="md"
+                p={4}
+                boxShadow="md"
+                bg="white"
+                cursor="pointer"
+                onClick={() => handleCardClick(order)}
               >
-                <GridItem>
-                  {formatDate(order.items[0]?.creationDate ?? "")}
-                </GridItem>
-                <GridItem>{order.items[0].status}</GridItem>
-                <GridItem>{order.invoiceNumber}</GridItem>
-                <GridItem>
-                  <Stack direction="row">
-                    <Text textTransform="uppercase">
-                      {order.items[0].currency}
-                    </Text>
-                    <Text>{order.items[0].finalGrandTotal}</Text>
-                  </Stack>
-                </GridItem>
+                <Grid
+                  templateColumns={getColumnTemplate(headerItems.length)}
+                  gap={4}
+                  alignItems="center"
+                >
+                  <GridItem>
+                    {formatDate(order.items[0]?.creationDate ?? "")}
+                  </GridItem>
+                  <GridItem>{order.items[0].status}</GridItem>
+                  <GridItem>{order.invoiceNumber}</GridItem>
+                  <GridItem>
+                    <Stack direction="row">
+                      <Text textTransform="uppercase">
+                        {order.items[0].currency}
+                      </Text>
+                      <Text>{order.items[0].finalGrandTotal}</Text>
+                    </Stack>
+                  </GridItem>
 
-                <GridItem>{order.items[0].paymentMethod}</GridItem>
-                <GridItem>
-                  {order.items[0].user?.shippingAddress?.fullAddress}
-                </GridItem>
-              </Grid>
-            </Box>
-          ))}
+                  <GridItem>{order.items[0].paymentMethod}</GridItem>
+                  <GridItem>
+                    {order.items[0].user?.shippingAddress?.fullAddress}
+                  </GridItem>
+                </Grid>
+              </Box>
+            ))}
+          </Stack>
+
+          <Box py={4}>
+            {/* Pagination */}
+            <Comps.Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </Box>
+
+          {selectedOrder && (
+            <Comps.OrderCardModal
+              isOpen={isOpen}
+              onClose={onClose}
+              order={selectedOrder}
+            />
+          )}
+
+          {/* Show error message if there's an error */}
+          <ErrorComponent />
         </Stack>
-
-        <Box py={4}>
-          {/* Pagination */}
-          <Comps.Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
+      ) : (
+        <Box h="80vh">
+          <Flex align="center" justify="center" height="full">
+            <Text fontSize="4xl">No orders available</Text>
+          </Flex>
         </Box>
-
-        {selectedOrder && (
-          <Comps.OrderCardModal
-            isOpen={isOpen}
-            onClose={onClose}
-            order={selectedOrder}
-          />
-        )}
-
-        {/* Show error message if there's an error */}
-        <ErrorComponent />
-      </Stack>
+      )}
     </Box>
   );
 };
