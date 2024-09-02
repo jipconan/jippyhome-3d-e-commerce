@@ -13,13 +13,13 @@ export const homePageCategoryContent: HomePageContentType[] = [
   },
   {
     _id: "2",
-    name: "Bed Frames",
+    name: "Beds",
     image: "/media/iconimages/metalbedframe-image-1.jpg",
   },
   {
     _id: "3",
-    name: "Mattress",
-    image: "/media/iconimages/queen-image-1.jpg",
+    name: "Mirrors",
+    image: "/media/iconimages/mirror-image-1.jpg",
   },
   {
     _id: "4",
@@ -226,7 +226,7 @@ export const categoriesContents: CategoriesPopOverContents = [
         name: "Storage by Type",
         subcategories: [
           { _id: "5-1-1", name: "Wardrobes" },
-          { _id: "5-1-2", name: "Bookshelfs" },
+          { _id: "5-1-2", name: "Shelves" },
           { _id: "5-1-3", name: "Cabinets" },
         ],
       },

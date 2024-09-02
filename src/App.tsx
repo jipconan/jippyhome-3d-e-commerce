@@ -22,9 +22,10 @@ const App: React.FC = () => {
 
   return (
     <ChakraProvider theme={theme}>
-      <Box maxW="100vw" w="100vw">
+      <Box maxW="full" w="full">
         <Router>
           <ScrollToTop />
+
           <AppContent user={user} admin={admin} />
         </Router>
       </Box>
@@ -55,6 +56,7 @@ const AppContent: React.FC<{ user: User | null; admin: Admin }> = ({
           </header>
         </>
       )}
+
       <main>
         <Routes>
           <Route
@@ -152,6 +154,7 @@ const AppContent: React.FC<{ user: User | null; admin: Admin }> = ({
           />
         </Routes>
       </main>
+
       {!(isSignInPage || isSignUpPage) && (
         <footer className="footer">
           <Comps.Footer />

@@ -1,5 +1,14 @@
 import { PageContent } from "../types/contentTypes";
 
+// Product Page details
+export const productPageContent: string[] = [
+  "Estimated lead time is 4 to 6 weeks.",
+  "Price includes GST.",
+  "Shipments might face unforeseen delays.",
+  "Free delivery and installation for orders over S$500.",
+  "Carry-up and disposal service available for door deliveries.",
+];
+
 // Footer Content
 export const footerContent: string =
   "Brought to you by Jippie E-Commerce App. © 2024 Jippie Group. All rights reserved.";

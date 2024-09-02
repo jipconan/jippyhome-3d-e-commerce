@@ -24,7 +24,7 @@ const ProductFilters: React.FC<ProductFiltersProps> = ({
   } = Comps.UseProductFilters(products, onFilterChange);
 
   return (
-    <Box overflow="auto" maxH="80vh">
+    <Box overflow="auto" maxH="80vh" pr={4}>
       <Box mt={4} mb={12}>
         <Text fontWeight="bold" mb={4}>
           Price

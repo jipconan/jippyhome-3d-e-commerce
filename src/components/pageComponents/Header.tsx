@@ -100,7 +100,7 @@ const Header: React.FC<UserProps> = ({ user, admin }) => {
       borderBottom="solid 1px"
       borderColor="gray.600"
     >
-      <Flex align="center" justify="space-between" maxW="75vw" w="100%">
+      <Flex align="center" justify="space-between" maxW="70vw" w="100%">
         <Flex align="center">
           {/* Logo */}
           <Link to="/">
