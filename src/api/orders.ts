@@ -2,9 +2,9 @@ import axios from "axios";
 
 // API base URL
 // const BASE_URL = "http://localhost:3000/orders";
-const BASE_URL = "https://jippy.home.ngrok.app/orders";
-// const BASE_URL =
-//   "https://jippyhome-be-node-express-mongodb.onrender.com/orders";
+// const BASE_URL = "https://jippy.home.ngrok.app/orders";
+const BASE_URL =
+  "https://jippyhome-be-node-express-mongodb.onrender.com/orders";
 
 // Creates a new order with the given user ID and invoice number
 export async function createOrder(
