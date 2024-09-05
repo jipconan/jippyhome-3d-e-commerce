@@ -64,10 +64,10 @@ const SignInForm: React.FC = () => {
       maxW="30vw"
       maxH="60vh"
       w="25vw"
-      h="55vh"
-      p={6}
+      h="45vh"
+      p={12}
       borderRadius="lg"
-      boxShadow="lg"
+      boxShadow="dark-lg"
       className="font-montserrat"
     >
       <Box

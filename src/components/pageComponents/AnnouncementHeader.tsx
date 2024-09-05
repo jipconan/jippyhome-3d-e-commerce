@@ -26,11 +26,9 @@ const AnnouncementHeader: React.FC = () => {
       justify="center"
       bg="gray.800"
       color="white"
-      w="100%"
       p={4}
       position="relative"
       overflow="hidden"
-      height="3.5vh"
     >
       {/* Container for the sliding announcements */}
       <Box
@@ -38,7 +36,7 @@ const AnnouncementHeader: React.FC = () => {
         flexDirection="column"
         position="absolute"
         width="100%"
-        height="100%"
+        h="3.5vh"
         transition={`transform ${slideTime}ms ease-in-out`}
         transform={`translateY(-${currentIndex * 100}%)`}
       >
@@ -46,8 +44,7 @@ const AnnouncementHeader: React.FC = () => {
         {announcements.map((announcement, index) => (
           <Text
             key={index}
-            px={8}
-            fontSize="sm"
+            fontSize={{ base: "xs", md: "sm" }}
             fontWeight="bold"
             lineHeight="3.5vh"
             textAlign="center"

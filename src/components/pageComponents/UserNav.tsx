@@ -17,7 +17,7 @@ const UserNav: React.FC<UserProps> = ({ user, admin }) => {
   }
 
   return (
-    <Flex align="center" mr={4} gap={8}>
+    <Flex align="center" mr={4} gap={4}>
       {/* Merchant button */}
       {admin && (
         <Link to="/merchant">
