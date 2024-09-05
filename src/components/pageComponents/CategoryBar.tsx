@@ -10,6 +10,7 @@ import {
   Text,
   Image,
   SimpleGrid,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { categoriesContents } from "../../constants/categoriesContents";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
@@ -20,9 +21,14 @@ import { Link } from "react-router-dom";
 const CategoryBar: React.FC = () => {
   const [openPopover, setOpenPopover] = useState<string | null>(null);
 
+  const offsetValue = useBreakpointValue({
+    md: [0, 20],
+    lg: [0, 0],
+  }) || [0, 0];
+
   // Handle mouse enter event to show popover
   const handleMouseEnter = (categoryId: string | null) => {
-    setOpenPopover(categoryId); // If categoryId is null, it will close any popover
+    setOpenPopover(categoryId);
   };
 
   // Handle mouse leave event to hide popover
@@ -33,14 +39,19 @@ const CategoryBar: React.FC = () => {
   return (
     <Flex as="nav" align="center" justify="center" bg="gray.700" color="white">
       {/* Main container for category items */}
-      <Flex align="center" maxW="70vw" w="full" position="relative">
+      <Flex
+        align="center"
+        maxW={{ md: "90vw", lg: "70vw" }}
+        w="full"
+        position="relative"
+      >
         {/* Link to "All" category page */}
         <Box mr={4}>
           <Link to={`/store`}>
             <Button
               variant="unstyled"
-              w="4vw"
-              h="4vh"
+              w={{ md: "8vw", lg: "4vw" }}
+              h={{ base: "10vh", md: "12vh", lg: "4vh" }}
               color="white"
               borderBottom="solid 3px transparent"
               borderRadius="0"
@@ -55,7 +66,7 @@ const CategoryBar: React.FC = () => {
         </Box>
 
         {/* Container to hold categories */}
-        <Flex align="center" justify="space-between" gap={4}>
+        <Flex align="center" justify="space-between" gap={{ md: 8, lg: 4 }}>
           {categoriesContents.map((category: CategoryPopOver) => (
             <Popover
               key={category._id}
@@ -63,7 +74,7 @@ const CategoryBar: React.FC = () => {
               isLazy
               isOpen={openPopover === category._id}
               onClose={handleMouseLeave}
-              offset={[0, 0]}
+              offset={offsetValue as [number, number]}
             >
               {/* Trigger element for the popover */}
               <PopoverTrigger>
@@ -81,8 +92,8 @@ const CategoryBar: React.FC = () => {
                   >
                     <Button
                       variant="unstyled"
-                      w="4vw"
-                      h="4vh"
+                      w={{ md: "8vw", lg: "4vw" }}
+                      h={{ base: "10vh", md: "12vh", lg: "4vh" }}
                       color="white"
                       borderBottom="solid 3px transparent"
                       borderRadius="0"
@@ -90,8 +101,10 @@ const CategoryBar: React.FC = () => {
                       display="flex"
                       alignItems="center"
                     >
-                      <Text fontSize="sm">{category.name}</Text>
-                      <MdOutlineKeyboardArrowDown />
+                      <Flex align="center">
+                        <Text fontSize="sm">{category.name}</Text>
+                        <MdOutlineKeyboardArrowDown />
+                      </Flex>
                     </Button>
                   </Link>
                 </Box>

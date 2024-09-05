@@ -1,5 +1,5 @@
 import React from "react";
-import { ChakraProvider, Box, Flex } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -22,13 +22,10 @@ const App: React.FC = () => {
 
   return (
     <ChakraProvider theme={theme}>
-      <Box maxW="full" w="full">
-        <Router>
-          <ScrollToTop />
-
-          <AppContent user={user} admin={admin} />
-        </Router>
-      </Box>
+      <Router>
+        <ScrollToTop />
+        <AppContent user={user} admin={admin} />
+      </Router>
     </ChakraProvider>
   );
 };
@@ -47,11 +44,7 @@ const AppContent: React.FC<{ user: User | null; admin: Admin }> = ({
         <>
           <header className="header">
             <Comps.FadingBox>
-              <Flex direction="column">
-                <Comps.AnnouncementHeader />
-                <Comps.Header user={user} admin={admin} />
-                <Comps.CategoryBar />
-              </Flex>
+              <Comps.Header user={user} admin={admin} />
             </Comps.FadingBox>
           </header>
         </>

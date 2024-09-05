@@ -72,10 +72,10 @@ const SignUpForm: React.FC = () => {
       maxW="40vw"
       maxH="80vh"
       w="50vw"
-      h="65vh"
-      p={6}
+      h="50vh"
+      p={12}
       borderRadius="lg"
-      boxShadow="lg"
+      boxShadow="dark-lg"
       className="font-montserrat"
     >
       <Box

@@ -23,7 +23,7 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     getAllProducts().then((data) => {
-      const shuffledProducts = data.sort(() => 0.5 - Math.random()).slice(0, 5);
+      const shuffledProducts = data.sort(() => 0.5 - Math.random()).slice(0, 6);
       setProducts(shuffledProducts);
     });
   }, []);
@@ -31,16 +31,21 @@ const HomePage: React.FC = () => {
   return (
     <Stack spacing={8}>
       {/* Landing Page Section */}
-      <Flex direction="row" mb={8} align="stretch" h="100vh">
+      <Flex
+        direction={{ base: "column", md: "row", lg: "row" }}
+        mb={8}
+        align="stretch"
+        minHeight={{ base: "auto", md: "100vh" }}
+      >
         <Image
           src={`/media/homepageimages/homepageimage-large-1.jpg`}
           alt="Landing Image"
           objectFit="cover"
           flex="1"
-          minW="300px"
-          h="100%"
+          w={{ base: "auto", md: "40vw" }}
+          h={{ base: "40vh", md: "auto" }}
         />
-        <Box position="relative" flex="0 1 40%" bg="gray.200" minW="300px">
+        <Box position="relative" flex="0 1 40%" bg="gray.200">
           <Image
             src="/media/homepageimages/homepageimage-small-1.jpg"
             alt="Landing Image"
@@ -50,29 +55,26 @@ const HomePage: React.FC = () => {
           />
           <Flex
             position="absolute"
-            top="25%"
+            top={{ base: "0%", md: "5%", lg: "25%" }}
             right="0"
             direction="column"
             align="end"
             color="white"
             p={12}
             mr={4}
+            textAlign="end"
+            gap={{ base: "1", md: "2", lg: "8" }}
           >
             <Heading
-              fontSize={{ base: "3xl", md: "5xl" }}
+              fontSize={{ base: "2xl", md: "1xl", lg: "5xl" }}
               color="gray.700"
-              textAlign="end"
               fontFamily="'Baskervville', serif"
-              my={4}
             >
               Buy Furniture Online In JippyHome At Your Leisure
             </Heading>
             <Text
-              fontSize={{ base: "1xl", md: "2xl" }}
+              fontSize={{ base: "lg", md: "lg", lg: "2xl" }}
               color="gray.700"
-              textAlign="end"
-              fontFamily="'Baskervville', serif"
-              my={4}
             >
               Enjoy unbeatable prices with the highest quality!
             </Text>
@@ -83,9 +85,8 @@ const HomePage: React.FC = () => {
               colorScheme="teal"
               bgColor="gray.700"
               _hover={{ bgColor: "gray.600" }}
-              size="lg"
+              size={{ base: "sm", md: "lg" }}
               borderRadius="30px"
-              textAlign="end"
             >
               Shop Now
             </Button>
@@ -101,6 +102,7 @@ const HomePage: React.FC = () => {
             my={12}
             fontFamily="'Baskervville', serif"
             fontWeight="bold"
+            textAlign={{ base: "center", md: "start" }}
           >
             Shop by Categories
           </Heading>
@@ -111,7 +113,7 @@ const HomePage: React.FC = () => {
                   <Image
                     src={category.image}
                     alt={category.name}
-                    boxSize="250px"
+                    boxSize={{ base: "150px", md: "200px", lg: "250px" }}
                     objectFit="cover"
                   />
                   <Text mt={4} textAlign="center">
@@ -124,40 +126,36 @@ const HomePage: React.FC = () => {
         </Box>
       </Flex>
 
-      <Flex direction="row" my={8} align="stretch" h="100vh">
-        <Box position="relative" flex="0 1 40%" bg="gray.200" minW="300px">
-          <Image
-            src="/media/homepageimages/homepageimage-small-2.jpg"
-            alt="Landing Image"
-            objectFit="cover"
-            w="100%"
-            h="100%"
-          />
+      {/* 2nd Landing Page */}
+      <Flex
+        direction={{ base: "column", md: "row", lg: "row" }}
+        mb={8}
+        align="stretch"
+        minHeight={{ base: "auto", md: "70vh", lg: "100vh" }}
+      >
+        <Box position="relative" flex="0 1 40%" bg="gray.200">
           <Flex
             position="absolute"
-            top="25%"
+            top={{ base: "0%", md: "5%", lg: "25%" }}
             right="0"
             direction="column"
             align="start"
             color="white"
             p={12}
-            ml={8}
+            mr={4}
+            textAlign="start"
+            gap={{ base: "1", md: "2", lg: "8" }}
           >
             <Heading
-              fontSize={{ base: "4xl", md: "5xl" }}
+              fontSize={{ base: "2xl", md: "1xl", lg: "5xl" }}
               color="gray.700"
-              textAlign="start"
               fontFamily="'Baskervville', serif"
-              my={4}
             >
-              Shop for sofas online at JippyHome, anytime you like.
+              Shop for sofas here, whenever it suits you.
             </Heading>
             <Text
-              fontSize={{ base: "1xl", md: "2xl" }}
+              fontSize={{ base: "lg", md: "lg", lg: "2xl" }}
               color="gray.700"
-              textAlign="start"
-              fontFamily="'Baskervville', serif"
-              my={4}
             >
               Find your ideal sofa online at JippyHome.
             </Text>
@@ -168,13 +166,19 @@ const HomePage: React.FC = () => {
               colorScheme="teal"
               bgColor="gray.700"
               _hover={{ bgColor: "gray.600" }}
-              size="lg"
+              size={{ base: "sm", md: "sm", lg: "lg" }}
               borderRadius="30px"
-              textAlign="start"
             >
               Shop Now
             </Button>
           </Flex>
+          <Image
+            src="/media/homepageimages/homepageimage-small-2.jpg"
+            alt="Landing Image"
+            objectFit="cover"
+            w="100%"
+            h="100%"
+          />
         </Box>
         <Image
           src={`/media/homepageimages/homepageimage-large-2.jpg`}
@@ -194,10 +198,11 @@ const HomePage: React.FC = () => {
             my={12}
             fontFamily="'Baskervville', serif"
             fontWeight="bold"
+            textAlign={{ base: "center", md: "start" }}
           >
             Interesting Products
           </Heading>
-          <SimpleGrid columns={{ base: 2, md: 3, lg: 5 }} spacing={4}>
+          <SimpleGrid columns={{ base: 1, md: 3, lg: 5 }} spacing={4}>
             {products.map((product) => (
               <Comps.ProductCard key={product._id} product={product} />
             ))}
@@ -211,33 +216,19 @@ const HomePage: React.FC = () => {
           <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={4}>
             {homePageBenefitsContent.map((info, index) => (
               <Flex key={index} direction="column" align="center">
-                <Box
-                  position="relative"
-                  width="100%"
-                  maxW="100px"
-                  overflow="hidden"
-                >
+                <Box maxW={{ base: "80px", md: "100px" }}>
                   <Image
                     src={info.image}
                     alt={info.heading}
                     objectFit="cover"
                   />
                 </Box>
-                <Flex
-                  direction="column"
-                  align="center"
-                  justify="space-between"
-                  minHeight="120px"
-                  mt={8}
-                >
-                  <Heading fontSize="2xl" mb={2}>
+                <Flex direction="column" align="center" mt={4}>
+                  <Heading fontSize={{ base: "lg", md: "xl" }}>
                     {info.heading}
                   </Heading>
-                  <Text align="center" mb={4}>
+                  <Text textAlign="center" mt={2}>
                     {info.description}
-                  </Text>
-                  <Text textDecoration="underline" cursor="pointer">
-                    Learn More
                   </Text>
                 </Flex>
               </Flex>
@@ -247,7 +238,13 @@ const HomePage: React.FC = () => {
       </Flex>
 
       {/* Store Information Texts */}
-      <Stack spacing={4} align="center" my={8}>
+      <Stack
+        spacing={4}
+        align="center"
+        justify="center"
+        textAlign="center"
+        my={8}
+      >
         <Heading fontSize="2xl">Store Information</Heading>
         <Text fontSize="lg">
           Fake address to the show room | Singapore 530000
