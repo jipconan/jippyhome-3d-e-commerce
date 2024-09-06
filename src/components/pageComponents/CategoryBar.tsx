@@ -50,7 +50,7 @@ const CategoryBar: React.FC = () => {
           <Link to={`/store`}>
             <Button
               variant="unstyled"
-              w={{ md: "8vw", lg: "4vw" }}
+              w={{ md: "8vw", lg: "7vw" }}
               h={{ base: "10vh", md: "12vh", lg: "4vh" }}
               color="white"
               borderBottom="solid 3px transparent"
@@ -92,7 +92,7 @@ const CategoryBar: React.FC = () => {
                   >
                     <Button
                       variant="unstyled"
-                      w={{ md: "8vw", lg: "4vw" }}
+                      w={{ md: "8vw", lg: "8vw" }}
                       h={{ base: "10vh", md: "12vh", lg: "4vh" }}
                       color="white"
                       borderBottom="solid 3px transparent"
@@ -128,7 +128,7 @@ const CategoryBar: React.FC = () => {
                     textAlign="start"
                     justifyContent="flex-start"
                     alignItems="flex-start"
-                    w="10vw"
+                    minW="10vw"
                   >
                     {/* Map and display subcategories */}
                     {MapSubcategories(

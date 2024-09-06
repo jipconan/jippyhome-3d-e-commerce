@@ -69,10 +69,8 @@ const SignUpForm: React.FC = () => {
 
   return (
     <Box
-      maxW="40vw"
-      maxH="80vh"
-      w="50vw"
-      h="50vh"
+      h="100%"
+      w={{ base: "85%", md: "60%", lg: "50%" }}
       p={12}
       borderRadius="lg"
       boxShadow="dark-lg"
