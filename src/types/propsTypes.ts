@@ -1,4 +1,4 @@
-import { Product } from "./dataTypes";
+import { Product, Category } from "./dataTypes";
 
 // Defines a basic prop structure with an id and a name
 export type Prop = {
@@ -15,6 +15,14 @@ export type Admin = boolean;
 export type UserProps = {
   user: User;
   admin: Admin;
+};
+
+// Defines props related to user & products
+export type UserProductCategoryProps = {
+  user: User;
+  admin: Admin;
+  products: Product[];
+  categories: Category[];
 };
 
 // Defines the props required for the ProtectedRoute component

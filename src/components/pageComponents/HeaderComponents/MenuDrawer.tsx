@@ -78,7 +78,11 @@ const MenuDrawer: React.FC<UserProps> = ({ user, admin }) => {
           <DrawerBody>
             <Flex flexDirection="column" align="start" gap={2}>
               <>
-                <Box my={2} borderBottom="solid lightgrey 1px" w="50vw">
+                <Box
+                  my={2}
+                  borderBottom="solid lightgrey 1px"
+                  w={{ sm: "50vw", md: "25vw" }}
+                >
                   <RouterLink to={`/store`}>
                     <Button
                       variant="unstyled"
@@ -101,7 +105,7 @@ const MenuDrawer: React.FC<UserProps> = ({ user, admin }) => {
                     key={category._id}
                     my={2}
                     borderBottom="solid lightgrey 1px"
-                    w="50vw"
+                    w={{ sm: "50vw", md: "25vw" }}
                   >
                     <Button
                       variant="unstyled"

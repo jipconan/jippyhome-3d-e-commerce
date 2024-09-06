@@ -61,10 +61,8 @@ const SignInForm: React.FC = () => {
 
   return (
     <Box
-      maxW="30vw"
-      maxH="60vh"
-      w="25vw"
-      h="45vh"
+      h="100%"
+      w={{ base: "85%", md: "50%", lg: "35%" }}
       p={12}
       borderRadius="lg"
       boxShadow="dark-lg"

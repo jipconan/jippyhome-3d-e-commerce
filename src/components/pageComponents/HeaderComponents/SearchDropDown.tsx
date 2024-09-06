@@ -34,7 +34,7 @@ const SearchDropDown = forwardRef<HTMLDivElement, SearchDropDownProps>(
         color="black"
         mt={2}
         p={8}
-        width="100%"
+        width={{ base: "90vw", md: "60vw", lg: "30vw" }}
         zIndex={20}
         boxShadow="md"
       >
