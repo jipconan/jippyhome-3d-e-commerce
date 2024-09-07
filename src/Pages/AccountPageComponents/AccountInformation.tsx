@@ -1,5 +1,11 @@
 import React from "react";
-import { Box, Heading, Text, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Button,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { UserDetailsProps } from "../../types/autheticationTypes";
 import { getRowTemplate } from "../../utils/mathUtil";
 import { useLoading } from "../../utils/PageUtils";
@@ -12,17 +18,33 @@ const AccountInformation: React.FC<AccountInformationProps> = ({
   userDetails,
 }) => {
   const { LoadingComponent } = useLoading();
+
+  // Number of rows in the grid
+  const numRows = 4;
+
+  // Responsive values
+  const boxPadding = useBreakpointValue({ base: 4, md: 6 });
+  const buttonWidth = useBreakpointValue({ base: "full", md: "10vw" });
+
   // Handle case where userDetails might be null
   if (!userDetails) {
     return <LoadingComponent />;
   }
 
-  // Number of rows in the grid
-  const numRows = 7;
-
   return (
-    <Box p={6} maxW="50vw" minH="60vh" display="flex" flexDirection="column">
-      <Heading as="h3" size="lg" mb={8} textAlign="start">
+    <Box
+      p={boxPadding}
+      maxW={{ base: "100%", md: "50vw" }}
+      minH={{ base: "auto", md: "60vh" }}
+      display="flex"
+      flexDirection="column"
+    >
+      <Heading
+        as="h3"
+        size="lg"
+        mb={8}
+        textAlign={{ base: "center", md: "start" }}
+      >
         Account Information
       </Heading>
       <Box
@@ -70,10 +92,10 @@ const AccountInformation: React.FC<AccountInformationProps> = ({
             {userDetails.lastName}
           </Text>
         </Box>
-        <Box mt={4} display="flex" alignItems="start">
+        <Box mt={4} display="flex" justifyContent="Start" alignItems="start">
           <Button
             size="lg"
-            w="10vw"
+            w={buttonWidth}
             bg="gray.500"
             color="gray.100"
             borderRadius="0"
