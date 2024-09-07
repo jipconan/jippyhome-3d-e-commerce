@@ -11,6 +11,7 @@ import {
   Heading,
   Stack,
   Flex,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import * as Comps from "../../components";
 import { useLoading, useError } from "../../utils/PageUtils";
@@ -21,15 +22,6 @@ type OrderPageProps = {
   user: string | null;
 };
 
-const headerItems = [
-  "Date",
-  "Status",
-  "Order ID",
-  "Total",
-  "Payment Method",
-  "Address",
-];
-
 const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
   const [orderIds, setOrderIds] = useState<string[]>([]);
   const [snipcartOrders, setSnipcartOrders] = useState<SnipcartOrdersResponse>(
@@ -38,19 +30,52 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
   const [selectedOrder, setSelectedOrder] = useState<
     SnipcartOrdersResponse[number] | null
   >(null);
-  const [hasOrders, setHasOrders] = useState<boolean>(true); // New state for checking if there are orders
+  const [hasOrders, setHasOrders] = useState<boolean>(true);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { loading, setLoading, LoadingComponent } = useLoading();
   const { setError, ErrorComponent } = useError();
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage = 8;
+
+  // Determine items per page based on orientation
+  const itemsPerPage =
+    useBreakpointValue({
+      base: 3, // portrait
+      md: 3, // Phone landscape
+      lg: 8, // landscape
+    }) || 8;
+
+  // Calculate total pages based on itemsPerPage
   const totalPages = Math.ceil(snipcartOrders.length / itemsPerPage);
 
   const currentData = snipcartOrders.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
+
+  const headerItems = [
+    "Date",
+    "Status",
+    "Order ID",
+    "Total",
+    "Payment Method",
+    "Address",
+  ];
+
+  // Determine number of columns and headers based on orientation
+  const columns =
+    useBreakpointValue({
+      base: 3, // portrait
+      md: 3, // Phone landscape
+      lg: headerItems.length, // landscape
+    }) || headerItems.length;
+
+  const visibleHeaders =
+    useBreakpointValue({
+      base: ["Date", "Status", "Order ID"], // portrait
+      md: ["Date", "Status", "Order ID"], // Phone Landscape
+      lg: headerItems, // landscape
+    }) || headerItems;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -114,20 +139,25 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
   }
 
   return (
-    <Box p={6} maxW="100vw" overflowX="auto">
+    <Box maxW="100vw" overflowX="auto">
       {hasOrders ? (
-        <Stack spacing={4}>
-          <Heading as="h3" size="lg" mb={8} textAlign="start">
+        <Stack>
+          <Heading
+            as="h3"
+            size="lg"
+            mb={{ base: 2, md: 4, lg: 8 }}
+            textAlign="start"
+          >
             Your Orders
           </Heading>
 
-          <Box px={4}>
+          <Box>
             <Grid
-              templateColumns={getColumnTemplate(headerItems.length)}
+              templateColumns={getColumnTemplate(columns)}
               gap={4}
               fontWeight="bold"
             >
-              {headerItems.map((header) => (
+              {visibleHeaders.map((header) => (
                 <GridItem key={header}>
                   <strong>{header}</strong>
                 </GridItem>
@@ -135,7 +165,7 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
             </Grid>
           </Box>
 
-          <Stack minH="35vh">
+          <Stack minH="35vh" spacing={{ md: 2, lg: 4 }}>
             {currentData.map((order) => (
               <Box
                 key={order.invoiceNumber}
@@ -148,7 +178,7 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
                 onClick={() => handleCardClick(order)}
               >
                 <Grid
-                  templateColumns={getColumnTemplate(headerItems.length)}
+                  templateColumns={getColumnTemplate(columns)}
                   gap={4}
                   alignItems="center"
                 >
@@ -157,25 +187,30 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
                   </GridItem>
                   <GridItem>{order.items[0].status}</GridItem>
                   <GridItem>{order.invoiceNumber}</GridItem>
-                  <GridItem>
-                    <Stack direction="row">
-                      <Text textTransform="uppercase">
-                        {order.items[0].currency}
-                      </Text>
-                      <Text>{order.items[0].finalGrandTotal}</Text>
-                    </Stack>
-                  </GridItem>
-
-                  <GridItem>{order.items[0].paymentMethod}</GridItem>
-                  <GridItem>
-                    {order.items[0].user?.shippingAddress?.fullAddress}
-                  </GridItem>
+                  {visibleHeaders.includes("Total") && (
+                    <GridItem>
+                      <Stack direction="row">
+                        <Text textTransform="uppercase">
+                          {order.items[0].currency}
+                        </Text>
+                        <Text>{order.items[0].finalGrandTotal}</Text>
+                      </Stack>
+                    </GridItem>
+                  )}
+                  {visibleHeaders.includes("Payment Method") && (
+                    <GridItem>{order.items[0].paymentMethod}</GridItem>
+                  )}
+                  {visibleHeaders.includes("Address") && (
+                    <GridItem>
+                      {order.items[0].user?.shippingAddress?.fullAddress}
+                    </GridItem>
+                  )}
                 </Grid>
               </Box>
             ))}
           </Stack>
 
-          <Box py={4}>
+          <Box mt={{ base: 0, md: 4 }}>
             {/* Pagination */}
             <Comps.Pagination
               currentPage={currentPage}
@@ -196,7 +231,7 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
           <ErrorComponent />
         </Stack>
       ) : (
-        <Box h="80vh">
+        <Box h={{ md: "auto", lg: "80vh" }}>
           <Flex align="center" justify="center" height="full">
             <Text fontSize="4xl">No orders available</Text>
           </Flex>

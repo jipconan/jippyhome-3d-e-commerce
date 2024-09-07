@@ -7,6 +7,8 @@ import {
   Heading,
   Text,
   BoxProps,
+  useBreakpointValue,
+  ResponsiveValue,
 } from "@chakra-ui/react";
 import { getUserDetails, logoutUser } from "../service/users";
 import { getColumnTemplate } from "../utils/mathUtil";
@@ -39,7 +41,7 @@ const AccountPage: React.FC<AccountPageProps> = ({ user }) => {
     ...props
   }) => {
     return (
-      <Box p={4} minH="80vh" {...props}>
+      <Box p={4} minH={{ base: "10vh", md: "80vh" }} {...props}>
         {children}
       </Box>
     );
@@ -49,15 +51,31 @@ const AccountPage: React.FC<AccountPageProps> = ({ user }) => {
     fetchUserDetails();
   }, []);
 
-  // Provide a fallback value for userName
   const userName = (userDetails?.firstName ?? "Guest").toUpperCase();
 
-  // Set gridHeight and number of buttons.
-  const gridHeight = "60vh";
-  const numberOfButtons = 6;
+  const gridHeight = useBreakpointValue({
+    base: "25vh",
+    md: "100vh",
+    lg: "60vh",
+  });
+  const buttonHeight = useBreakpointValue({
+    base: "auto",
+    md: `calc(${gridHeight} / 6)`,
+  });
 
-  // Calculate button height based on the grid height and number of buttons
-  const buttonHeight = `calc(${gridHeight} / ${numberOfButtons})`;
+  // Correctly typing useBreakpointValue
+  const flexDirection: ResponsiveValue<
+    "row" | "column" | "row-reverse" | "column-reverse"
+  > = useBreakpointValue({ base: "column", md: "row" }) || "row";
+
+  const leftColumnWidth = useBreakpointValue({
+    base: "100%",
+    md: "35%",
+    lg: "25%",
+  });
+  const rightColumnWidth = useBreakpointValue({ base: "100%", md: "80%" });
+
+  const isPortrait = useBreakpointValue({ base: true, md: false, lg: false });
 
   const renderContent = () => {
     switch (selectedOption) {
@@ -114,20 +132,24 @@ const AccountPage: React.FC<AccountPageProps> = ({ user }) => {
   return (
     <Box>
       {/* Header */}
-      <Box p={4} my={4}>
+      <Box p={4} my={{ base: 0, md: 4 }}>
         <Heading as="h2" size="lg">
           HELLO {userName}!
         </Heading>
       </Box>
 
-      {/* Main Content */}
-      <Flex>
+      <Flex direction={flexDirection}>
         {/* Left Side - Navigation */}
-        <Flex direction="column" w="20%" border="1px solid lightgrey">
+        <Flex
+          direction="column"
+          w={leftColumnWidth}
+          border="1px solid lightgrey"
+        >
           <Grid
-            templateRows={getColumnTemplate(numberOfButtons)}
+            templateRows={getColumnTemplate(6)}
             gap={0}
             h={gridHeight}
+            templateColumns="1fr"
           >
             <Button
               variant="ghost"
@@ -212,15 +234,15 @@ const AccountPage: React.FC<AccountPageProps> = ({ user }) => {
             </Button>
           </Grid>
 
-          {/* Empty box below the buttons */}
-          <Box flex="1" borderTop="1px solid lightgrey" />
+          {/* Conditionally render the empty box based on portrait mode */}
+          {!isPortrait && <Box flex="1" borderTop="1px solid lightgrey" />}
         </Flex>
 
         {/* Right Side - Main Content */}
         <Box
-          w="80%"
-          p={4}
-          borderTop="1px solid lightgrey"
+          w={rightColumnWidth}
+          p={{ base: 0, md: 4 }}
+          borderTop={{ base: 0, md: "1px solid lightgrey" }}
           borderBottom="1px solid lightgrey"
           borderRight="1px solid lightgrey"
         >
