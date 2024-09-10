@@ -114,25 +114,22 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
 
   return (
     <Flex as="header" align="center" justify="center" w="100%" py={4}>
-      <Stack direction="row" spacing={8} p={8} maxW="65vw" w="100%">
+      <Stack direction={{ base: "column", md: "row" }} spacing={8} p={8}>
         {/* Left Side */}
         <Stack spacing={4} flex="1">
           {/* Main Image Gallery */}
           <Flex
-            h="100%"
-            w="45vw"
-            align="center"
-            justify="center"
             border="solid 1px lightgrey"
             borderRadius="5px"
             position="relative"
             bgColor="whitesmoke"
+            w={{ base: "40vh", md: "100vh" }}
+            h={{ base: "40vh", md: "80vh" }}
           >
             <Image
               src={product.imageUrl[currentImageIndex]}
               alt="Product Image"
-              boxSize="800px"
-              objectFit="cover"
+              objectFit="contain"
             />
             <IconButton
               aria-label="Previous Image"
@@ -145,7 +142,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
               bgColor="white"
               border="solid 1px black"
               borderRadius="50%"
-              ml={8}
+              ml={{ base: 2, md: 8 }}
             />
             <IconButton
               aria-label="Next Image"
@@ -159,7 +156,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
               bgColor="white"
               border="solid 1px black"
               borderRadius="50%"
-              mr={8}
+              mr={{ base: 2, md: 8 }}
             />
           </Flex>
 
@@ -171,7 +168,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
                   key={index}
                   src={url}
                   alt={`Thumbnail ${index + 1}`}
-                  boxSize="80px"
+                  boxSize="85px"
                   objectFit="cover"
                   border={
                     currentImageIndex === index ? "2px solid gray" : "none"
@@ -183,7 +180,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
               <Flex
                 cursor="pointer"
                 h="100%"
-                w="80px"
+                w="85px"
                 align="center"
                 justify="center"
                 border="solid 1px lightgrey"
@@ -233,10 +230,9 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
             <Heading fontSize="lg">Colors</Heading>
             <Flex direction="row" gap={8}>
               {product.color.map((color, index) => (
-                <>
+                <React.Fragment key={index}>
                   <Flex direction="column" gap={1} align="center">
                     <Box
-                      key={index}
                       w="30px"
                       h="30px"
                       bg={`linear-gradient(to bottom right, ${color}, rgba(0, 0, 0, 0.75))`}
@@ -245,7 +241,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
                     />
                     <Text fontSize="sm">{color}</Text>
                   </Flex>
-                </>
+                </React.Fragment>
               ))}
             </Flex>
           </Stack>

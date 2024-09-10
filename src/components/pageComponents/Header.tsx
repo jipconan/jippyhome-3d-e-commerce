@@ -1,6 +1,7 @@
 // Header.tsx
 import React, { useEffect, useState } from "react";
 import { Flex, Image, Box, useBreakpointValue } from "@chakra-ui/react";
+
 import { Link } from "react-router-dom";
 import * as Comps from "../../components";
 import { UserProps } from "../../types/propsTypes";
@@ -60,11 +61,12 @@ const Header: React.FC<UserProps> = ({ user, admin }) => {
           {/* If it's portrait, show MenuDrawer */}
           {isPhonePortrait ? (
             <Flex direction="column">
-              <MenuDrawer user={user} admin={admin} />
-              {/* SearchBar component */}
-              <Box mx={4} my={2}>
-                <SearchBar products={products} categories={categories} />
-              </Box>
+              <MenuDrawer
+                user={user}
+                admin={admin}
+                products={products}
+                categories={categories}
+              />
             </Flex>
           ) : (
             <>

@@ -165,7 +165,7 @@ const OrderGrid: React.FC<OrderPageProps> = ({ user }) => {
             </Grid>
           </Box>
 
-          <Stack minH="35vh" spacing={{ md: 2, lg: 4 }}>
+          <Stack minH="35vh" spacing={{ base: 2, md: 2, lg: 4 }}>
             {currentData.map((order) => (
               <Box
                 key={order.invoiceNumber}

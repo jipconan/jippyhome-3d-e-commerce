@@ -10,6 +10,7 @@ import {
   Box,
   Divider,
   Grid,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { SnipcartOrdersResponse } from "../../types/snipcartFetchTypes";
 
@@ -24,21 +25,31 @@ const OrderCardModal: React.FC<OrderCardModalProps> = ({
   onClose,
   order,
 }) => {
-  // console.log(order);
+  // Define responsive modal size
+  const modalSize = useBreakpointValue({ base: "full", md: "full", lg: "6xl" });
+
+  // Define responsive grid templates
+  const gridTemplateColumns = useBreakpointValue({
+    base: "repeat(1, 1fr)",
+    md: "repeat(3, 1fr)",
+  });
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="lg">
+    <Modal isOpen={isOpen} onClose={onClose} size={modalSize}>
       <ModalOverlay />
-      <ModalContent maxW="70vw" h="70vh">
+      <ModalContent>
         <ModalHeader>Order Details</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Box p={4}>
+          <Box p={8}>
             {/* Order ID and Status */}
             <Text fontSize="xl" fontWeight="bold" mb={2}>
               Order ID: {order.invoiceNumber}
             </Text>
             <Divider mb={4} />
-            <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+
+            {/* Responsive Grid for Order Details */}
+            <Grid templateColumns={gridTemplateColumns} gap={6}>
               {/* User Details */}
               <Box>
                 <Text fontSize="lg" fontWeight="bold" mb={2}>
@@ -74,7 +85,8 @@ const OrderCardModal: React.FC<OrderCardModalProps> = ({
 
             <Divider my={4} />
 
-            <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+            {/* Responsive Grid for Addresses and Tracking */}
+            <Grid templateColumns={gridTemplateColumns} gap={6}>
               {/* Billing Address */}
               <Box>
                 <Text fontSize="lg" fontWeight="bold" mb={2}>

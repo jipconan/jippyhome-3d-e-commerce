@@ -17,6 +17,14 @@ export type UserProps = {
   admin: Admin;
 };
 
+// Defines props related to user information
+export type UserMenuProps = {
+  user: User;
+  admin: Admin;
+  products: Product[];
+  categories: Category[];
+};
+
 // Defines props related to user & products
 export type UserProductCategoryProps = {
   user: User;
