@@ -73,7 +73,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ products, categories }) => {
       bg="gray.500"
       borderRadius="20px"
       p={1}
-      width={{ base: "90vw", md: "95vw", lg: "30vw" }}
+      width={{ base: "90vw", md: "98vw", lg: "30vw" }}
     >
       <InputGroup>
         <Input

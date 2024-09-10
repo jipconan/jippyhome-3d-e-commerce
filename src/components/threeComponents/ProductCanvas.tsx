@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { Button, Stack, Flex } from "@chakra-ui/react";
+import { Button, Stack, Flex, useBreakpointValue } from "@chakra-ui/react";
 import ProductModel from "./ProductModel";
 import React from "react";
 
@@ -19,57 +19,67 @@ const CameraSetup: React.FC = React.memo(() => {
 const ProductCanvas: React.FC<{ modelUrl: string }> = ({ modelUrl }) => {
   const [lightingMode, setLightingMode] = useState("default");
 
+  // Responsive sizes based on breakpoints
+  const canvasWidth = useBreakpointValue({
+    base: "90vw",
+    md: "100vw",
+    lg: "70vw",
+  });
+  const canvasHeight = useBreakpointValue({
+    base: "45vh",
+    md: "70vh",
+    lg: "70vh",
+  });
+
   return (
-    <div id="canvas-container" style={{ width: "100%", height: "100%" }}>
-      <Stack align="center">
-        <div style={{ width: "70vw", height: "70vh" }}>
-          <Canvas shadows>
-            {/* Memoized Camera Setup */}
-            <CameraSetup />
+    <Stack align="center">
+      <div style={{ width: canvasWidth, height: canvasHeight }}>
+        <Canvas shadows>
+          {/* Memoized Camera Setup */}
+          <CameraSetup />
 
-            {/* 3D ProductModel with lighting mode */}
-            <ProductModel modelUrl={modelUrl} lightingMode={lightingMode} />
+          {/* 3D ProductModel with lighting mode */}
+          <ProductModel modelUrl={modelUrl} lightingMode={lightingMode} />
 
-            {/* Orbit Controls */}
-            <OrbitControls
-              enableZoom={false}
-              enablePan={false}
-              enableRotate={true}
-              maxPolarAngle={Math.PI / 2}
-              target={[0, 1.5, 0]}
-            />
-          </Canvas>
-        </div>
+          {/* Orbit Controls */}
+          <OrbitControls
+            enableZoom={false}
+            enablePan={false}
+            enableRotate={true}
+            maxPolarAngle={Math.PI / 2}
+            target={[0, 1.5, 0]}
+          />
+        </Canvas>
+      </div>
 
-        {/* List of Buttons */}
-        <Flex direction="row" gap={8} my={4}>
-          <Button
-            colorScheme="teal"
-            size="lg"
-            w="10vw"
-            onClick={() => setLightingMode("default")}
-          >
-            Default
-          </Button>
-          <Button
-            colorScheme="orange"
-            size="lg"
-            w="10vw"
-            onClick={() => setLightingMode("warm")}
-          >
-            Warm
-          </Button>
-          <Button
-            colorScheme="blue"
-            size="lg"
-            w="10vw"
-            onClick={() => setLightingMode("cool")}
-          >
-            Cool
-          </Button>
-        </Flex>
-      </Stack>
-    </div>
+      {/* List of Buttons */}
+      <Flex direction="row" gap={4} my={{ base: 2, md: 1 }}>
+        <Button
+          colorScheme="teal"
+          size={{ base: "sm", md: "sm", lg: "lg" }}
+          w={{ base: "80%", md: "10vw" }}
+          onClick={() => setLightingMode("default")}
+        >
+          Default
+        </Button>
+        <Button
+          colorScheme="orange"
+          size={{ base: "sm", md: "sm", lg: "lg" }}
+          w={{ base: "80%", md: "10vw" }}
+          onClick={() => setLightingMode("warm")}
+        >
+          Warm
+        </Button>
+        <Button
+          colorScheme="blue"
+          size={{ base: "sm", md: "sm", lg: "lg" }}
+          w={{ base: "80%", md: "10vw" }}
+          onClick={() => setLightingMode("cool")}
+        >
+          Cool
+        </Button>
+      </Flex>
+    </Stack>
   );
 };
 

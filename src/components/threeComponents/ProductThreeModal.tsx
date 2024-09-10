@@ -7,6 +7,7 @@ import {
   ModalBody,
   Flex,
   Text,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import * as Comps from "..";
 
@@ -15,10 +16,21 @@ const ProductThreeModal: React.FC<{
   onClose: () => void;
   modelUrl: string;
 }> = ({ isOpen, onClose, modelUrl }) => {
+  // Responsive size for the modal content
+  const modalSize = useBreakpointValue({
+    base: "3xl",
+    md: "full",
+    lg: "3xl",
+  });
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="1xl">
+    <Modal isOpen={isOpen} onClose={onClose} size={modalSize}>
       <ModalOverlay />
-      <ModalContent sx={{ width: "75vw", height: "85vh" }}>
+      <ModalContent
+        maxW={{ base: "100%", md: "100%", lg: "75vw" }}
+        maxH={{ base: "100%", md: "100%", lg: "90vh" }}
+        overflow="hidden"
+      >
         <ModalHeader>3D Model Preview</ModalHeader>
         <ModalCloseButton />
         <ModalBody>

@@ -11,17 +11,25 @@ import {
   Text,
   Box,
   Heading,
+  IconButton,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
-import UserNav from "../UserNav";
-import { UserProps } from "../../../types/propsTypes";
+import { UserMenuProps } from "../../../types/propsTypes";
 import { categoriesContents } from "../../../constants/categoriesContents";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { CategoryPopOver, Subcategory } from "../../../types/categoryTypes";
 import { MapSubcategories } from "../../../utils/CategoryMapper";
+import { PiShoppingCartSimple } from "react-icons/pi";
+import SearchBar from "./SearchBar";
+import MenuUserNav from "./MenuUserNav";
 
-const MenuDrawer: React.FC<UserProps> = ({ user, admin }) => {
+const MenuDrawer: React.FC<UserMenuProps> = ({
+  user,
+  admin,
+  products,
+  categories,
+}) => {
   const [selectedCategory, setSelectedCategory] =
     useState<CategoryPopOver | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,17 +51,41 @@ const MenuDrawer: React.FC<UserProps> = ({ user, admin }) => {
 
   return (
     <>
-      <Flex align="center" justify="space-between" maxW="100vw" w="100%">
-        <Button
-          colorScheme="teal"
-          variant="unstyle"
-          onClick={onOpen}
-          aria-label="Menu"
-          fontSize="xl"
-        >
-          <GiHamburgerMenu />
-        </Button>
-        <UserNav user={user} admin={admin} />
+      <Flex align="center" direction="column" w="98vw">
+        <Flex align="center" justify="space-between" direction="row" w="100%">
+          <Button
+            colorScheme="teal"
+            variant="unstyle"
+            onClick={onOpen}
+            aria-label="Menu"
+            fontSize="xl"
+          >
+            <GiHamburgerMenu />
+          </Button>
+
+          {/* Shopping cart */}
+          <Flex
+            align="center"
+            className="snipcart-checkout"
+            cursor="pointer"
+            px={4}
+          >
+            <IconButton
+              aria-label="Cart"
+              variant="ghost"
+              colorScheme="white"
+              icon={<PiShoppingCartSimple />}
+              size="lg"
+              fontSize="2xl"
+              pr={{ base: 0, md: 4, lg: 0 }}
+            />
+            <Text ml={2}>Cart</Text>
+          </Flex>
+        </Flex>
+
+        <Box my={2}>
+          <SearchBar products={products} categories={categories} />
+        </Box>
       </Flex>
 
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
@@ -76,7 +108,10 @@ const MenuDrawer: React.FC<UserProps> = ({ user, admin }) => {
             </Flex>
           </DrawerHeader>
           <DrawerBody>
-            <Flex flexDirection="column" align="start" gap={2}>
+            <Flex mb={8} py={4} borderBottom="1px solid lightgrey">
+              <MenuUserNav user={user} admin={admin} />
+            </Flex>
+            <Flex flexDirection="column" gap={2}>
               <>
                 <Box
                   my={2}
