@@ -44,7 +44,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       {/* Product details */}
       <Flex direction="column">
         {/* Product name */}
-        <Text fontWeight="bold" fontSize={{ base: "xs", md: "md" }} h="6vh">
+        <Text
+          fontWeight="bold"
+          fontSize={{ base: "xs", md: "sm", lg: "md" }}
+          h="6vh"
+          mb={{ base: 0, md: 2 }}
+        >
           {name}
         </Text>
         {/* Product description */}
@@ -54,7 +59,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {/* Product price */}
         <Text
           mt="2"
-          fontSize={{ base: "md", md: "lg" }}
+          fontSize={{ base: "xs", md: "sm", lg: "md" }}
           fontWeight="semibold"
           height="4vh"
           color="gray.500"

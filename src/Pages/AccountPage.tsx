@@ -54,7 +54,7 @@ const AccountPage: React.FC<AccountPageProps> = ({ user }) => {
   const userName = (userDetails?.firstName ?? "Guest").toUpperCase();
 
   const gridHeight = useBreakpointValue({
-    base: "25vh",
+    base: "55vh",
     md: "100vh",
     lg: "60vh",
   });

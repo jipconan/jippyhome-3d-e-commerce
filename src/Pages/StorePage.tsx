@@ -91,7 +91,7 @@ const StorePage: React.FC = () => {
   }
 
   return (
-    <Container maxW={{ base: "100vw", md: "65vw" }} centerContent>
+    <Container maxW={{ base: "100vw", md: "90vw", lg: "65vw" }} centerContent>
       {/* Product or Category Details*/}
       <Flex direction="column" gap={4} w="100%" h="auto" my={8}>
         {/* Category Header */}
@@ -128,7 +128,7 @@ const StorePage: React.FC = () => {
       <Divider border="1px solid lightgrey" />
 
       {/* Product Grid & Queries */}
-      <Flex direction="row" w="100%" my={4}>
+      <Flex direction="row" w="100%" my={8}>
         <Flex direction="row" justify="space-between" w="100%">
           <Button
             border="1px solid #E2E8F0"
