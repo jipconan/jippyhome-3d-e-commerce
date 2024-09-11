@@ -22,12 +22,12 @@ const FilterDrawer: React.FC<FilterDrawerProps> = ({
     <>
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
-        <DrawerContent maxW={{ base: "75%", md: "20%" }}>
+        <DrawerContent w="100%">
           {/* <DrawerHeader borderBottomWidth="1px" bgColor="gray.700">
             <Flex align="center" justify="space-between"></Flex>
           </DrawerHeader> */}
           <DrawerBody>
-            <Flex flexDirection="column" gap={2}>
+            <Flex flexDirection="column" gap={2} w="100%">
               <>
                 <VStack align="stretch" w={{ md: "17vw" }}>
                   <Link to="/store">

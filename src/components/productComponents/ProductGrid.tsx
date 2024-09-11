@@ -13,7 +13,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products }) => {
       <Box
         overflowY="scroll"
         h={{ base: "auto", md: "70vh" }}
-        w={{ base: "auto", md: "62vw" }}
+        w={{ base: "auto", md: "80vw", lg: "62vw" }}
       >
         <SimpleGrid columns={{ base: 2, md: 4 }} spacing={4}>
           {products.map((product) => (

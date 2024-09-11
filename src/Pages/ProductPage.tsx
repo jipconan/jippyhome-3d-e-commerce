@@ -123,7 +123,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
             borderRadius="5px"
             position="relative"
             bgColor="whitesmoke"
-            maxW={{ base: "auto", md: "100vw" }}
+            w={{ base: "90vw", md: "100vw" }}
             h={{ base: "80vh", md: "80vh" }}
           >
             <Image
