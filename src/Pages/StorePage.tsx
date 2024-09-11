@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import {
   Box,
-  Stack,
   Flex,
   Select,
-  VStack,
   Divider,
   Container,
   Heading,
-  Button,
   Text,
   Image,
+  useDisclosure,
+  Button,
 } from "@chakra-ui/react";
 import { useLoading } from "../utils/PageUtils";
 import { capitalizeWords } from "../utils/formatUtils";
@@ -18,9 +17,11 @@ import { getAllProducts, getProductsByCategory } from "../service/products";
 import { getCategoriesByName } from "../service/categories";
 import { Product, Category } from "../types/dataTypes";
 import * as Comps from "../components";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { sortProducts } from "../utils/queryUtils";
 import { sortProductPage } from "../constants/queryConstants";
+import FilterDrawer from "./StorePageComponents/FilterDrawer";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const StorePage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -35,19 +36,19 @@ const StorePage: React.FC = () => {
     keyof typeof sortProductPage
   >;
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   async function fetchProducts() {
     setLoading(true);
     try {
       let data;
       let details;
       if (category) {
-        // console.log(category);
         data = await getProductsByCategory(category);
         details = await getCategoriesByName(category);
 
         if (details) {
           setCategoryDetails(details);
-          // console.log(details);
         } else {
           setCategoryDetails(null);
         }
@@ -70,13 +71,17 @@ const StorePage: React.FC = () => {
   }, [category]);
 
   useEffect(() => {
-    setFilteredProducts(sortProducts(products, sortOrder));
-  }, [products, sortOrder]);
+    // Sort the currently filtered products, not the full products list
+    setFilteredProducts((prevFilteredProducts) =>
+      sortProducts(prevFilteredProducts, sortOrder)
+    );
+  }, [sortOrder]);
 
   function handleSortChange(e: React.ChangeEvent<HTMLSelectElement>) {
     setSortOrder(e.target.value as keyof typeof sortProductPage);
   }
 
+  // When filters are applied, keep sorting the filtered list
   function handleFilterChange(filteredProducts: Product[]) {
     setFilteredProducts(sortProducts(filteredProducts, sortOrder));
   }
@@ -86,23 +91,22 @@ const StorePage: React.FC = () => {
   }
 
   return (
-    <Container maxW="65vw" centerContent>
+    <Container maxW={{ base: "100vw", md: "65vw" }} centerContent>
       {/* Product or Category Details*/}
-      <Flex direction="column" gap={4} w="100%" h="12vh" height="full" my={8}>
+      <Flex direction="column" gap={4} w="100%" h="auto" my={8}>
         {/* Category Header */}
         <Heading as="h1" fontFamily="'Baskervville', serif" fontWeight="bold">
           {category ? capitalizeWords(category) : null}
         </Heading>
 
         {/* Category Details */}
-        <Text fontSize="sm" maxW="30vw" my={4}>
+        <Text fontSize="sm" maxW={{ base: "auto", md: "40vw" }} my={4}>
           {categoryDetails?.description}
         </Text>
-        <Stack spacing={4} flexDir="row">
+        <Flex gap={4} direction={{ base: "column", md: "row" }}>
           {categoryDetails?.gridImages.map((image, index) => (
             <Box
-              maxBlockSize="400px"
-              boxSize="400px"
+              boxSize={{ base: "auto", md: "400px" }}
               border="1px solid lightgrey"
               boxShadow="lg"
               key={index}
@@ -118,46 +122,62 @@ const StorePage: React.FC = () => {
               />
             </Box>
           ))}
-        </Stack>
+        </Flex>
       </Flex>
 
       <Divider border="1px solid lightgrey" />
 
-      {/* Product Grid & Queries*/}
-      <Stack direction="row" w="100%">
-        <VStack align="stretch" w="17vw">
-          <Link to="/store">
-            <Button colorScheme="red" variant="outline" mt={4}>
-              Clear Filters
-            </Button>
-          </Link>
-          <Comps.ProductFilters
+      {/* Product Grid & Queries */}
+      <Flex direction="row" w="100%" my={4}>
+        <Flex direction="row" justify="space-between" w="100%">
+          <Button
+            border="1px solid #E2E8F0"
+            borderRadius={2}
+            variant="ghost"
+            onClick={onOpen}
+            aria-label="Menu"
+            size={{ base: "sm", md: "lg" }}
+            fontSize={{ base: "sm", md: "lg" }}
+          >
+            <Flex align="center" gap={4}>
+              <GiHamburgerMenu />
+              <Text>Filters</Text>
+            </Flex>
+          </Button>
+
+          <FilterDrawer
             products={products}
             onFilterChange={handleFilterChange}
+            isOpen={isOpen}
+            onClose={onClose}
           />
-        </VStack>
-        <Box w="100%">
-          <Flex justifyContent="flex-end" my={4}>
-            <Select width="200px" value={sortOrder} onChange={handleSortChange}>
-              {sortOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </Select>
-          </Flex>
-          <Box
-            boxShadow="lg"
-            border="1px"
-            borderColor="rgba(211, 211, 211, 0.5)"
-            borderRadius="20px"
-            p={10}
-            ml={4}
+
+          {/* Sort Option & Product Grid */}
+          <Select
+            width={{ base: "150px", md: "200px" }}
+            size={{ base: "sm", md: "lg" }}
+            value={sortOrder}
+            onChange={handleSortChange}
           >
-            <Comps.ProductGrid products={filteredProducts} />
-          </Box>
-        </Box>
-      </Stack>
+            {sortOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </Select>
+        </Flex>
+      </Flex>
+
+      {/* Product Grid */}
+      <Box
+        boxShadow="lg"
+        border="1px"
+        borderColor="rgba(211, 211, 211, 0.5)"
+        borderRadius="20px"
+        p={4}
+      >
+        <Comps.ProductGrid products={filteredProducts} />
+      </Box>
     </Container>
   );
 };

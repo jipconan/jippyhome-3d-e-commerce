@@ -21,12 +21,12 @@ const ProductCanvas: React.FC<{ modelUrl: string }> = ({ modelUrl }) => {
 
   // Responsive sizes based on breakpoints
   const canvasWidth = useBreakpointValue({
-    base: "90vw",
+    base: "100vw",
     md: "100vw",
     lg: "70vw",
   });
   const canvasHeight = useBreakpointValue({
-    base: "45vh",
+    base: "68vh",
     md: "70vh",
     lg: "70vh",
   });
@@ -53,7 +53,7 @@ const ProductCanvas: React.FC<{ modelUrl: string }> = ({ modelUrl }) => {
       </div>
 
       {/* List of Buttons */}
-      <Flex direction="row" gap={4} my={{ base: 2, md: 1 }}>
+      <Flex direction="row" gap={4} my={{ base: 0, md: 1 }}>
         <Button
           colorScheme="teal"
           size={{ base: "sm", md: "sm", lg: "lg" }}

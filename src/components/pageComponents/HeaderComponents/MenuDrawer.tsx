@@ -90,9 +90,9 @@ const MenuDrawer: React.FC<UserMenuProps> = ({
 
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent maxW="80%">
           <DrawerHeader borderBottomWidth="1px" bgColor="gray.700">
-            <Flex align="center" justify="space-between">
+            <Flex align="center" justify="space-between" h="5vh">
               <RouterLink to={`/`}>
                 <Heading
                   color="gray.100"
@@ -111,12 +111,12 @@ const MenuDrawer: React.FC<UserMenuProps> = ({
             <Flex mb={8} py={4} borderBottom="1px solid lightgrey">
               <MenuUserNav user={user} admin={admin} />
             </Flex>
-            <Flex flexDirection="column" gap={2}>
+            <Flex direction="column" gap={2}>
               <>
                 <Box
                   my={2}
                   borderBottom="solid lightgrey 1px"
-                  w={{ sm: "50vw", md: "25vw" }}
+                  w={{ base: "50vw", md: "25vw" }}
                 >
                   <RouterLink to={`/store`}>
                     <Button
@@ -140,7 +140,7 @@ const MenuDrawer: React.FC<UserMenuProps> = ({
                     key={category._id}
                     my={2}
                     borderBottom="solid lightgrey 1px"
-                    w={{ sm: "50vw", md: "25vw" }}
+                    w={{ base: "50vw", md: "25vw" }}
                   >
                     <Button
                       variant="unstyled"
