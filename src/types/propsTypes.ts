@@ -17,6 +17,14 @@ export type UserProps = {
   admin: Admin;
 };
 
+// Defines props related to FilterDrawer information
+export type FilterDrawerProps = {
+  products: Product[];
+  onFilterChange: (filteredProducts: Product[]) => void;
+  isOpen: boolean;
+  onClose: () => void;
+};
+
 // Defines props related to user information
 export type UserMenuProps = {
   user: User;

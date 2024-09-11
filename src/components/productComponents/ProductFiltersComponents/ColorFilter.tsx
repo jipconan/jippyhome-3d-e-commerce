@@ -15,13 +15,13 @@ const ColorFilter: React.FC<ColorFilterProps> = ({
 }) => {
   return (
     <>
-      <SimpleGrid columns={6} spacing={3}>
+      <SimpleGrid columns={5} spacing={3}>
         {colors.map((color, index) => (
           <Box
             key={index}
             position="relative"
-            w="40px"
-            h="40px"
+            w="30px"
+            h="30px"
             bg={`linear-gradient(to bottom right, ${color}, rgba(0, 0, 0, 0.75))`}
             borderRadius="full"
             cursor="pointer"

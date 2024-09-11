@@ -42,17 +42,17 @@ const HomePage: React.FC = () => {
           src={`/media/homepageimages/homepageimage-large-1.jpg`}
           alt="Landing Image"
           objectFit="cover"
-          w={{ base: "100%", md: "50%" }}
-          h={{ base: "40vh", md: "auto" }}
+          w={{ base: "100%", md: "60%" }}
+          h={{ base: "60vh", md: "auto" }}
         />
-        <Box position="relative" w={{ base: "100%", md: "50%" }} bg="gray.200">
+        <Box position="relative" w={{ base: "100%", md: "40%" }} bg="gray.200">
           {/* Landing Image Small 1 */}
           <Image
             src="/media/homepageimages/homepageimage-small-1.jpg"
             alt="Landing Image"
             objectFit="cover"
             w="100%"
-            h="100%"
+            h={{ base: "70vh", md: "100%" }}
           />
           <Flex
             position="absolute"
@@ -130,10 +130,10 @@ const HomePage: React.FC = () => {
         align="stretch"
         minHeight={{ base: "auto", md: "70vh", lg: "100vh" }}
       >
-        <Box position="relative" w={{ base: "100%", md: "50%" }} bg="gray.200">
+        <Box position="relative" w={{ base: "100%", md: "40%" }} bg="gray.200">
           <Flex
             position="absolute"
-            top={{ base: "15%", md: "25%", lg: "25%" }}
+            top={{ base: "10%", md: "25%", lg: "25%" }}
             right={{ base: "30%", md: "25%", lg: "10%" }}
             direction="column"
             align="start"
@@ -174,7 +174,7 @@ const HomePage: React.FC = () => {
             alt="Landing Image Small 2"
             objectFit="cover"
             w="100%"
-            h="100%"
+            h={{ base: "60vh", md: "100%" }}
           />
         </Box>
         {/* Landing Image Big 2 */}
@@ -182,8 +182,8 @@ const HomePage: React.FC = () => {
           src={`/media/homepageimages/homepageimage-large-2.jpg`}
           alt="Landing Image Big 2"
           objectFit="cover"
-          w={{ base: "100%", md: "50%" }}
-          h={{ base: "40vh", md: "auto" }}
+          w={{ base: "100%", md: "60%" }}
+          h={{ base: "70vh", md: "auto" }}
         />
       </Flex>
 
@@ -198,7 +198,7 @@ const HomePage: React.FC = () => {
         >
           Interesting Products
         </Heading>
-        <SimpleGrid columns={{ base: 1, md: 3, lg: 6 }} spacing={6}>
+        <SimpleGrid columns={{ base: 2, md: 3, lg: 6 }} spacing={4}>
           {products.map((product) => (
             <Comps.ProductCard key={product._id} product={product} />
           ))}

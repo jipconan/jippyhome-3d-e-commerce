@@ -123,8 +123,8 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
             borderRadius="5px"
             position="relative"
             bgColor="whitesmoke"
-            w={{ base: "40vh", md: "100vh" }}
-            h={{ base: "40vh", md: "80vh" }}
+            maxW={{ base: "auto", md: "100vw" }}
+            h={{ base: "80vh", md: "80vh" }}
           >
             <Image
               src={product.imageUrl[currentImageIndex]}
@@ -161,14 +161,14 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
           </Flex>
 
           {/* Thumbnails */}
-          <Flex>
+          <Flex maxW={{ base: "auto", md: "100vw" }}>
             <HStack spacing={2}>
               {product.imageUrl.map((url, index) => (
                 <Image
                   key={index}
                   src={url}
                   alt={`Thumbnail ${index + 1}`}
-                  boxSize="85px"
+                  boxSize="72px"
                   objectFit="cover"
                   border={
                     currentImageIndex === index ? "2px solid gray" : "none"
@@ -180,7 +180,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
               <Flex
                 cursor="pointer"
                 h="100%"
-                w="85px"
+                w="72px"
                 align="center"
                 justify="center"
                 border="solid 1px lightgrey"

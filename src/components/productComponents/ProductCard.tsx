@@ -1,14 +1,14 @@
 // ProductCard.tsx
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Image, Text, Flex } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { Product } from "../../types/dataTypes";
 
 type ProductCardProps = {
-  product: Product; // Define the product prop type
+  product: Product;
 };
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { name, description, price, imageUrl } = product;
+  const { name, price, imageUrl } = product;
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -17,39 +17,52 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <Box
+    <Flex
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
       boxShadow="md"
       bg="white"
-      display="flex"
-      flexDirection="column"
-      h="100%"
+      direction="column"
+      maxH="300px"
+      maxW="auto"
       onClick={handleClick}
       cursor="pointer"
+      p={4}
     >
       {/* Image of the product */}
-      <Box flex="1" alignContent="center" p={4}>
-        <Image src={imageUrl[0]} alt={name} objectFit="cover" />
-      </Box>
+      <Flex flex="1" align="center" justify="center" p={4}>
+        <Image
+          src={imageUrl[0]}
+          alt={name}
+          objectFit="contain"
+          maxH="150px"
+          maxW="auto"
+        />
+      </Flex>
 
       {/* Product details */}
-      <Box p="4">
+      <Flex direction="column">
         {/* Product name */}
-        <Text fontWeight="bold" fontSize="lg" mb="2" height="3vh">
+        <Text fontWeight="bold" fontSize={{ base: "xs", md: "md" }} h="6vh">
           {name}
         </Text>
         {/* Product description */}
-        <Text color="gray.500" fontSize="sm" height="4vh" overflow="hidden">
+        {/* <Text color="gray.500" fontSize="xs" height="4vh" overflow="hidden">
           {description}
-        </Text>
+        </Text> */}
         {/* Product price */}
-        <Text mt="2" fontSize="lg" fontWeight="semibold" height="4vh">
+        <Text
+          mt="2"
+          fontSize={{ base: "md", md: "lg" }}
+          fontWeight="semibold"
+          height="4vh"
+          color="gray.500"
+        >
           ${price}
         </Text>
-      </Box>
-    </Box>
+      </Flex>
+    </Flex>
   );
 };
 

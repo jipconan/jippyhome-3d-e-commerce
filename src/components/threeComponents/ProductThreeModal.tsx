@@ -18,7 +18,7 @@ const ProductThreeModal: React.FC<{
 }> = ({ isOpen, onClose, modelUrl }) => {
   // Responsive size for the modal content
   const modalSize = useBreakpointValue({
-    base: "3xl",
+    base: "full",
     md: "full",
     lg: "3xl",
   });
