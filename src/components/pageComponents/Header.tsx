@@ -47,15 +47,14 @@ const Header: React.FC<UserProps> = ({ user, admin }) => {
         justify="center"
         bg="gray.700"
         color="white"
-        w="100%"
-        py={1}
+        maxW="100vw"
         borderBottom="solid 1px"
         borderColor="gray.600"
       >
         <Flex
           align="center"
           justify="space-between"
-          maxW={{ base: "98vw", md: "98vw", lg: "70vw" }}
+          maxW={{ base: "auto", md: "98vw", lg: "70vw" }}
           w="100%"
         >
           {/* If it's portrait, show MenuDrawer */}

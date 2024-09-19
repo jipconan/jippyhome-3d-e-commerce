@@ -115,7 +115,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
       as="header"
       align="center"
       justify="center"
-      w="100%"
+      maxW="95vw"
       minH="100vh"
       py={4}
     >
@@ -134,8 +134,8 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
             borderRadius="5px"
             position="relative"
             bgColor="whitesmoke"
-            w={{ base: "90vw", md: "40vw" }}
-            h={{ base: "80vh", md: "80vh" }}
+            w={{ base: "auto", md: "40vw" }}
+            h={{ base: "220px", md: "80vh" }}
             direction="column"
             align="center"
             justify="center"
@@ -144,6 +144,8 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
               src={product.imageUrl[currentImageIndex]}
               alt="Product Image"
               objectFit="contain"
+              w={{ base: "300px", md: "auto" }}
+              h={{ base: "200px", md: "auto" }}
             />
             <IconButton
               aria-label="Previous Image"
@@ -175,14 +177,14 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
           </Flex>
 
           {/* Thumbnails */}
-          <Flex maxW={{ base: "auto", md: "100vw" }}>
+          <Flex maxW={{ base: "95vw", md: "100vw" }}>
             <Flex direction="row" gap={2}>
               {product.imageUrl.map((url, index) => (
                 <Image
                   key={index}
                   src={url}
                   alt={`Thumbnail ${index + 1}`}
-                  boxSize="72px"
+                  boxSize="65px"
                   objectFit="cover"
                   border={
                     currentImageIndex === index ? "2px solid gray" : "none"
@@ -193,8 +195,6 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
               ))}
               <Flex
                 cursor="pointer"
-                h="100%"
-                w="72px"
                 align="center"
                 justify="center"
                 border="solid 1px lightgrey"
@@ -207,6 +207,8 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
                   colorScheme="white"
                   icon={<Md3dRotation />}
                   size="lg"
+                  h="100%"
+                  w="65px"
                   fontSize="5xl"
                   animation={`${spin} 2s infinite`}
                 />
@@ -216,7 +218,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
         </Flex>
 
         {/* Right Side */}
-        <Flex gap={8} direction="column" minW={{ base: "90vw", md: "auto" }}>
+        <Flex gap={8} direction="column" w={{ base: "300px", md: "auto" }}>
           <Flex direction="column">
             <Text fontSize="2xl" fontWeight="bold">
               {product.name}
