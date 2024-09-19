@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {
-  Stack,
+  Flex,
   Image,
   Text,
-  Flex,
-  HStack,
   IconButton,
   keyframes,
   Heading,
@@ -113,18 +111,34 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
   const formattedThreeWeeksLater = formatDate(threeWeeksLaterString);
 
   return (
-    <Flex as="header" align="center" justify="center" w="100%" py={4}>
-      <Stack direction={{ base: "column", md: "row" }} spacing={8} p={8}>
+    <Flex
+      as="header"
+      align="center"
+      justify="center"
+      w="100%"
+      minH="100vh"
+      py={4}
+    >
+      <Flex
+        direction={{ base: "column", md: "row" }}
+        p={8}
+        align="center"
+        justify="center"
+        gap={12}
+      >
         {/* Left Side */}
-        <Stack spacing={4} flex="1">
+        <Flex gap={4} direction="column">
           {/* Main Image Gallery */}
           <Flex
             border="solid 1px lightgrey"
             borderRadius="5px"
             position="relative"
             bgColor="whitesmoke"
-            w={{ base: "90vw", md: "100vw" }}
+            w={{ base: "90vw", md: "40vw" }}
             h={{ base: "80vh", md: "80vh" }}
+            direction="column"
+            align="center"
+            justify="center"
           >
             <Image
               src={product.imageUrl[currentImageIndex]}
@@ -162,7 +176,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
 
           {/* Thumbnails */}
           <Flex maxW={{ base: "auto", md: "100vw" }}>
-            <HStack spacing={2}>
+            <Flex direction="row" gap={2}>
               {product.imageUrl.map((url, index) => (
                 <Image
                   key={index}
@@ -197,41 +211,41 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
                   animation={`${spin} 2s infinite`}
                 />
               </Flex>
-            </HStack>
+            </Flex>
           </Flex>
-        </Stack>
+        </Flex>
 
         {/* Right Side */}
-        <Stack spacing={8} flex="1">
-          <Stack>
+        <Flex gap={8} direction="column" minW={{ base: "90vw", md: "auto" }}>
+          <Flex direction="column">
             <Text fontSize="2xl" fontWeight="bold">
               {product.name}
             </Text>
             <Text fontSize="sm" color="gray">
               {product.public_id}
             </Text>
-          </Stack>
+          </Flex>
 
-          <Stack>
+          <Flex direction="column">
             <Heading fontSize="lg">Price</Heading>
             <Text fontSize="xl" color="green.500">
               ${product.price.toFixed(2)}
             </Text>
-          </Stack>
+          </Flex>
 
-          <Stack>
+          <Flex direction="column">
             <Heading fontSize="lg">Materials</Heading>
             <Text>
               {capitalizeWords(formatArrayToStringWithComma(product.material))}
             </Text>
-          </Stack>
+          </Flex>
 
-          <Stack>
+          <Flex direction="column">
             <Heading fontSize="lg">Colors</Heading>
             <Flex direction="row" gap={8}>
               {product.color.map((color, index) => (
                 <React.Fragment key={index}>
-                  <Flex direction="column" gap={1} align="center">
+                  <Flex direction="row" gap={1} align="center">
                     <Box
                       w="30px"
                       h="30px"
@@ -244,50 +258,50 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
                 </React.Fragment>
               ))}
             </Flex>
-          </Stack>
+          </Flex>
 
-          <Stack>
+          <Flex direction="column">
             <Heading fontSize="lg">Dimensions</Heading>
             <Text>
               {product.dimensions.width} x {product.dimensions.height} x{" "}
               {product.dimensions.depth} cm
             </Text>
-          </Stack>
+          </Flex>
 
-          <Stack>
+          <Flex direction="column">
             <Heading fontSize="lg">Description</Heading>
             <Text>{product.description}</Text>
-          </Stack>
+          </Flex>
 
-          <Stack key={product.public_id}>
+          <Flex key={product.public_id}>
             <Comps.AddToCartButton product={product} user={user} />
-          </Stack>
+          </Flex>
 
           {/* Shipping Estimation */}
-          <Stack spacing={4} align="center">
-            <HStack spacing={8} my={4}>
-              <Stack align="center">
+          <Flex gap={4} align="center" direction="column">
+            <Flex direction="row" gap={8} my={4}>
+              <Flex align="center" direction="column">
                 <Text fontWeight="bold">Order Today</Text>
                 <Icon as={MdCalendarToday} boxSize={8} my={2} />
                 <Text>{formattedToday}</Text>
-              </Stack>
-              <Stack align="center">
+              </Flex>
+              <Flex align="center" direction="column">
                 <Text fontWeight="bold">Door Delivery</Text>
                 <Icon as={MdDeliveryDining} boxSize={8} my={2} />
                 <Text>{formattedThreeWeeksLater}</Text>
-              </Stack>
-            </HStack>
-          </Stack>
+              </Flex>
+            </Flex>
+          </Flex>
 
-          <Stack>
+          <Flex direction="column">
             {productPageContent.map((text) => (
               <Text key={text} fontSize="sm">
                 {text}
               </Text>
             ))}
-          </Stack>
-        </Stack>
-      </Stack>
+          </Flex>
+        </Flex>
+      </Flex>
 
       {/* 3D Model Previewer Modal */}
       <Comps.ProductThreeModal
