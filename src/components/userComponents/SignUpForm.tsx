@@ -79,7 +79,6 @@ const SignUpForm: React.FC = () => {
     >
       <Box
         mx="auto"
-        mb={2}
         mb={4}
         boxSize="120px"
         border="solid 1px lightgray"
