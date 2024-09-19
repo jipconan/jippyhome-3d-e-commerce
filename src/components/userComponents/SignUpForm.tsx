@@ -70,8 +70,9 @@ const SignUpForm: React.FC = () => {
   return (
     <Box
       h="100%"
-      w={{ base: "85%", md: "60%", lg: "50%" }}
-      p={12}
+      w={{ base: "90vw", md: "60%", lg: "50%" }}
+      p={8}
+      my={4}
       borderRadius="lg"
       boxShadow="dark-lg"
       className="font-montserrat"
@@ -79,6 +80,7 @@ const SignUpForm: React.FC = () => {
       <Box
         mx="auto"
         mb={2}
+        mb={4}
         boxSize="120px"
         border="solid 1px lightgray"
         boxShadow="md"
@@ -88,14 +90,22 @@ const SignUpForm: React.FC = () => {
         </Link>
       </Box>
 
-      <Text fontSize="lg" fontWeight="bold" textAlign="start" mb={2}>
+      <Text
+        fontSize={{ base: "sm", md: "lg" }}
+        fontWeight="bold"
+        textAlign="start"
+        mb={2}
+      >
         Create an Account
       </Text>
       <form onSubmit={handleSubmit}>
         <VStack spacing={4}>
           <HStack spacing={4} w="full">
             <FormControl isRequired>
-              <FormLabel htmlFor="firstName" fontSize="sm">
+              <FormLabel
+                htmlFor="firstName"
+                fontSize={{ base: "xs", md: "sm" }}
+              >
                 First Name
               </FormLabel>
               <Input
@@ -107,7 +117,7 @@ const SignUpForm: React.FC = () => {
               <FormErrorMessage>First name is required</FormErrorMessage>
             </FormControl>
             <FormControl isRequired>
-              <FormLabel htmlFor="lastName" fontSize="sm">
+              <FormLabel htmlFor="lastName" fontSize={{ base: "xs", md: "sm" }}>
                 Last Name
               </FormLabel>
               <Input
@@ -121,7 +131,7 @@ const SignUpForm: React.FC = () => {
           </HStack>
 
           <FormControl isRequired>
-            <FormLabel htmlFor="email" fontSize="sm">
+            <FormLabel htmlFor="email" fontSize={{ base: "xs", md: "sm" }}>
               Email
             </FormLabel>
             <Input
@@ -135,7 +145,7 @@ const SignUpForm: React.FC = () => {
 
           <HStack spacing={4} w="full">
             <FormControl isRequired isInvalid={!!error}>
-              <FormLabel htmlFor="password" fontSize="sm">
+              <FormLabel htmlFor="password" fontSize={{ base: "xs", md: "sm" }}>
                 Password
               </FormLabel>
               <Input
@@ -147,7 +157,7 @@ const SignUpForm: React.FC = () => {
               {error && <FormErrorMessage>{error}</FormErrorMessage>}
             </FormControl>
             <FormControl isRequired isInvalid={!!error}>
-              <FormLabel htmlFor="confirm" fontSize="sm">
+              <FormLabel htmlFor="confirm" fontSize={{ base: "xs", md: "sm" }}>
                 Confirm Password
               </FormLabel>
               <Input
@@ -163,11 +173,15 @@ const SignUpForm: React.FC = () => {
           <FormControl isRequired display="flex" alignItems="center">
             <Checkbox id="agree" name="agree" onChange={handleChange} />
             <Box display="flex" alignItems="center" ml={2}>
-              <FormLabel htmlFor="agree" mb={0} fontSize="sm">
+              <FormLabel
+                htmlFor="agree"
+                mb={0}
+                fontSize={{ base: "xs", md: "sm" }}
+              >
                 I have read and acknowledge JippyHome’s{" "}
                 <Text
                   as="span"
-                  fontSize="sm"
+                  fontSize={{ base: "xs", md: "sm" }}
                   style={{ textDecoration: "underline" }}
                   _hover={{ cursor: "pointer" }}
                 >
@@ -177,7 +191,7 @@ const SignUpForm: React.FC = () => {
             </Box>
           </FormControl>
 
-          <Text fontSize="sm">
+          <Text fontSize={{ base: "xs", md: "sm" }}>
             Already have an account?{" "}
             <Link to="/signin" style={{ color: "blue" }}>
               Sign in

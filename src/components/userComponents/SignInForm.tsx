@@ -63,14 +63,15 @@ const SignInForm: React.FC = () => {
     <Box
       h="100%"
       w={{ base: "85%", md: "50%", lg: "35%" }}
-      p={12}
+      p={8}
+      my={4}
       borderRadius="lg"
       boxShadow="dark-lg"
       className="font-montserrat"
     >
       <Box
         mx="auto"
-        mb={2}
+        mb={8}
         boxSize="120px"
         border="solid 1px lightgray"
         boxShadow="md"
@@ -80,16 +81,21 @@ const SignInForm: React.FC = () => {
         </Link>
       </Box>
 
-      <Text fontSize="lg" fontWeight="bold" textAlign="start" mb={2}>
+      <Text
+        fontSize={{ base: "sm", md: "lg" }}
+        fontWeight="bold"
+        textAlign="start"
+        mb={2}
+      >
         Sign In
       </Text>
-      <Text fontSize="sm" textAlign="start" mb={8}>
+      <Text fontSize={{ base: "xs", md: "sm" }} textAlign="start" mb={8}>
         Enter your email and password to login.
       </Text>
       <form onSubmit={handleSubmit}>
         <VStack spacing={4}>
           <FormControl isInvalid={!!emailError} isRequired>
-            <FormLabel htmlFor="email" fontSize="sm">
+            <FormLabel htmlFor="email" fontSize={{ base: "xs", md: "sm" }}>
               Email
             </FormLabel>
             <Input
@@ -105,7 +111,7 @@ const SignInForm: React.FC = () => {
           </FormControl>
 
           <FormControl isInvalid={!!passwordError} isRequired>
-            <FormLabel htmlFor="password" fontSize="sm">
+            <FormLabel htmlFor="password" fontSize={{ base: "xs", md: "sm" }}>
               Password
             </FormLabel>
             <Input
@@ -120,7 +126,7 @@ const SignInForm: React.FC = () => {
             <FormErrorMessage>{passwordError}</FormErrorMessage>
           </FormControl>
 
-          <Text fontSize="sm">
+          <Text fontSize={{ base: "xs", md: "sm" }}>
             Don't have an account?{" "}
             <Link to="/signup" style={{ color: "blue" }}>
               Sign Up
