@@ -1,15 +1,15 @@
 import React from "react";
-import { Text, Stack } from "@chakra-ui/react";
+import { Text, Flex } from "@chakra-ui/react";
 import { footerContent } from "../../constants/textContents";
 
 const Footer: React.FC = () => {
   return (
-    <Stack my={4}>
+    <Flex as="footer" w="100%" align="center" justify="center" py={4}>
       {/* Footer text content */}
-      <Text textAlign="center" fontSize="1xl">
+      <Text textAlign="center" maxW="90vw">
         {footerContent}
       </Text>
-    </Stack>
+    </Flex>
   );
 };
 
