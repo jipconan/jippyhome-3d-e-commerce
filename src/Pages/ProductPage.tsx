@@ -111,14 +111,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
   const formattedThreeWeeksLater = formatDate(threeWeeksLaterString);
 
   return (
-    <Flex
-      as="header"
-      align="center"
-      justify="center"
-      maxW="95vw"
-      minH="100vh"
-      py={4}
-    >
+    <Flex as="header" align="center" justify="center" w="100%" py={4}>
       <Flex
         direction={{ base: "column", md: "row" }}
         p={8}
@@ -139,6 +132,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ user }) => {
             direction="column"
             align="center"
             justify="center"
+            p={4}
           >
             <Image
               src={product.imageUrl[currentImageIndex]}
